@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.51'
+    ext.kotlin_version = '1.2.61'
     repositories {
         google()
         jcenter()
@@ -24,4 +24,22 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    appCompat = '1.0.0'
+    constraintLayout = '1.1.3'
+    recyclerView = '28.0.0'
+    cardView = '28.0.0'
+    ktx = '1.0.0'
+    weekView = '1.2.6'
+
+    dagger2 = '2.17'
+    butterKnife = '9.0.0-rc1'
+    retrofit = '2.4.0'
+    gson = '2.8.5'
+
+    rxJava2 = '2.2.2'
+    rxKotlin = '2.3.0'
+    rxAndroid = '2.1.0'
 }
