@@ -7,10 +7,19 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/onboardingMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        tools:text="@string/onboarding__message_1"/>
+        tools:text="Message" />
+
+    <Button
+        android:id="@+id/onboardingStartBtn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:layout_gravity="bottom|center"/>
 
 </FrameLayout>

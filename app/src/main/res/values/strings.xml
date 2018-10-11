@@ -3,7 +3,9 @@
     <string name="action_settings">Settings</string>
 
     <!--Onboarding-->
-    <string name="onboarding__message_1">Hello</string>
-    <string name="onboarding__message_2">This is</string>
-    <string name="onboarding__message_3">Apptitude</string>
+    <string-array name="onboarding_messages">
+        <item>Hello</item>
+        <item>This is</item>
+        <item>Apptitude</item>
+    </string-array>
 </resources>
