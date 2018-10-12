@@ -9,8 +9,11 @@
 
     <ImageView
         android:id="@+id/onboardingIcon"
+        tools:src="@drawable/ic_heart_24dp"
+        android:layout_above="@id/onboardingMessage"
+        android:layout_marginBottom="64dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="32dp"/>
 
     <TextView
         android:id="@+id/onboardingMessage"

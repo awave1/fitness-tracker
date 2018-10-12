@@ -22,6 +22,15 @@ class OnboardingActivity : AppCompatActivity() {
 }
 
 private class OnboardingAdapter(fm: FragmentManager?, private val messages: Array<String>) : FragmentPagerAdapter(fm) {
-    override fun getItem(position: Int): Fragment = OnboardingPageFragment.newInstance(messages[position], position == this.count - 1)
+    override fun getItem(position: Int): Fragment {
+        var image = 0
+        when (position) {
+            0 -> image = R.drawable.ic_fitness_24dp
+            1 -> image = R.drawable.ic_heart_24dp
+            2 -> image = R.drawable.ic_smile_24dp
+        }
+
+        return OnboardingPageFragment.newInstance(messages[position], position == this.count - 1, image)
+    }
     override fun getCount(): Int = messages.size
 }

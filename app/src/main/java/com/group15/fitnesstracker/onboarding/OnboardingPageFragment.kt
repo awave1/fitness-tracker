@@ -14,17 +14,18 @@ class OnboardingPageFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_onboarding_page, container, false)
         view.onboardingMessage.text = arguments?.getString(Constants.ONBOARDING_MESSAGE)
         view.onboardingStartBtn.visibility = if (arguments?.getBoolean(Constants.ONBOARDING_SHOW_BTN_FLAG)!!) View.VISIBLE else View.GONE
-
+        view.onboardingIcon.setImageResource(arguments?.getInt(Constants.ONBOARDING_IMG)!!)
         return view
     }
 
     companion object {
-        fun newInstance(message: String, showBtn: Boolean): OnboardingPageFragment {
+        fun newInstance(message: String, showBtn: Boolean, imageResource: Int): OnboardingPageFragment {
             val instance = OnboardingPageFragment()
             val args = Bundle()
 
             args.putString(Constants.ONBOARDING_MESSAGE, message)
             args.putBoolean(Constants.ONBOARDING_SHOW_BTN_FLAG, showBtn)
+            args.putInt(Constants.ONBOARDING_IMG, imageResource)
 
             instance.arguments = args
             return instance
