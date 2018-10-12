@@ -13,10 +13,7 @@ class OnboardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
 
-        onboardingContainer.apply {
-            adapter = OnboardingAdapter(supportFragmentManager, resources.getStringArray(R.array.onboarding_messages))
-        }
-
+        onboardingContainer.apply { adapter = OnboardingAdapter(supportFragmentManager) }
         onboardingPageIndicator.apply { setViewPager(onboardingContainer) }
     }
 }
