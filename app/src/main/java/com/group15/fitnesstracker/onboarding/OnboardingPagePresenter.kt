@@ -2,7 +2,7 @@ package com.group15.fitnesstracker.onboarding
 
 import com.group15.fitnesstracker.R
 
-class OnboardingPresenter(val view: OnboardingContract.View, private val data: Array<String>): OnboardingContract.Presenter {
+class OnboardingPagePresenter(val view: OnboardingPageContract.View, private val data: Array<String>): OnboardingPageContract.Presenter {
     init {
         view.presenter = this
     }

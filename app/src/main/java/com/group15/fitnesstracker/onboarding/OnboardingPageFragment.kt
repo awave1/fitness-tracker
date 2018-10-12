@@ -10,11 +10,11 @@ import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_onboarding_page.*
 
 
-class OnboardingPageFragment : Fragment(), OnboardingContract.View {
-    override lateinit var presenter: OnboardingContract.Presenter
+class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
+    override lateinit var presenter: OnboardingPageContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = OnboardingPresenter(this, resources.getStringArray(R.array.onboarding_messages))
+        presenter = OnboardingPagePresenter(this, resources.getStringArray(R.array.onboarding_messages))
         return inflater.inflate(R.layout.fragment_onboarding_page, container, false)
     }
 
