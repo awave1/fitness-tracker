@@ -43,9 +43,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2"
 
-    implementation "com.jakewharton:butterknife:$rootProject.butterKnife"
-    kapt "com.jakewharton:butterknife-compiler:$rootProject.butterKnife"
-
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit"
@@ -53,6 +50,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation "com.github.alamkanak:android-week-view:$rootProject.weekView"
+    implementation 'com.romandanylyk:pageindicatorview:1.0.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-beta02'

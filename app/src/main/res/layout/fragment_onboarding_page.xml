@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:id="@+id/onboardingIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/onboardingMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:textAlignment="center"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:textStyle="bold"
         tools:text="Message" />
 
     <Button
         android:id="@+id/onboardingStartBtn"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:layout_gravity="bottom|center"/>
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/onboardingMessage"
+        android:layout_centerInParent="true"
+        android:text="@string/onboarding__btn_text"
+        android:visibility="gone"
+        android:elevation="8dp"
+        tools:visibility="visible"/>
 
-</FrameLayout>
+</RelativeLayout>

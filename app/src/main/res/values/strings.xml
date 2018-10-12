@@ -4,8 +4,9 @@
 
     <!--Onboarding-->
     <string-array name="onboarding_messages">
-        <item>Hello</item>
-        <item>This is</item>
+        <item>Get fit</item>
+        <item>Track your nutrition</item>
         <item>Apptitude</item>
     </string-array>
+    <string name="onboarding__btn_text">Get Started</string>
 </resources>
