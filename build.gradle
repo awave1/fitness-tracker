@@ -34,6 +34,8 @@ ext {
     ktx = '1.0.0'
     weekView = '1.2.6'
 
+    room = '2.1.0-alpha01'
+
     dagger2 = '2.17'
     butterKnife = '9.0.0-rc1'
     retrofit = '2.4.0'

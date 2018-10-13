@@ -32,6 +32,10 @@ dependencies {
     implementation "com.android.support:recyclerview-v7:$rootProject.recyclerView"
     implementation "com.android.support:cardview-v7:$rootProject.cardView"
 
+    implementation "androidx.room:room-runtime:$rootProject.room"
+    kapt "androidx.room:room-compiler:$rootProject.room"
+    implementation "androidx.room:room-rxjava2:$rootProject.room"
+
     implementation "com.google.code.gson:gson:$rootProject.gson"
 
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava2"
