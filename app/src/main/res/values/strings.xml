@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">FitnessTracker</string>
     <string name="action_settings">Settings</string>
+
+    <!--Onboarding-->
+    <string-array name="onboarding_messages">
+        <item>Get fit</item>
+        <item>Stay Healthy</item>
+        <item>Apptitude</item>
+    </string-array>
+    <string name="onboarding__btn_text">Get Started</string>
 </resources>

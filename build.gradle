@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -33,6 +33,8 @@ ext {
     cardView = '28.0.0'
     ktx = '1.0.0'
     weekView = '1.2.6'
+
+    room = '2.1.0-alpha01'
 
     dagger2 = '2.17'
     butterKnife = '9.0.0-rc1'
