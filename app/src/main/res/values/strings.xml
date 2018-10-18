@@ -9,4 +9,9 @@
         <item>Apptitude</item>
     </string-array>
     <string name="onboarding__btn_text">Get Started</string>
+
+    <!--Navigation Bottom Bar-->
+    <string name="navigation_profile">Profile</string>
+    <string name="navigation_workout">Workout</string>
+    <string name="navigation_schedule">Schedule</string>
 </resources>
