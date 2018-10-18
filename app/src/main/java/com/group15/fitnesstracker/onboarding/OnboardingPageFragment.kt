@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.DashboardActivity
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_onboarding_page.*
 
@@ -26,7 +26,7 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
         presenter.showPage(pagePosition!!)
 
         onboardingStartBtn.setOnClickListener {
-            startActivity(Intent(context, MainActivity::class.java))
+            startActivity(Intent(context, DashboardActivity::class.java))
             activity?.finish()
         }
     }
