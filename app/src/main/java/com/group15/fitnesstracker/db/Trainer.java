@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Trainer {
     @PrimaryKey
-    public String trainer_id;
+    public String trainerId;
 
     public String firstName;
 
