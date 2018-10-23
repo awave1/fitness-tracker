@@ -20,5 +20,5 @@ public class Schedule {
 
     @PrimaryKey
 //    @ForeignKey()
-    public int recording_id;
+    public int recordingId;
 }
