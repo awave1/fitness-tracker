@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class NutritionRecording {
     @PrimaryKey
-    public int recording_id;
+    public int recordingId;
 
     public Date date;
 
