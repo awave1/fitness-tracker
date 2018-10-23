@@ -10,14 +10,14 @@ public class Nutrition_Recording {
     @PrimaryKey
     public int recording_id;
 
-    //TODO: create date and time object?
     public Date date;
 
-    //TODO: create object for bodypart measurement
-    public String Bodypart;
-    public double Bodypart_size;
+    public double calories;
 
-    //TODO:create object with macronutrients (protein carbohydrate fat)
+    public macronutrient macronutrient;
+}
+
+class macronutrient {
     public double protein;
     public double carbohydrate;
     public double fat;

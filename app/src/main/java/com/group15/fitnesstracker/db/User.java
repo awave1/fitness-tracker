@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
 public class User {
-    //TODO:review public/private aspect of variables
     @PrimaryKey
     @ColumnInfo(name = "id")
     public int id;

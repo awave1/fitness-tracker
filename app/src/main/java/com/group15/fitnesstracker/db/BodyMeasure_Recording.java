@@ -1,5 +1,7 @@
 package com.group15.fitnesstracker.db;
 
+import java.util.Date;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -8,19 +10,16 @@ public class BodyMeasure_Recording {
     @PrimaryKey
     public int recording_id;
 
-
-    //TODO: create date and time object?
-    public String day;
-    public String month;
-    public String year;
-    public String time;
+    public Date date;
 
     public double bodyfat;
 
     public double weight;
 
-    //TODO: create object for bodypart measurement
+    public BodyPartMeasurement[] bodyPartMeasurements;
+}
+
+class BodyPartMeasurement {
     public String Bodypart;
     public double Bodypart_size;
-
 }

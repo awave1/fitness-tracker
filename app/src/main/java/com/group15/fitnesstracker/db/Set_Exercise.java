@@ -14,5 +14,9 @@ public class Set_Exercise {
 
     public String description;
 
-    //TODO: Create set record (reps in the set and the weight)
+    public Set[] sets;
+}
+class Set {
+    public int reps;
+    public double weight;
 }

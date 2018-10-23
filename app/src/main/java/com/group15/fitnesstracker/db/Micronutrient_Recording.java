@@ -5,7 +5,6 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 
-//TODO:implement foreign key
 @Entity(foreignKeys = @ForeignKey(entity = Nutrition_Recording.class,
                                   parentColumns = "recording_id",
                                   childColumns = " recording_id"))
@@ -13,5 +12,9 @@ public class Micronutrient_Recording {
     @PrimaryKey
     public int recording_id;
 
-    //TODO: create object for micronutrient (String name, double quantity)
+    public micronutrient[] micronutrients;
+}
+class micronutrient {
+    public String name;
+    public double amount;
 }

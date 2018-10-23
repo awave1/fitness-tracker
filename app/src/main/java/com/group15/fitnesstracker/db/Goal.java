@@ -14,7 +14,5 @@ public class Goal {
 
     public String goal_description;
 
-
-    //TODO: possible implemntation, to review
     public Date completion_date;
 }
