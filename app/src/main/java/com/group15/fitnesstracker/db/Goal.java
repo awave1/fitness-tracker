@@ -12,7 +12,7 @@ public class Goal {
     @ColumnInfo(name = "id")
     public int id;
 
-    public String goal_description;
+    public String goalDescription;
 
     public Date completion_date;
 }
