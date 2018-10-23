@@ -16,7 +16,7 @@ public class Schedule {
 
     @PrimaryKey
 //    @ForeignKey()
-    public int user_id;
+    public int userId;
 
     @PrimaryKey
 //    @ForeignKey()
