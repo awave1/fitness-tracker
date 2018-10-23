@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Nutrition_Recording {
+public class NutritionRecording {
     @PrimaryKey
     public int recording_id;
 
