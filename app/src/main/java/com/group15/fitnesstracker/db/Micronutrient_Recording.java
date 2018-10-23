@@ -12,6 +12,6 @@ import androidx.room.PrimaryKey;
 public class Micronutrient_Recording {
     @PrimaryKey
     public int recording_id;
-    
+
     //TODO: create object for micronutrient (String name, double quantity)
 }
