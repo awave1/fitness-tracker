@@ -10,7 +10,7 @@ public class Timed_Exercise {
     public String name;
 
 //    @ForeignKey()
-    public int workout_id;
+    public int workoutId;
 
     public String description;
 
