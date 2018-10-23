@@ -6,7 +6,7 @@ import androidx.room.ForeignKey;
 @Entity
 public class Trains {
     //    @ForeignKey()
-    public int trainer_id;
+    public int trainerId;
 //    @ForeignKey()
     public int userId;
 }
