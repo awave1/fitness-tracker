@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Schedule {
     @PrimaryKey
 //    @ForeignKey()
-    public int workout_id;
+    public int workoutId;
 
     @PrimaryKey
 //    @ForeignKey()
