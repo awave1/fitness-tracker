@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey;
                                   childColumns = " recording_id"))
 public class MicronutrientRecording {
     @PrimaryKey
-    public int recording_id;
+    public int recordingId;
 
     public micronutrient[] micronutrients;
 }
