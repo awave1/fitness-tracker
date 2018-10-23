@@ -3,6 +3,7 @@ package com.group15.fitnesstracker.dashboard
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class DashboardActivity: AppCompatActivity() {
