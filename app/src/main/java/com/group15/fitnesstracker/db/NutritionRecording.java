@@ -14,7 +14,7 @@ public class NutritionRecording {
 
     public double calories;
 
-    public macronutrient macronutrient;
+    public Macronutrient macronutrient;
 }
 
 class Macronutrient {
