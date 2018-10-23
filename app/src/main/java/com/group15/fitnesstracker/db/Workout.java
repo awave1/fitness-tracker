@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Workout {
     @PrimaryKey
-    public int workout_id;
+    public int workoutId;
 
     public String routineDescription;
 
