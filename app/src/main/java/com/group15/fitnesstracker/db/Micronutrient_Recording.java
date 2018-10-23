@@ -14,7 +14,7 @@ public class MicronutrientRecording {
 
     public micronutrient[] micronutrients;
 }
-class micronutrient {
+class Micronutrient {
     public String name;
     public double amount;
 }
