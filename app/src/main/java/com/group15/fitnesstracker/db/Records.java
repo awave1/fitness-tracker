@@ -12,5 +12,5 @@ public class Records {
 
     @PrimaryKey
 //    @ForeignKey()
-    public String record_id;
+    public String recordId;
 }
