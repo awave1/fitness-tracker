@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.dashboard.DashboardActivity
+import com.group15.fitnesstracker.dashboard.DashboardFragment
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_onboarding_page.*
 
@@ -26,7 +28,7 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
         presenter.showPage(pagePosition!!)
 
         onboardingStartBtn.setOnClickListener {
-            startActivity(Intent(context, DashboardActivity::class.java))
+            startActivity(Intent(context, MainActivity::class.java))
             activity?.finish()
         }
     }
@@ -44,14 +46,10 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
     }
 
     companion object {
-        fun newInstance(position: Int): OnboardingPageFragment {
-            val instance = OnboardingPageFragment()
-            val args = Bundle()
-
-            args.putInt(Constants.ONBOARDING_PAGE_POS, position)
-
-            instance.arguments = args
-            return instance
+        fun newInstance(position: Int) = OnboardingPageFragment().apply {
+            arguments = bundleOf(
+                Constants.ONBOARDING_PAGE_POS to position
+            )
         }
     }
 }
