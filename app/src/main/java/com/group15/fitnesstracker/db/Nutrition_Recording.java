@@ -17,7 +17,7 @@ public class NutritionRecording {
     public macronutrient macronutrient;
 }
 
-class macronutrient {
+class Macronutrient {
     public double protein;
     public double carbohydrate;
     public double fat;
