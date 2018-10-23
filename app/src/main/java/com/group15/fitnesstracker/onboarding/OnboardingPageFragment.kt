@@ -1,5 +1,6 @@
 package com.group15.fitnesstracker.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +10,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.dashboard.DashboardFragment
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_onboarding_page.*
 
@@ -28,6 +28,8 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
         presenter.showPage(pagePosition!!)
 
         onboardingStartBtn.setOnClickListener {
+            val sharedPref = context?.getSharedPreferences(context?.resources?.getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+            sharedPref?.edit()?.putBoolean(Constants.USER_FIRST_TIME, false)?.apply()
             startActivity(Intent(context, MainActivity::class.java))
             activity?.finish()
         }
