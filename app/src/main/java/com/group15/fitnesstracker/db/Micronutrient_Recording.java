@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(foreignKeys = @ForeignKey(entity = Nutrition_Recording.class,
                                   parentColumns = "recording_id",
                                   childColumns = " recording_id"))
-public class Micronutrient_Recording {
+public class MicronutrientRecording {
     @PrimaryKey
     public int recording_id;
 
