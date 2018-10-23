@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class History {
     @PrimaryKey
     //TODO: @ForeignKey()
-    public int user_id;
+    public int userId;
 
     @PrimaryKey
     //TODO: @ForeignKey()
