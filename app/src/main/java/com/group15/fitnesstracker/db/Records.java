@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Records {
     @PrimaryKey
 //    @ForeignKey()
-    public String user_id;
+    public String userId;
 
     @PrimaryKey
 //    @ForeignKey()
