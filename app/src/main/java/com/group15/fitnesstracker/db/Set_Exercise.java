@@ -5,7 +5,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Set_Exercise {
+public class SetExercise {
     @PrimaryKey
     public String name;
 
