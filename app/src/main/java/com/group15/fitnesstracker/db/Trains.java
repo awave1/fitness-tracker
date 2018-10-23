@@ -8,5 +8,5 @@ public class Trains {
     //    @ForeignKey()
     public int trainer_id;
 //    @ForeignKey()
-    public int user_id;
+    public int userId;
 }
