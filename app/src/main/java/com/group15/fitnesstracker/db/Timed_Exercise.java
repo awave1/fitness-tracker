@@ -5,7 +5,7 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Timed_Exercise {
+public class TimedExercise {
     @PrimaryKey
     public String name;
 
