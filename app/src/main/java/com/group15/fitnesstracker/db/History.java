@@ -13,5 +13,5 @@ public class History {
 
     @PrimaryKey
     //TODO: @ForeignKey()
-    public int workout_id;
+    public int workoutId;
 }
