@@ -20,5 +20,5 @@ public class User {
     public int age;
 
     @ColumnInfo(name = "weight")
-    public float weight;
+    public double weight;
 }
