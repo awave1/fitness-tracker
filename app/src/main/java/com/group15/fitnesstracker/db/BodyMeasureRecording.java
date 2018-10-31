@@ -20,6 +20,6 @@ public class BodyMeasureRecording {
 }
 
 class BodyPartMeasurement {
-    public String Bodypart;
+    public String bodypart;
     public double Bodypart_size;
 }
