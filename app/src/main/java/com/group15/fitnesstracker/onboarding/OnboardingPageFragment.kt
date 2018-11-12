@@ -1,10 +1,12 @@
 package com.group15.fitnesstracker.onboarding
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
@@ -26,6 +28,8 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
         presenter.showPage(pagePosition!!)
 
         onboardingStartBtn.setOnClickListener {
+            val sharedPref = context?.getSharedPreferences(context?.resources?.getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+            sharedPref?.edit()?.putBoolean(Constants.USER_FIRST_TIME, false)?.apply()
             startActivity(Intent(context, MainActivity::class.java))
             activity?.finish()
         }
@@ -44,14 +48,10 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
     }
 
     companion object {
-        fun newInstance(position: Int): OnboardingPageFragment {
-            val instance = OnboardingPageFragment()
-            val args = Bundle()
-
-            args.putInt(Constants.ONBOARDING_PAGE_POS, position)
-
-            instance.arguments = args
-            return instance
+        fun newInstance(position: Int) = OnboardingPageFragment().apply {
+            arguments = bundleOf(
+                Constants.ONBOARDING_PAGE_POS to position
+            )
         }
     }
 }

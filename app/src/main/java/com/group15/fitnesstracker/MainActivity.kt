@@ -1,39 +1,30 @@
 package com.group15.fitnesstracker
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
-
+import androidx.appcompat.app.AppCompatActivity
+import com.group15.fitnesstracker.dashboard.DashboardFragment
+import com.group15.fitnesstracker.onboarding.OnboardingActivity
+import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-    }
+        val pref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+        if (!pref.getBoolean(Constants.USER_FIRST_TIME, true)) {
+            setContentView(R.layout.activity_main)
+            setSupportActionBar(toolbar)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, DashboardFragment.instance)
+                    .addToBackStack(null)
+                    .commit()
+        } else {
+            startActivity(Intent(this, OnboardingActivity::class.java))
         }
     }
 }
