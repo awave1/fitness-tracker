@@ -26,6 +26,5 @@ class MainActivity: AppCompatActivity() {
         } else {
             startActivity(Intent(this, OnboardingActivity::class.java))
         }
-
     }
 }
