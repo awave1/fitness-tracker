@@ -15,4 +15,9 @@
     <string name="navigation_workout">Workout</string>
     <string name="navigation_schedule">Schedule</string>
     <string name="preference_file_key">FITNESS_TRACKER_SHARED_PREF</string>
+    <string name="create_user_first_name_hint">First name</string>
+    <string name="create_user_last_name_hint">Last name</string>
+    <string name="create_user_age_hint">Age</string>
+    <string name="create_user_weight_hint">Weight</string>
+    <string name="create_user_enter_info_text">Enter your information</string>
 </resources>

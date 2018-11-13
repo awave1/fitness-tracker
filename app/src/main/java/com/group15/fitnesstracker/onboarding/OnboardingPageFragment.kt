@@ -33,6 +33,10 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
 //            sharedPref?.edit()?.putBoolean(Constants.USER_FIRST_TIME, false)?.apply()
 //            startActivity(Intent(context, MainActivity::class.java))
 //            activity?.finish()
+
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.onboardingFragmentContainer, CreateUserFragment())
+                    ?.commit()
         }
     }
 
