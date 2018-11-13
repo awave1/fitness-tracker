@@ -24,6 +24,7 @@
         android:textColor="#fff"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:gravity="center"
         tools:text="Message" />
 
     <Button
