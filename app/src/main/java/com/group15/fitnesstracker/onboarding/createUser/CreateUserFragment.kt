@@ -14,22 +14,23 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
     override lateinit var presenter: CreateUserContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = CreateUserPresenter(this)
+        presenter = CreateUserPresenter(this, context!!)
 
         return inflater.inflate(R.layout.fragment_create_user, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val firstName = firstName.text.toString()
-//        val lastName = lastName.text.toString()
-//        val age = age.text.toString().toInt()
-//        val weight = weight.text.toString().toDouble()
+        val firstName = firstNameInputContainer.editText?.text?.toString()
+        val lastName = lastNameInputContainer.editText?.text?.toString()
+        val age = ageInputContainer.editText.toString().toIntOrNull()
+        val weight = weightInputContainer.editText.toString().toDoubleOrNull()
 
         submit.setOnClickListener {
-            presenter.createUser()
-            Toast.makeText(context, "Create user", Toast.LENGTH_LONG).show()
-            
+            if (firstName != null && lastName != null && age != null && weight != null) {
+                presenter.createUser(firstName, lastName, age, weight)
+            }
+
 //            val sharedPref = context?.getSharedPreferences(context?.resources?.getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 //            sharedPref?.edit()?.putBoolean(Constants.USER_FIRST_TIME, false)?.apply()
 //            startActivity(Intent(context, MainActivity::class.java))
