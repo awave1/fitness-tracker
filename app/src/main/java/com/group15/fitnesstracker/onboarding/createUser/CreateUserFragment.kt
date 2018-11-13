@@ -1,4 +1,4 @@
-package com.group15.fitnesstracker.create_user
+package com.group15.fitnesstracker.onboarding.createUser
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,5 +14,9 @@ class CreateUserFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//            val sharedPref = context?.getSharedPreferences(context?.resources?.getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+//            sharedPref?.edit()?.putBoolean(Constants.USER_FIRST_TIME, false)?.apply()
+//            startActivity(Intent(context, MainActivity::class.java))
+//            activity?.finish()
     }
 }
