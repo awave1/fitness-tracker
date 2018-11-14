@@ -13,4 +13,7 @@ interface UserDao {
 
     @Query("select * from users")
     fun getAll(): List<User>
+
+    @Query("select * from users where first_name = :firstName")
+    fun getByName(firstName: String): User
 }
