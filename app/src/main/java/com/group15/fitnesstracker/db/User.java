@@ -28,4 +28,7 @@ public class User {
 
     @ColumnInfo(name = "weight")
     public double weight;
+
+    @ColumnInfo(name = "logged_in")
+    public boolean isLoggenIn;
 }

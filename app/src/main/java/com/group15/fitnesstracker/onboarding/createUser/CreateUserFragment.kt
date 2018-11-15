@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_create_user.*
 
@@ -16,7 +17,7 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
     override lateinit var presenter: CreateUserContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = CreateUserPresenter(this, context!!)
+        presenter = CreateUserPresenter(this, DbInjection.provideUserDao(context!!))
         presenter.start()
 
         return inflater.inflate(R.layout.fragment_create_user, container, false)

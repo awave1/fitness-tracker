@@ -13,14 +13,14 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
 
     companion object {
-        private var db: FitnessTrackerDatabase? = null
+        @Volatile private var db: FitnessTrackerDatabase? = null
 
-        fun instance(context: Context): FitnessTrackerDatabase? {
-            if (db == null) {
-                db = Room.databaseBuilder(context, FitnessTrackerDatabase::class.java, DB_NAME).build()
-            }
+        fun instance(context: Context): FitnessTrackerDatabase =
+                db ?: synchronized(this) {
+                    db ?: buildDb(context).also { db = it }
+                }
 
-            return db
-        }
+        private fun buildDb(context: Context) =
+                Room.databaseBuilder(context, FitnessTrackerDatabase::class.java, DB_NAME).build()
     }
 }
