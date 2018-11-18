@@ -20,4 +20,6 @@
     <string name="create_user_age_hint">Age</string>
     <string name="create_user_weight_hint">Weight</string>
     <string name="create_user_enter_info_text">Enter your information</string>
+
+    <string name="dashboard_user_name">Hello, %1$s!</string>
 </resources>

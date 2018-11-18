@@ -17,7 +17,7 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
     override lateinit var presenter: CreateUserContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = CreateUserPresenter(this, DbInjection.provideUserDao(context!!))
+        presenter = CreateUserPresenter(this, context!!, DbInjection.provideUserDao(context!!))
         presenter.start()
 
         return inflater.inflate(R.layout.fragment_create_user, container, false)

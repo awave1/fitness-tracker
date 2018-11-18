@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "users")
 public class User {
     public User(String firstName, String lastName, int age, double weight) {
+        this.id = 1; // required for autoincrement
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

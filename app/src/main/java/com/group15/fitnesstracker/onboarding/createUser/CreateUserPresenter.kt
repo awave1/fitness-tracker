@@ -12,12 +12,23 @@ import com.group15.fitnesstracker.util.Constants
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
-class CreateUserPresenter(val view: CreateUserContract.View, private val userDao: UserDao): CreateUserContract.Presenter {
+class CreateUserPresenter(val view: CreateUserContract.View, private val context: Context, private val userDao: UserDao): CreateUserContract.Presenter {
 
 
+    @SuppressLint("CheckResult")
     override fun createUser(firstName: String, lastName: String, age: Int, weight: Double) {
         val user = User(firstName, lastName, age, weight)
         userDao.insert(user)
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    val sharedPref = context.getSharedPreferences(
+                            context.resources.getString(R.string.preference_file_key),
+                            Context.MODE_PRIVATE
+                    )
+
+                    sharedPref.edit().putInt(Constants.CURRENT_USER_ID, user.id).apply()
+                }
+
     }
 
     override fun start() {
