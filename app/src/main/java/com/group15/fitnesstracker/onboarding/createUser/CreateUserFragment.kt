@@ -39,7 +39,7 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
                         context?.resources?.getString(R.string.preference_file_key),
                         Context.MODE_PRIVATE
                 )
-                sharedPref?.edit()?.putBoolean(Constants.USER_FIRST_TIME, false)?.apply()
+                sharedPref?.edit()?.putBoolean(Constants.USER_LOGGED_IN, true)?.apply()
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
             }
