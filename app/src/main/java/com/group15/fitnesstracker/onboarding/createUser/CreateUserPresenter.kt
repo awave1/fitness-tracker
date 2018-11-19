@@ -16,8 +16,8 @@ class CreateUserPresenter(val view: CreateUserContract.View, private val context
 
 
     @SuppressLint("CheckResult")
-    override fun createUser(firstName: String, lastName: String, age: Int, weight: Double) {
-        val user = User(firstName, lastName, age, weight)
+    override fun createUser(username: String, firstName: String, lastName: String, age: Int, weight: Double) {
+        val user = User(username, firstName, lastName, age, weight)
         userDao.insert(user)
                 .subscribeOn(Schedulers.io())
                 .subscribe {

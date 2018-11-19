@@ -1,13 +1,16 @@
 package com.group15.fitnesstracker.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = {@Index(value = {"username"}, unique = true)})
 public class User {
-    public User(String firstName, String lastName, int age, double weight) {
+    public User(String username, String firstName, String lastName, int age, double weight) {
         this.id = 1; // required for autoincrement
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -17,6 +20,10 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public int id;
+
+    @NonNull
+    @ColumnInfo(name = "username")
+    public String username;
 
     @ColumnInfo(name = "first_name")
     public String firstName;
@@ -29,7 +36,4 @@ public class User {
 
     @ColumnInfo(name = "weight")
     public double weight;
-
-    @ColumnInfo(name = "logged_in")
-    public boolean isLoggenIn;
 }

@@ -24,4 +24,5 @@
     <string name="dashboard_user_name">Hello, %1$s!</string>
     <string name="toolbar_logout">Logout</string>
     <string name="logout_message">See you soon!</string>
+    <string name="create_user_username_hint">Username</string>
 </resources>

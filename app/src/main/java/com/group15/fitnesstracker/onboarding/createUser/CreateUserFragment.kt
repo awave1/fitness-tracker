@@ -27,13 +27,14 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         submit.setOnClickListener {
+            val username = usernameInputContainer.editText?.text?.toString()
             val firstName = firstNameInputContainer.editText?.text?.toString()
             val lastName = lastNameInputContainer.editText?.text?.toString()
             val age = ageInputContainer.editText?.text?.toString()?.toIntOrNull()
             val weight = weightInputContainer.editText?.text?.toString()?.toDoubleOrNull()
 
-            if (!firstName.isNullOrEmpty() && !lastName.isNullOrEmpty() && age != null && weight != null) {
-                presenter.createUser(firstName!!, lastName!!, age, weight)
+            if (!username.isNullOrEmpty() && !firstName.isNullOrEmpty() && !lastName.isNullOrEmpty() && age != null && weight != null) {
+                presenter.createUser(username!!, firstName!!, lastName!!, age, weight)
 
                 val sharedPref = context?.getSharedPreferences(
                         context?.resources?.getString(R.string.preference_file_key),
