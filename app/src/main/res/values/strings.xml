@@ -25,4 +25,7 @@
     <string name="toolbar_logout">Logout</string>
     <string name="logout_message">See you soon!</string>
     <string name="create_user_username_hint">Username</string>
+    <string name="onboarding_login_text">Login</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_text">Login</string>
 </resources>

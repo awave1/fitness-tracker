@@ -36,11 +36,6 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
             if (!username.isNullOrEmpty() && !firstName.isNullOrEmpty() && !lastName.isNullOrEmpty() && age != null && weight != null) {
                 presenter.createUser(username!!, firstName!!, lastName!!, age, weight)
 
-                val sharedPref = context?.getSharedPreferences(
-                        context?.resources?.getString(R.string.preference_file_key),
-                        Context.MODE_PRIVATE
-                )
-                sharedPref?.edit()?.putBoolean(Constants.USER_LOGGED_IN, true)?.apply()
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
             }

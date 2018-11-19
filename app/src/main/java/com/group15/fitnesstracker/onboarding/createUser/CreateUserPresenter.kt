@@ -26,7 +26,9 @@ class CreateUserPresenter(val view: CreateUserContract.View, private val context
                             Context.MODE_PRIVATE
                     )
 
-                    sharedPref.edit().putInt(Constants.CURRENT_USER_ID, user.id).apply()
+                    sharedPref.edit()
+                            .putBoolean(Constants.USER_LOGGED_IN, true)
+                            .putInt(Constants.CURRENT_USER_ID, user.id).apply()
                 }
 
     }

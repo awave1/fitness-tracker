@@ -5,7 +5,7 @@ import com.group15.fitnesstracker.base.BaseView
 
 interface OnboardingPageContract {
     interface View: BaseView<Presenter> {
-        fun showButton(position: Int)
+        fun showButtons(position: Int)
         fun showText(text: String)
         fun showImage(image: Int)
     }

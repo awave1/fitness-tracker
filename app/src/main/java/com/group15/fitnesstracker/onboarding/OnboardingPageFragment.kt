@@ -8,6 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.onboarding.createUser.CreateUserFragment
+import com.group15.fitnesstracker.onboarding.login.LoginFragment
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_onboarding_page.*
 
@@ -31,14 +32,22 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
                     ?.addToBackStack(null)
                     ?.commit()
         }
+
+        onboardingLoginBtn.setOnClickListener {
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.onboardingFragmentContainer, LoginFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
+        }
     }
 
     override fun showText(text: String) {
         onboardingMessage.text = text
     }
 
-    override fun showButton(position: Int) {
+    override fun showButtons(position: Int) {
         onboardingStartBtn.visibility = if (position == 2) View.VISIBLE else View.GONE
+        onboardingLoginBtn.visibility = if (position == 2) View.VISIBLE else View.GONE
     }
 
     override fun showImage(image: Int) {
