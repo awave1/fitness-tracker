@@ -3,6 +3,9 @@ package com.group15.fitnesstracker
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.group15.fitnesstracker.dashboard.DashboardFragment
 import com.group15.fitnesstracker.onboarding.OnboardingActivity
@@ -26,5 +29,24 @@ class MainActivity: AppCompatActivity() {
         } else {
             startActivity(Intent(this, OnboardingActivity::class.java))
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.toolbar_menu_logout -> {
+                Toast.makeText(this, getString(R.string.logout_message), Toast.LENGTH_LONG).show()
+
+                val sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+                sharedPref.edit().putBoolean(Constants.USER_LOGGED_IN, false).apply()
+                startActivity(Intent(this, OnboardingActivity::class.java))
+                this.finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
