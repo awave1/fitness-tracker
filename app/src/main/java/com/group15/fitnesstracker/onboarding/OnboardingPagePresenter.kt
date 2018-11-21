@@ -2,7 +2,8 @@ package com.group15.fitnesstracker.onboarding
 
 import com.group15.fitnesstracker.R
 
-class OnboardingPagePresenter(val view: OnboardingPageContract.View, private val data: Array<String>): OnboardingPageContract.Presenter {
+class OnboardingPagePresenter(val view: OnboardingPageContract.View, private val data: Array<String>)
+    : OnboardingPageContract.Presenter {
     init {
         view.presenter = this
     }
@@ -14,7 +15,7 @@ class OnboardingPagePresenter(val view: OnboardingPageContract.View, private val
     override fun showPage(position: Int) {
         var image = 0
         view.showText(data[position])
-        view.showButton(position)
+        view.showButtons(position)
 
         when(position) {
             0 -> image = R.drawable.ic_heart_24dp

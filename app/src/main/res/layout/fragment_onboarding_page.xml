@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -24,6 +23,7 @@
         android:textColor="#fff"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:gravity="center"
         tools:text="Message" />
 
     <Button
@@ -37,5 +37,19 @@
         android:visibility="gone"
         android:elevation="8dp"
         tools:visibility="visible"/>
+
+    <Button
+        android:id="@+id/onboardingLoginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/onboardingStartBtn"
+        android:layout_centerInParent="true"
+        android:text="@string/onboarding_login_text"
+        android:visibility="gone"
+        android:textColor="#fff"
+        style="?android:attr/borderlessButtonStyle"
+        tools:visibility="visible"/>
+
 
 </RelativeLayout>
