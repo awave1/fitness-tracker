@@ -21,6 +21,6 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                 }
 
         private fun buildDb(context: Context) =
-                Room.databaseBuilder(context, FitnessTrackerDatabase::class.java, DB_NAME).build()
+                Room.databaseBuilder(context, FitnessTrackerDatabase::class.java, DB_NAME).fallbackToDestructiveMigration().build()
     }
 }
