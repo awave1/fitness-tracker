@@ -18,7 +18,7 @@
             android:paddingBottom="16dp">
 
             <TextView
-                android:id="@+id/execiseName"
+                android:id="@+id/exerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
@@ -32,7 +32,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/exerciseSetList"
-                app:layout_constraintTop_toBottomOf="@id/execiseName"
+                app:layout_constraintTop_toBottomOf="@id/exerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
