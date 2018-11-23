@@ -31,7 +31,7 @@
                 tools:text="ExerciseName"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/execiseSetList"
+                android:id="@+id/exerciseSetList"
                 app:layout_constraintTop_toBottomOf="@id/execiseName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
