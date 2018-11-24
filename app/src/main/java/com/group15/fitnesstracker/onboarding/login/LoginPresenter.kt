@@ -6,6 +6,7 @@ import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.base.BaseView
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.util.Constants
+import com.group15.fitnesstracker.util.CryptoUtils
 import io.reactivex.schedulers.Schedulers
 
 class LoginPresenter(val view: LoginContract.View, private val context: Context, private val userDao: UserDao): LoginContract.Presenter {
@@ -15,9 +16,9 @@ class LoginPresenter(val view: LoginContract.View, private val context: Context,
 
     @SuppressLint("CheckResult")
     override fun login(username: String, password: String) {
-        // @TODO: implement password handling as well
+        val passHash = CryptoUtils.SHA256Hash(password)
 
-        userDao.getByUsername(username)
+        userDao.getByUsername(username, passHash)
                 .subscribeOn(Schedulers.io())
                 .subscribe {
                     val sharedPref = context.getSharedPreferences(

@@ -8,6 +8,6 @@ interface CreateUserContract {
     }
 
     interface Presenter: BasePresenter {
-        fun createUser(username: String, firstName: String, lastName: String, age: Int, weight: Double)
+        fun createUser(username: String, password: String, firstName: String, lastName: String, age: Int, weight: Double)
     }
 }
