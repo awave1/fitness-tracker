@@ -9,6 +9,7 @@ import com.group15.fitnesstracker.db.FitnessTrackerDatabase
 import com.group15.fitnesstracker.db.User
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.util.Constants
+import com.group15.fitnesstracker.util.CryptoUtils
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
@@ -16,8 +17,10 @@ class CreateUserPresenter(val view: CreateUserContract.View, private val context
 
 
     @SuppressLint("CheckResult")
-    override fun createUser(username: String, firstName: String, lastName: String, age: Int, weight: Double) {
-        val user = User(username, firstName, lastName, age, weight)
+    override fun createUser(username: String, password: String, firstName: String, lastName: String, age: Int, weight: Double) {
+        val passHash = CryptoUtils.SHA256Hash(password)
+        val user = User(username, passHash, firstName, lastName, age, weight)
+
         userDao.insert(user)
                 .subscribeOn(Schedulers.io())
                 .subscribe {

@@ -22,6 +22,6 @@ interface UserDao {
     @Query("select * from users where id = :id")
     fun getById(id: Int): Maybe<User>
 
-    @Query("select * from users where username = :username")
-    fun getByUsername(username: String): Maybe<User>
+    @Query("select * from users where username = :username and password = :password")
+    fun getByUsername(username: String, password: String): Maybe<User>
 }

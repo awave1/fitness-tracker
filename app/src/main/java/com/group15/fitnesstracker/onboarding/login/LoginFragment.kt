@@ -26,8 +26,8 @@ class LoginFragment: Fragment(), LoginContract.View {
             val username = usernameInputContainer.editText?.text?.toString()
             val password = passwordInputContainer.editText?.text?.toString()
 
-            if (!username.isNullOrEmpty()) {
-                presenter.login(username!!, "")
+            if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                presenter.login(username!!, password!!)
 
                 startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()

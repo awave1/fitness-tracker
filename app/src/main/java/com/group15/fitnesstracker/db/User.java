@@ -8,9 +8,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users", indices = {@Index(value = {"username"}, unique = true)})
 public class User {
-    public User(String username, String firstName, String lastName, int age, double weight) {
+    public User(String username, String password, String firstName, String lastName, int age, double weight) {
         this.id = 1; // required for autoincrement
         this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -24,6 +25,10 @@ public class User {
     @NonNull
     @ColumnInfo(name = "username")
     public String username;
+
+    @NonNull
+    @ColumnInfo(name = "password")
+    public String password; // NOT plaintext fyi
 
     @ColumnInfo(name = "first_name")
     public String firstName;
