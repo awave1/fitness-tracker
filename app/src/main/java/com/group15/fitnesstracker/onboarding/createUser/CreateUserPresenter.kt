@@ -31,9 +31,9 @@ class CreateUserPresenter(val view: CreateUserContract.View, private val context
 
                     sharedPref.edit()
                             .putBoolean(Constants.USER_LOGGED_IN, true)
-                            .putInt(Constants.CURRENT_USER_ID, user.id).apply()
+                            .putInt(Constants.CURRENT_USER_ID, user.id)
+                            .apply()
                 }
-
     }
 
     override fun start() {

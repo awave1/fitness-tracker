@@ -18,7 +18,7 @@ class MainActivity: AppCompatActivity() {
 
         val pref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
-        if (pref.getBoolean(Constants.USER_LOGGED_IN, false)) {
+        if (pref.getBoolean(Constants.USER_LOGGED_IN, false) && pref.getInt(Constants.CURRENT_USER_ID, -1) != -1) {
             setContentView(R.layout.activity_main)
             setSupportActionBar(toolbar)
 
