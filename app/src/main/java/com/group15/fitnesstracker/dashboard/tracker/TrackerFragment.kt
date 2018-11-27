@@ -7,27 +7,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
 import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
 private const val NUM_PAGES = 2
 
 class TrackerFragment: Fragment() {
-    private lateinit var mPager: ViewPager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tracker_page, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // The pager adapter, which provides the pages to the view pager widget.
         val pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
         pagerAdapter.addFragment(BodyTrackerFragment(), "@string/body")
         pagerAdapter.addFragment(NutrTrackerFragment(), "@string/nutrition")
-        tracker_pager.setAdapter = pagerAdapter
+
+        tracker_pager.adapter = pagerAdapter
     }
 
     /*
