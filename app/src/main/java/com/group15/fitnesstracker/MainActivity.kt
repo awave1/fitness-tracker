@@ -8,26 +8,28 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.group15.fitnesstracker.dashboard.DashboardFragment
-import com.group15.fitnesstracker.onboarding.OnboardingActivity
+import com.group15.fitnesstracker.onboarding.OnboardingFragment
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
 
         val pref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
         if (pref.getBoolean(Constants.USER_LOGGED_IN, false) && pref.getInt(Constants.CURRENT_USER_ID, -1) != -1) {
-            setContentView(R.layout.activity_main)
-            setSupportActionBar(toolbar)
-
+            supportActionBar?.show()
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, DashboardFragment.instance)
-                    .addToBackStack(null)
                     .commit()
         } else {
-            startActivity(Intent(this, OnboardingActivity::class.java))
+            supportActionBar?.hide()
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, OnboardingFragment.instance)
+                    .commit()
         }
     }
 
@@ -43,10 +45,15 @@ class MainActivity: AppCompatActivity() {
 
                 val sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
                 sharedPref.edit().putBoolean(Constants.USER_LOGGED_IN, false).apply()
-                startActivity(Intent(this, OnboardingActivity::class.java))
-                this.finish()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, OnboardingFragment.instance)
+                        .commit()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        finish()
     }
 }
