@@ -3,6 +3,7 @@ package com.group15.fitnesstracker.onboarding.createUser
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.FitnessTrackerDatabase
@@ -33,6 +34,9 @@ class CreateUserPresenter(val view: CreateUserContract.View, private val context
                             .putBoolean(Constants.USER_LOGGED_IN, true)
                             .putInt(Constants.CURRENT_USER_ID, user.id)
                             .apply()
+
+                    startActivity(context, Intent(context, MainActivity::class.java), null)
+
                 }
     }
 

@@ -36,8 +36,6 @@ class CreateUserFragment: Fragment(), CreateUserContract.View {
             // @TODO: clean this up, show warnings for missing labels
             if (!username.isNullOrEmpty() && !password.isNullOrEmpty() && !firstName.isNullOrEmpty() && !lastName.isNullOrEmpty() && age != null && weight != null) {
                 presenter.createUser(username!!, password!!, firstName!!, lastName!!, age, weight)
-
-                startActivity(Intent(context, MainActivity::class.java))
                 activity?.finish()
             }
         }
