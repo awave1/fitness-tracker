@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
+import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
 private const val NUM_PAGES = 2
 
 class TrackerFragment: Fragment() {
     private lateinit var mPager: ViewPager
-    private lateinit var manager: FragmentManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tracker_page, container, false)
@@ -23,14 +23,11 @@ class TrackerFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-        // Instantiate a ViewPager and a PagerAdapter.
-        mPager = fragmentManager as ViewPager
-        manager = fragmentManager as FragmentManager
-*/
         // The pager adapter, which provides the pages to the view pager widget.
-        val pagerAdapter = ScreenSlidePagerAdapter()
-        mPager.adapter = pagerAdapter
+        val pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
+        pagerAdapter.addFragment(BodyTrackerFragment(), "@string/body")
+        pagerAdapter.addFragment(NutrTrackerFragment(), "@string/nutrition")
+        tracker_pager.setAdapter = pagerAdapter
     }
 
     /*
@@ -44,10 +41,18 @@ class TrackerFragment: Fragment() {
     }
 */
 
-    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        override fun getCount(): Int = NUM_PAGES
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        private val fragmentList : MutableList<Fragment> = ArrayList()
+        private val titleList : MutableList<String> = ArrayList()
 
-        override fun getItem(position: Int): Fragment = TrackerViewFragment()
+        override fun getCount(): Int = NUM_PAGES
+        override fun getItem(position: Int): Fragment = fragmentList[position]
+        override fun getPageTitle(position: Int): CharSequence? = titleList[position]
+
+        fun addFragment(fragment: Fragment, title: String) {
+            fragmentList.add(fragment)
+            titleList.add(title)
+        }
     }
 
 }
