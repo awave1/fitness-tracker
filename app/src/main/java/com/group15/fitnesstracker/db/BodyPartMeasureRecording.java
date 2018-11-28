@@ -6,13 +6,13 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class BodyMeasureRecording {
+public class BodyPartMeasureRecording {
     @PrimaryKey
     public int recordingId;
 
     public Date date;
 
-    public double bodyfat;
+    public String bodypart;
 
-    public double weight;
+    public double bodypartSize;
 }

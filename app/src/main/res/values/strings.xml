@@ -34,5 +34,6 @@
     <!--Tracker Page-->
     <string name="body">Body</string>
     <string name="nutrition">Nutrition</string>
+    <string name="bpart">Body Part</string>
 
 </resources>

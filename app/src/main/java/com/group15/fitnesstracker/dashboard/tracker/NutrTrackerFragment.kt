@@ -1,5 +1,6 @@
 package com.group15.fitnesstracker.dashboard.tracker
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,6 +20,11 @@ class NutrTrackerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPref = context?.getSharedPreferences(
+                context?.resources?.getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+        )
 
         nutr_text.text = getString(R.string.nutrition)
     }
