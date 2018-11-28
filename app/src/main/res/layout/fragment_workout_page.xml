@@ -2,46 +2,20 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:fab="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workoutList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/card_exercise" />
+        tools:listitem="@layout/card_workout_routine" />
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/startWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
         android:layout_gravity="bottom|end"
-        fab:fab_addButtonColorNormal="@color/colorAccent"
-        fab:fab_addButtonColorPressed="@color/colorAccentDark"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        fab:fab_labelsPosition="left">
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/createWorkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_size="mini"
-            fab:fab_icon="@drawable/ic_list_add_black_24dp"
-            fab:fab_title="@string/create_workout"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccentDark" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/pickWorkout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_size="mini"
-            fab:fab_icon="@drawable/ic_exercise_24dp"
-            fab:fab_title="@string/pick_workout"
-            fab:fab_colorNormal="@color/colorAccent"
-            fab:fab_colorPressed="@color/colorAccentDark" />
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        android:src="@drawable/ic_add_black_24dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
