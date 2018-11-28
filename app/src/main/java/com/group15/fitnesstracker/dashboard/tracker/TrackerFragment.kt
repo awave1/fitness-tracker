@@ -22,13 +22,17 @@ class TrackerFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // The pager adapter, which provides the pages to the view pager widget.
-        val pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
+        val pagerAdapter = ScreenSlidePagerAdapter(fragmentManager!!)
         pagerAdapter.addFragment(BodyTrackerFragment(), "@string/body")
         pagerAdapter.addFragment(NutrTrackerFragment(), "@string/nutrition")
 
         tracker_pager.adapter = pagerAdapter
     }
 
+    /*@TODO: Add ListView to display items in database (either body records or nutrition records)
+    *       - when clicked -> brought to another fragment view? or alert dialog with update button
+    *       - for nutrition records have a micronutrient button as well which displays them
+    */
     /*
     override fun onBackPressed() {
         if (mPager.currentItem == 0) {
