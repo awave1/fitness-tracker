@@ -3,10 +3,11 @@ package com.group15.fitnesstracker.dashboard.workout
 import android.content.Context
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Workout
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class WorkoutPresenter(private val context: Context?): WorkoutContract.Presenter {
-
-    private lateinit var workouts: Array<Workout>
+    private lateinit var workouts: List<Workout>
 
     override fun getItemCount(): Int = workouts.size
 
@@ -17,8 +18,11 @@ class WorkoutPresenter(private val context: Context?): WorkoutContract.Presenter
     }
 
     override fun start() {
-        context?.let {
-//            DbInjection.provideWorkoutDao(context)
+        context?.let { ctx ->
+            DbInjection.provideWorkoutDao(ctx).getAll()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { workouts = it }
         }
     }
 

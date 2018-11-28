@@ -16,16 +16,15 @@ class WorkoutFragment: Fragment(), WorkoutContract.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = WorkoutPresenter(context)
+        presenter.start()
         return inflater.inflate(R.layout.fragment_workout_page, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter.start()
-
         workoutList.setHasFixedSize(false)
         workoutList.layoutManager = LinearLayoutManager(context)
-//        workoutList.adapter = WorkoutAdapter()
+        workoutList.adapter = WorkoutAdapter(presenter)
     }
 }
