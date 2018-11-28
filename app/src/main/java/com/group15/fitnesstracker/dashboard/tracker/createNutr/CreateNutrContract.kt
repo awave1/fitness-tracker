@@ -1,14 +1,14 @@
-package com.group15.fitnesstracker.dashboard.tracker
+package com.group15.fitnesstracker.dashboard.tracker.createNutr
 
 import com.group15.fitnesstracker.base.BasePresenter
 import com.group15.fitnesstracker.base.BaseView
 import java.util.*
 
-interface CreateBodyContract {
+interface CreateNutrContract {
     interface View: BaseView<Presenter> {
     }
 
     interface Presenter: BasePresenter {
-        fun createBody(recordingId: Int, date: Date, bodyfat: Double, weight: Double)
+        fun createNutrition(recordingId: Int, date: Date, bodypart: String, bodypartSize: Double)
     }
 }

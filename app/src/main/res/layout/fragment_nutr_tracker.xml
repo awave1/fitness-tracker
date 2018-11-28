@@ -9,6 +9,7 @@
         android:id="@+id/nutr_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/nutrition"
         android:textSize="14sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

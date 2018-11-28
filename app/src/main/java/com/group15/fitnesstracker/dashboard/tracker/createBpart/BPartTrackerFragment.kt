@@ -1,4 +1,4 @@
-package com.group15.fitnesstracker.dashboard.tracker
+package com.group15.fitnesstracker.dashboard.tracker.createBpart
 
 import android.content.Context
 import android.os.Bundle
@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.group15.fitnesstracker.R
-import kotlinx.android.synthetic.main.fragment_nutr_tracker.*
 
-class NutrTrackerFragment : Fragment() {
+class BPartTrackerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nutr_tracker, container, false)
+        return inflater.inflate(R.layout.fragment_bpart_tracker, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +25,6 @@ class NutrTrackerFragment : Fragment() {
                 Context.MODE_PRIVATE
         )
 
-        nutr_text.text = getString(R.string.nutrition)
+
     }
 }

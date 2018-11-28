@@ -12,9 +12,7 @@ public class MicronutrientRecording {
     @PrimaryKey
     public int recordingId;
 
-    public Micronutrient[] micronutrients;
-}
-class Micronutrient {
     public String name;
+
     public double amount;
 }

@@ -8,9 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.tracker.createBody.BodyTrackerFragment
+import com.group15.fitnesstracker.dashboard.tracker.createBpart.BPartTrackerFragment
+import com.group15.fitnesstracker.dashboard.tracker.createNutr.NutrTrackerFragment
 import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
-private const val NUM_PAGES = 2
+private const val NUM_PAGES = 3
 
 class TrackerFragment: Fragment() {
 
@@ -25,6 +28,7 @@ class TrackerFragment: Fragment() {
         val pagerAdapter = ScreenSlidePagerAdapter(fragmentManager!!)
         pagerAdapter.addFragment(BodyTrackerFragment(), "@string/body")
         pagerAdapter.addFragment(NutrTrackerFragment(), "@string/nutrition")
+        pagerAdapter.addFragment(BPartTrackerFragment(), "@string/bpart")
 
         tracker_pager.adapter = pagerAdapter
     }
