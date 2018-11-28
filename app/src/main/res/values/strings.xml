@@ -30,4 +30,6 @@
     <string name="login_password_hint">Password</string>
     <string name="login_text">Login</string>
     <string name="create_user_password_hint">Password</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="pick_workout">Pick workout</string>
 </resources>
