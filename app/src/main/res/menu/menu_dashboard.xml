@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_calendar"
         android:title="@string/navigation_schedule"/>
 
+    <item
+        android:id="@+id/navigation_tracker"
+        android:icon="@drawable/ic_tracker"
+        android:title="@string/navigation_tracker"/>
+
 </menu>

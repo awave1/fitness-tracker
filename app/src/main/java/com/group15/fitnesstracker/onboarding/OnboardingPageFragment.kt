@@ -28,14 +28,14 @@ class OnboardingPageFragment : Fragment(), OnboardingPageContract.View {
 
         onboardingStartBtn.setOnClickListener {
             fragmentManager?.beginTransaction()
-                    ?.replace(R.id.onboardingFragmentContainer, CreateUserFragment())
+                    ?.replace(R.id.container, CreateUserFragment())
                     ?.addToBackStack(null)
                     ?.commit()
         }
 
         onboardingLoginBtn.setOnClickListener {
             fragmentManager?.beginTransaction()
-                    ?.replace(R.id.onboardingFragmentContainer, LoginFragment())
+                    ?.replace(R.id.container, LoginFragment())
                     ?.addToBackStack(null)
                     ?.commit()
         }

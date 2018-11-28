@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.dashboard.profile.ProfileFragment
 import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
+import com.group15.fitnesstracker.dashboard.tracker.TrackerFragment
 import com.group15.fitnesstracker.dashboard.workout.WorkoutFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 
@@ -41,6 +42,13 @@ class DashboardFragment: Fragment() {
                 R.id.navigation_schedule -> {
                     childFragmentManager.beginTransaction()
                             .replace(R.id.fragment_container, ScheduleFragment())
+                            .commit()
+
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.navigation_tracker -> {
+                    childFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, TrackerFragment())
                             .commit()
 
                     return@setOnNavigationItemSelectedListener true

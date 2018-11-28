@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
@@ -15,7 +16,7 @@ class LoginFragment: Fragment(), LoginContract.View {
     override lateinit var presenter: LoginContract.Presenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = LoginPresenter(this, context!!, DbInjection.provideUserDao(context!!))
+        presenter = LoginPresenter(this, context, fragmentManager, DbInjection.provideUserDao(context!!))
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -26,11 +27,9 @@ class LoginFragment: Fragment(), LoginContract.View {
             val username = usernameInputContainer.editText?.text?.toString()
             val password = passwordInputContainer.editText?.text?.toString()
 
-            if (!username.isNullOrEmpty()) {
-                presenter.login(username!!, "")
-
-                startActivity(Intent(context, MainActivity::class.java))
-                activity?.finish()
+            if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                presenter.login(username!!, password!!)
+                (activity as AppCompatActivity).supportActionBar?.show()
             }
         }
     }
