@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.workout.exerciseList.ExerciseListFragment
 import kotlinx.android.synthetic.main.fragment_workout_page.*
 
 class WorkoutFragment: Fragment() {
@@ -20,7 +20,10 @@ class WorkoutFragment: Fragment() {
 
         createWorkout.setOnClickListener {
             Toast.makeText(context, "create workout", Toast.LENGTH_SHORT).show()
-
+            activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.container, ExerciseListFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
         }
 
         pickWorkout.setOnClickListener {
