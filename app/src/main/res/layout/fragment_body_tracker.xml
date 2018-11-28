@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/body_text"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/body_list"
+        android:paddingTop="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/body"
-        android:textSize="14sp"/>
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

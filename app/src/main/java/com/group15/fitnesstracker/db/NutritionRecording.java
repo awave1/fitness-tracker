@@ -11,7 +11,7 @@ public class NutritionRecording {
     public int recordingId;
 
     public Date date;
-    
+
     public double calories;
 
     public double protein;
