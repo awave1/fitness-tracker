@@ -18,8 +18,9 @@ class WorkoutFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        addExercise.setOnClickListener {
-            Toast.makeText(context, "add exercise", Toast.LENGTH_SHORT).show()
+        createWorkout.setOnClickListener {
+            Toast.makeText(context, "create workout", Toast.LENGTH_SHORT).show()
+
         }
 
         pickWorkout.setOnClickListener {

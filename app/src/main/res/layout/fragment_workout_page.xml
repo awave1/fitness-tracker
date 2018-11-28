@@ -23,22 +23,22 @@
         fab:fab_labelsPosition="left">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/pickWorkout"
+            android:id="@+id/createWorkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_size="mini"
-            fab:fab_icon="@drawable/ic_more_vert_black_24dp"
-            fab:fab_title="@string/pick_workout"
+            fab:fab_icon="@drawable/ic_list_add_black_24dp"
+            fab:fab_title="@string/create_workout"
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/colorAccentDark" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addExercise"
+            android:id="@+id/pickWorkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_size="mini"
             fab:fab_icon="@drawable/ic_exercise_24dp"
-            fab:fab_title="@string/add_exercise"
+            fab:fab_title="@string/pick_workout"
             fab:fab_colorNormal="@color/colorAccent"
             fab:fab_colorPressed="@color/colorAccentDark" />
 
