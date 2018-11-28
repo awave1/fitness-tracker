@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.group15.fitnesstracker.R
+import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
 class BodyTrackerFragment : Fragment() {
 
@@ -25,10 +26,13 @@ class BodyTrackerFragment : Fragment() {
                 Context.MODE_PRIVATE
         )
 
-/*
+        /*
         create_tracker_fab.setOnClickListener {
-
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.onboardingFragmentContainer, CreateBodyFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
         }
-*/
+        */
     }
 }

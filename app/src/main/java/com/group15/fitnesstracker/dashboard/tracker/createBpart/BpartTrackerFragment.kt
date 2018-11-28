@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 import com.group15.fitnesstracker.R
 
-class BPartTrackerFragment : Fragment() {
+class BpartTrackerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

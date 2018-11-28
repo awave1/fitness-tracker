@@ -9,6 +9,6 @@ interface CreateNutrContract {
     }
 
     interface Presenter: BasePresenter {
-        fun createNutrition(recordingId: Int, date: Date, bodypart: String, bodypartSize: Double)
+        fun createNutrition(recordingId: Int, date: Date, calories: Double, protein: Double, carb: Double, fat: Double)
     }
 }

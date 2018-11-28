@@ -5,11 +5,11 @@ import com.group15.fitnesstracker.base.BaseView
 import com.group15.fitnesstracker.db.Macronutrient
 import java.util.*
 
-interface CreateBPartContract {
+interface CreateBpartContract {
     interface View: BaseView<Presenter> {
     }
 
     interface Presenter: BasePresenter {
-        fun createNutrition(recordingId: Int, date: Date, calories: Double, macronutrient: Macronutrient)
+        fun createNutrition(recordingId: Int, date: Date, bodypart: String, bodypartSize: Double)
     }
 }
