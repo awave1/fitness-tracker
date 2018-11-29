@@ -5,7 +5,7 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/body_item_date"
+        android:id="@+id/bpart_item_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,25 +18,25 @@
         android:layout_marginEnd="10dp"/>
 
     <RelativeLayout
-        android:id="@+id/body_item_header"
+        android:id="@+id/bpart_item_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <TextView
-            android:id="@+id/body_item_body_fat_header"
+            android:id="@+id/bpart_item_body_part_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_body_body_fat_hint"
+            android:text="@string/create_bpart_body_part_hint"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/body_item_weight_header"
+            android:id="@+id/bpart_item_body_part_size_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/body_item_body_fat_header"
-            android:text="@string/create_body_weight_hint"
+            android:layout_below="@+id/bpart_item_body_part_header"
+            android:text="@string/create_bpart_body_part_size_hint"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
@@ -46,22 +46,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/body_item_header"
+        android:layout_toEndOf="@id/bpart_item_header"
         android:paddingStart="20dp"
         android:paddingEnd="5dp">
 
         <TextView
-            android:id="@+id/body_item_body_fat"
+            android:id="@+id/bpart_item_body_part"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="123"
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/body_item_weight"
+            android:id="@+id/bpart_item_body_part_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/body_item_body_fat"
+            android:layout_below="@+id/bpart_item_body_part"
             android:text="123"
             android:textColor="@android:color/black" />
 
