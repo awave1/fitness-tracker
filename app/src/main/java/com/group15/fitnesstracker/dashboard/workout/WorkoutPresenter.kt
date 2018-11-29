@@ -5,11 +5,14 @@ import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Workout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
-class WorkoutPresenter(private val context: Context?): WorkoutContract.Presenter {
-    private lateinit var workouts: List<Workout>
+class WorkoutPresenter(private val view: WorkoutContract.View, private val context: Context?): WorkoutContract.Presenter {
+    init {
+        view.presenter = this
+    }
 
-    override fun getItemCount(): Int = workouts.size
+    private var workouts = listOf<Workout>()
 
     override fun onBindWorkoutViewAtPosition(position: Int, view: WorkoutContract.WorkoutItemView) {
         val workout = workouts.get(position)
@@ -17,13 +20,21 @@ class WorkoutPresenter(private val context: Context?): WorkoutContract.Presenter
         view.setDescription(workout.routineDescription)
     }
 
-    override fun start() {
+    override fun loadWorkouts() {
         context?.let { ctx ->
             DbInjection.provideWorkoutDao(ctx).getAll()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { workouts = it }
+                    .subscribe {
+                        Timber.d("workouts populated (size ${it.size})")
+
+                        workouts = it
+                        view.showWorkouts(workouts)
+                    }
         }
+    }
+
+    override fun start() {
     }
 
 }

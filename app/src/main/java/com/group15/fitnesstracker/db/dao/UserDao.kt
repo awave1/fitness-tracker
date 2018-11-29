@@ -13,15 +13,15 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User): Completable
 
-    @Query("select * from users")
+    @Query("select * from User")
     fun getAll(): Maybe<List<User>>
 
-    @Query("select * from users where first_name = :firstName")
+    @Query("select * from User where first_name = :firstName")
     fun getByName(firstName: String): Maybe<User>
 
-    @Query("select * from users where id = :id")
+    @Query("select * from User where id = :id")
     fun getById(id: Int): Maybe<User>
 
-    @Query("select * from users where username = :username and password = :password")
+    @Query("select * from User where username = :username and password = :password")
     fun getByUsername(username: String, password: String): Maybe<User>
 }

@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users", indices = {@Index(value = {"username"}, unique = true)})
+@Entity(indices = {@Index(value = {"username"}, unique = true)})
 public class User {
     public User(String username, String password, String firstName, String lastName, int age, double weight) {
         this.id = 1; // required for autoincrement

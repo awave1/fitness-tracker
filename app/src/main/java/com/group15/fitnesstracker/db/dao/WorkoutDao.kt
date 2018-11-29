@@ -10,10 +10,10 @@ interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(workout: Workout): Completable
 
-    @Query("select * from workout")
+    @Query("select * from Workout")
     fun getAll(): Maybe<List<Workout>>
 
-    @Query("select * from workout where workout_id = :id")
+    @Query("select * from Workout where workoutId = :id")
     fun getWorkout(id: Int): Maybe<Workout>
 
     @Delete()

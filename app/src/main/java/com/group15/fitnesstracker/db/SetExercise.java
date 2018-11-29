@@ -1,20 +1,33 @@
 package com.group15.fitnesstracker.db;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(foreignKeys = @ForeignKey(
+                entity = Workout.class,
+                parentColumns = "workoutId",
+                childColumns = "workoutId")
+)
 public class SetExercise {
+    public SetExercise(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     @PrimaryKey
+    @NonNull
     public String name;
 
-//    @ForeignKey()
     public int workoutId;
 
     public String description;
-
-    public Set[] sets;
+// @TODO: cant save arrays
+//    public Set[] sets;
 }
+
 class Set {
     public int reps;
     public double weight;

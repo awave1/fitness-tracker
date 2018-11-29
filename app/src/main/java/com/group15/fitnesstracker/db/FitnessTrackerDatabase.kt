@@ -7,6 +7,9 @@ import androidx.room.RoomDatabase
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.db.dao.WorkoutDao
 import androidx.sqlite.db.SupportSQLiteDatabase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.concurrent.Executors
 
 const val DB_NAME = "fitness_tracker.db"
@@ -17,7 +20,7 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
  */
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
-@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class], version = 1)
+@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class], version = 1, exportSchema = false)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun workoutDao(): WorkoutDao
@@ -37,10 +40,17 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
+
                             // @TODO implement db population
-//                            ioThread {
-//                                instance(context).workoutDao()
-//                            }
+                            Timber.d("populating db")
+                            instance(context).workoutDao().insert(Workout("Strong 5x5 A", "Very"))
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
+                            instance(context).workoutDao().insert(Workout("Strong 5x5 B", "Stronk"))
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
                         }
                     })
                     .build()
