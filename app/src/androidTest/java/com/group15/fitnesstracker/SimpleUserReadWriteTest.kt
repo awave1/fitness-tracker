@@ -48,7 +48,7 @@ class SimpleUserReadWriteTest {
 
 
     @Test
-    fun createUserAndReadInList() {
+    fun createMultipleUsers_shouldInsertAllSuccessfully() {
         val user1 = User(
                 username = "username1",
                 password = "password",
