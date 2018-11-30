@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.db.dao.WorkoutDao
 import androidx.sqlite.db.SupportSQLiteDatabase
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -41,13 +42,12 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
 
+                            val dbInstance = instance(context)
+
                             // @TODO implement db population
                             Timber.d("populating db")
-                            instance(context).workoutDao().insert(Workout("Strong 5x5 A", "Very"))
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe()
-                            instance(context).workoutDao().insert(Workout("Strong 5x5 B", "Stronk"))
+                            dbInstance.workoutDao()
+                                    .insertAll(Workout("Strong 5x5 A", "Very"), Workout("Strong 5x5 B", "Strong"))
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()

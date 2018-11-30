@@ -9,7 +9,6 @@ import androidx.room.PrimaryKey;
 @Entity(indices = {@Index(value = {"username"}, unique = true)})
 public class User {
     public User(String username, String password, String firstName, String lastName, int age, double weight) {
-        this.id = 1; // required for autoincrement
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -20,7 +19,7 @@ public class User {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    public int id;
+    public int id = 0;
 
     @NonNull
     @ColumnInfo(name = "username")
