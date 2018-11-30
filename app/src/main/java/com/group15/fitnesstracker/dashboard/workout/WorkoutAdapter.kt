@@ -23,5 +23,4 @@ class WorkoutAdapter(private val presenter: WorkoutContract.Presenter) : Recycle
     override fun onBindViewHolder(holder: WorkoutItemViewHolder, position: Int) {
         presenter.onBindWorkoutViewAtPosition(position, holder)
     }
-
 }

@@ -20,7 +20,6 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"/>
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/dashboardNav"
         android:layout_width="match_parent"

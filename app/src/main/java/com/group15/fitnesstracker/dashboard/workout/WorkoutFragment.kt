@@ -20,7 +20,7 @@ class WorkoutFragment: Fragment(), WorkoutContract.View {
     private lateinit var adapter: WorkoutAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = WorkoutPresenter(this, context)
+        presenter = WorkoutPresenter(this, context, fragmentManager)
         return inflater.inflate(R.layout.fragment_workout_page, container, false)
     }
 

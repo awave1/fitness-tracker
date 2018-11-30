@@ -39,6 +39,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
     implementation "com.android.support:recyclerview-v7:$rootProject.recyclerView"
     implementation "com.android.support:cardview-v7:$rootProject.cardView"
+    implementation "com.android.support:design:28.0.0"
 
     implementation "androidx.room:room-runtime:$rootProject.room"
     kapt "androidx.room:room-compiler:$rootProject.room"
