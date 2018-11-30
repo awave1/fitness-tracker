@@ -11,6 +11,7 @@ import com.group15.fitnesstracker.db.User
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.util.Constants
 import com.group15.fitnesstracker.util.CryptoUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class CreateUserPresenter(val view: CreateUserContract.View,
@@ -31,6 +32,7 @@ class CreateUserPresenter(val view: CreateUserContract.View,
 
         userDao.insert(user)
                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     val sharedPref = context?.getSharedPreferences(
                             context.resources.getString(R.string.preference_file_key),
@@ -39,7 +41,7 @@ class CreateUserPresenter(val view: CreateUserContract.View,
 
                     sharedPref?.edit()
                             ?.putBoolean(Constants.USER_LOGGED_IN, true)
-                            ?.putLong(Constants.CURRENT_USER_ID, user.id)
+                            ?.putLong(Constants.CURRENT_USER_ID, it)
                             ?.apply()
 
                     fm?.beginTransaction()

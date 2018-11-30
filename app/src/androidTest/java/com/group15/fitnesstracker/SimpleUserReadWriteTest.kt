@@ -48,6 +48,22 @@ class SimpleUserReadWriteTest {
 
 
     @Test
+    fun createUserReturnUserId_shouldInsertUserSuccessfully() {
+        val user1 = User(
+                username = "username1",
+                password = "password",
+                firstName = "first",
+                lastName = "last",
+                age = 99,
+                weight = 99.9
+        )
+
+        userDao.insert(user1)
+                .test()
+                .assertValue { it == 1.toLong() }
+    }
+
+    @Test
     fun createMultipleUsers_shouldInsertAllSuccessfully() {
         val user1 = User(
                 username = "username1",
@@ -73,6 +89,26 @@ class SimpleUserReadWriteTest {
                 .test()
                 .assertValue {
                     return@assertValue it.size == 2
+                }
+    }
+
+    @Test
+    fun getUserByUsername_shouldReturnUserSuccessfully() {
+        val user1 = User(
+                username = "username1",
+                password = "password",
+                firstName = "first",
+                lastName = "last",
+                age = 99,
+                weight = 99.9
+        )
+
+        userDao.insertAll(user1)
+
+        userDao.getByUsername(user1.username, user1.password)
+                .test()
+                .assertValue {
+                    return@assertValue it.username == user1.username
                 }
     }
 }
