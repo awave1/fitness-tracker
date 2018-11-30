@@ -65,6 +65,7 @@ dependencies {
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.0.0'
+    androidTestImplementation "android.arch.core:core-testing:1.1.1"
 
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.1.0'

@@ -20,7 +20,14 @@ class CreateUserPresenter(val view: CreateUserContract.View,
     @SuppressLint("CheckResult")
     override fun createUser(username: String, password: String, firstName: String, lastName: String, age: Int, weight: Double) {
         val passHash = CryptoUtils.SHA256Hash(password)
-        val user = User(username, passHash, firstName, lastName, age, weight)
+        val user = User(
+                username = username,
+                password = passHash,
+                firstName = firstName,
+                lastName = lastName,
+                age = age,
+                weight = weight
+        )
 
         userDao.insert(user)
                 .subscribeOn(Schedulers.io())
@@ -32,7 +39,7 @@ class CreateUserPresenter(val view: CreateUserContract.View,
 
                     sharedPref?.edit()
                             ?.putBoolean(Constants.USER_LOGGED_IN, true)
-                            ?.putInt(Constants.CURRENT_USER_ID, user.id)
+                            ?.putLong(Constants.CURRENT_USER_ID, user.id)
                             ?.apply()
 
                     fm?.beginTransaction()
