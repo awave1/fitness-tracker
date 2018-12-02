@@ -1,20 +1,12 @@
 package com.group15.fitnesstracker.db
 
 import androidx.annotation.NonNull
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity
 data class SetExercise (
-        @PrimaryKey(autoGenerate = true) val exerciseId: Int = 0,
-        @NonNull val name: String = "",
-        val description: String = ""
+    @PrimaryKey(autoGenerate = true) var exerciseId: Int = 0,
+    @NonNull var name: String = "",
+    var description: String = "",
+    @Ignore var isSelected: Boolean = false
 )
-
-//
-//class Set {
-//    public int sets;
-//    public double weight;
-//}

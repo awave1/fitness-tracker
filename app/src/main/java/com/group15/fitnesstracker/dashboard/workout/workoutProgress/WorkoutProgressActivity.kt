@@ -27,9 +27,27 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
 
         exerciseList.layoutManager = LinearLayoutManager(this)
         exerciseList.adapter = adapter
+
+        finishWorkout.setOnClickListener {
+            val isFinished = adapter.items.filterIndexed { index, _ ->
+                val vh = exerciseList.findViewHolderForAdapterPosition(index) as WorkoutProgressViewHolder
+                Timber.d("finished? ${vh.isComplete()}")
+                return@filterIndexed vh.isComplete()
+            }.size == adapter.items.size
+
+            if (isFinished) {
+                presenter.finishWorkout(workoutId)
+            } else {
+                presenter.showWarning()
+            }
+        }
     }
 
     override fun showExercises(exercises: List<SetExercise>) {
         adapter.items = exercises
+    }
+
+    override fun onBackPressed() {
+        presenter.showWarning()
     }
 }

@@ -34,4 +34,8 @@
     <string name="pick_workout">Pick workout</string>
     <string name="create_workout">Create workout</string>
     <string name="finish_workout">Finish Workout</string>
+    <string name="workout_progress_warning">Workout is unfinished. Do you want to finish?</string>
+    <string name="workout_progress_warning_title">Workout in progress</string>
+    <string name="ok">Ok</string>
+    <string name="close">Close</string>
 </resources>

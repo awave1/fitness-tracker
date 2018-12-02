@@ -1,6 +1,9 @@
 package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.SetExercise
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,8 +26,12 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
+                        val sets = mutableListOf<SetExercise>()
+
+                        repeat(it) { sets.add(exercise) }
+
                         view.showExerciseName(exercise.name)
-                        view.showSets(it)
+                        view.showSets(sets)
                     }
         }
     }
@@ -42,6 +49,24 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                         this.workoutId = workoutId
                     }
         }
+    }
+
+    override fun showWarning() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        builder.setMessage(R.string.workout_progress_warning)
+                .setTitle(R.string.workout_progress_warning_title)
+                .setPositiveButton(R.string.ok) { dialog, which ->
+                    (context as WorkoutProgressActivity).finish()
+                }
+                .setNegativeButton(R.string.close) { dialog, which ->
+
+                }
+                .create()
+                .show()
+    }
+
+    override fun finishWorkout(workoutId: Int) {
+
     }
 
     override fun start() {

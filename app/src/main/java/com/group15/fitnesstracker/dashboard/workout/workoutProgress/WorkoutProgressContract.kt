@@ -12,10 +12,12 @@ interface WorkoutProgressContract {
     interface Presenter: BasePresenter {
         fun onBindViewAtPosition(position: Int, view: ExerciseView)
         fun loadExercises(workoutId: Int)
+        fun showWarning()
+        fun finishWorkout(workoutId: Int)
     }
 
     interface ExerciseView {
         fun showExerciseName(name: String)
-        fun showSets(sets: Int)
+        fun showSets(sets: MutableList<SetExercise>)
     }
 }
