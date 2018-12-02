@@ -7,6 +7,7 @@ import com.group15.fitnesstracker.db.SetExercise
 import com.group15.fitnesstracker.db.WorkoutExercises
 import io.reactivex.Completable
 import io.reactivex.Maybe
+import io.reactivex.Observable
 
 @Dao
 interface WorkoutExercisesDao {
@@ -21,4 +22,7 @@ interface WorkoutExercisesDao {
 
     @Insert
     fun insertAll_test(vararg workoutExercises: WorkoutExercises)
+
+    @Query("select sets from WorkoutExercises where workoutId = :workoutId and exerciseId = :exerciseId")
+    fun getSets(workoutId: Int, exerciseId: Int): Observable<Int>
 }

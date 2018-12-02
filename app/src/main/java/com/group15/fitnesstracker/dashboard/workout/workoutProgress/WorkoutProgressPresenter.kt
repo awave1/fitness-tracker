@@ -13,10 +13,20 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
     }
 
     private var exercises = listOf<SetExercise>()
+    private var workoutId: Int = 0
 
     override fun onBindViewAtPosition(position: Int, view: WorkoutProgressContract.ExerciseView) {
         val exercise = exercises[position]
-        view.showExerciseName(exercise.name)
+        context?.let { ctx ->
+            DbInjection.provideWorkoutExercisesDao(ctx)
+                    .getSets(workoutId, exercise.exerciseId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        view.showExerciseName(exercise.name)
+                        view.showSets(it)
+                    }
+        }
     }
 
     override fun loadExercises(workoutId: Int) {
@@ -29,6 +39,7 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                         Timber.d("exercises ${it.size}")
                         view.showExercises(it)
                         exercises = it
+                        this.workoutId = workoutId
                     }
         }
     }

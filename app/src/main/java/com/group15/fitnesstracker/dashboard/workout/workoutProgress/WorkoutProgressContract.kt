@@ -16,5 +16,6 @@ interface WorkoutProgressContract {
 
     interface ExerciseView {
         fun showExerciseName(name: String)
+        fun showSets(sets: Int)
     }
 }
