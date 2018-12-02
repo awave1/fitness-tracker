@@ -2,7 +2,6 @@ package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.SetExercise
@@ -58,7 +57,7 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                 .setPositiveButton(R.string.ok) { dialog, which ->
                     (context as WorkoutProgressActivity).finish()
                 }
-                .setNegativeButton(R.string.close) { dialog, which ->
+                .setNegativeButton(R.string.cancel) { dialog, which ->
 
                 }
                 .create()
