@@ -15,6 +15,6 @@ data class SetExercise (
 
 //
 //class Set {
-//    public int reps;
+//    public int sets;
 //    public double weight;
 //}

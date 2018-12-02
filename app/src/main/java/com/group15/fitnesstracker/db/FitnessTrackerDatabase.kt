@@ -9,7 +9,6 @@ import com.group15.fitnesstracker.db.dao.WorkoutDao
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.group15.fitnesstracker.db.dao.SetExerciseDao
 import com.group15.fitnesstracker.db.dao.WorkoutExercisesDao
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -71,14 +70,14 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.workoutExercisesDao()
                                     .insertAll(
-                                            WorkoutExercises(workoutId = 1, exerciseId = 1, reps = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 2, reps = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 4, reps = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 1, sets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 2, sets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 4, sets = 5),
 
 
-                                            WorkoutExercises(workoutId = 2, exerciseId = 3, reps = 5),
-                                            WorkoutExercises(workoutId = 2, exerciseId = 2, reps = 5),
-                                            WorkoutExercises(workoutId = 2, exerciseId = 4, reps = 5)
+                                            WorkoutExercises(workoutId = 2, exerciseId = 3, sets = 5),
+                                            WorkoutExercises(workoutId = 2, exerciseId = 2, sets = 5),
+                                            WorkoutExercises(workoutId = 2, exerciseId = 4, sets = 5)
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())

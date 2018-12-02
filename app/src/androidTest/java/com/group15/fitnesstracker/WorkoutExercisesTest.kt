@@ -43,14 +43,14 @@ class WorkoutExercisesTest {
 
         db.workoutExercisesDao()
                 .insertAll_test(
-                        WorkoutExercises(workoutId = 1, exerciseId = 1, reps = 5),
-                        WorkoutExercises(workoutId = 1, exerciseId = 2, reps = 5),
-                        WorkoutExercises(workoutId = 1, exerciseId = 4, reps = 5),
+                        WorkoutExercises(workoutId = 1, exerciseId = 1, sets = 5),
+                        WorkoutExercises(workoutId = 1, exerciseId = 2, sets = 5),
+                        WorkoutExercises(workoutId = 1, exerciseId = 4, sets = 5),
 
 
-                        WorkoutExercises(workoutId = 2, exerciseId = 3, reps = 5),
-                        WorkoutExercises(workoutId = 2, exerciseId = 2, reps = 5),
-                        WorkoutExercises(workoutId = 2, exerciseId = 4, reps = 5)
+                        WorkoutExercises(workoutId = 2, exerciseId = 3, sets = 5),
+                        WorkoutExercises(workoutId = 2, exerciseId = 2, sets = 5),
+                        WorkoutExercises(workoutId = 2, exerciseId = 4, sets = 5)
                 )
     }
 

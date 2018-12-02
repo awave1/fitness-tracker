@@ -8,4 +8,6 @@ object DbInjection {
     fun provideUserDao(context: Context) = provideDb(context).userDao()
 
     fun provideWorkoutDao(context: Context) = provideDb(context).workoutDao()
+
+    fun provideWorkoutExercisesDao(context: Context) = provideDb(context).workoutExercisesDao()
 }
