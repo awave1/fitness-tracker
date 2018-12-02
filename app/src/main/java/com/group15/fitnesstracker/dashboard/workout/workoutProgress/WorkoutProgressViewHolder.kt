@@ -21,6 +21,7 @@ class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), Work
     override fun showSets(sets: Int) {
         val adapter: SetAdapter = SetAdapter()
 
+        setList.setHasFixedSize(true)
         setList.layoutManager = LinearLayoutManager(this.itemView.context)
         setList.adapter = adapter
 
