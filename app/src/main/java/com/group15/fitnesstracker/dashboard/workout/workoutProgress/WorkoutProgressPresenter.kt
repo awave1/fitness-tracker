@@ -5,6 +5,7 @@ import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.SetExercise
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, private val context: Context?): WorkoutProgressContract.Presenter {
     init {
@@ -14,10 +15,8 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
     private var exercises = listOf<SetExercise>()
 
     override fun onBindViewAtPosition(position: Int, view: WorkoutProgressContract.ExerciseView) {
-        if (exercises.isNotEmpty()) {
-            val exercise = exercises[position]
-            view.showExerciseName(exercise.name)
-        }
+        val exercise = exercises[position]
+        view.showExerciseName(exercise.name)
     }
 
     override fun loadExercises(workoutId: Int) {
@@ -27,7 +26,9 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
+                        Timber.d("exercises ${it.size}")
                         view.showExercises(it)
+                        exercises = it
                     }
         }
     }
