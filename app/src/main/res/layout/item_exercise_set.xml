@@ -26,7 +26,7 @@
         <EditText
             android:id="@+id/setReps"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:hint="# of reps"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -38,7 +38,7 @@
         <EditText
             android:id="@+id/setWeight"
             android:ems="10"
-            android:inputType="numberSigned"
+            android:inputType="number"
             android:hint="weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
