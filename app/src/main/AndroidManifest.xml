@@ -21,9 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".onboarding.OnboardingActivity"
-            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>
