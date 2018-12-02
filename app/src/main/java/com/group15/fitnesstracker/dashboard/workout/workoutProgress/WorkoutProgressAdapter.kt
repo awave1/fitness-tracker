@@ -21,6 +21,6 @@ class WorkoutProgressAdapter(private val presenter: WorkoutProgressPresenter): R
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: WorkoutProgressViewHolder, position: Int) {
-        presenter.onBindViewAtPosition()
+        presenter.onBindViewAtPosition(position, holder)
     }
 }

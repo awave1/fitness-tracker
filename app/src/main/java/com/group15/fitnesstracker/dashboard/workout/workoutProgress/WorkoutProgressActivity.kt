@@ -14,7 +14,7 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout_progress)
-        presenter = WorkoutProgressPresenter(this)
+        presenter = WorkoutProgressPresenter(this, this)
 
         val workoutId = intent.getIntExtra(Constants.WORKOUT_ID, 0)
         Timber.d("workout $workoutId")

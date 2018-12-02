@@ -13,6 +13,9 @@ interface WorkoutDao {
     @Insert()
     fun insertAll(vararg workouts: Workout): Completable
 
+    @Insert()
+    fun insertAll_test(vararg workouts: Workout)
+
     @Query("select * from Workout")
     fun getAll(): Maybe<List<Workout>>
 

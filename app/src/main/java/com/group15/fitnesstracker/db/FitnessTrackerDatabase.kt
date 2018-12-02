@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.db.dao.WorkoutDao
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.group15.fitnesstracker.db.dao.SetExerciseDao
+import com.group15.fitnesstracker.db.dao.WorkoutExercisesDao
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,10 +23,12 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
  */
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
-@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class, WorkoutExercises::class], version = 1, exportSchema = false)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun workoutDao(): WorkoutDao
+    abstract fun setExerciseDao(): SetExerciseDao
+    abstract fun workoutExercisesDao(): WorkoutExercisesDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null
@@ -47,7 +51,35 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                             // @TODO implement db population
                             Timber.d("populating db")
                             dbInstance.workoutDao()
-                                    .insertAll(Workout("Strong 5x5 A", "Very"), Workout("Strong 5x5 B", "Strong"))
+                                    .insertAll(
+                                            Workout("Strong 5x5 A", "Very"),
+                                            Workout("Strong 5x5 B", "Strong"))
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
+
+                            dbInstance.setExerciseDao()
+                                    .insertAll(
+                                            SetExercise(name = "Squats", description = "Just squat"),
+                                            SetExercise(name = "Bench", description = "Just bench"),
+                                            SetExercise(name = "Deadlift", description = "Just lift"),
+                                            SetExercise(name = "OH Press", description = "Just press")
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
+
+                            dbInstance.workoutExercisesDao()
+                                    .insertAll(
+                                            WorkoutExercises(workoutId = 1, exerciseId = 1, reps = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 2, reps = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 4, reps = 5),
+
+
+                                            WorkoutExercises(workoutId = 2, exerciseId = 3, reps = 5),
+                                            WorkoutExercises(workoutId = 2, exerciseId = 2, reps = 5),
+                                            WorkoutExercises(workoutId = 2, exerciseId = 4, reps = 5)
+                                    )
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
