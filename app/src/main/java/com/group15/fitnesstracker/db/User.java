@@ -28,7 +28,7 @@ public class User {
 
     @NonNull
     @ColumnInfo(name = "password")
-    public String password; // NOT plaintext fyi
+    public String password; // NOT plaintext fyi -hashed password
 
     @ColumnInfo(name = "first_name")
     public String firstName;
