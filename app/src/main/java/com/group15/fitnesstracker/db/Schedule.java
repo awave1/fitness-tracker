@@ -1,23 +1,23 @@
 package com.group15.fitnesstracker.db;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(primaryKeys = "workoutId, trainerId, userId, recordingId",foreignKeys = {@ForeignKey(entity = Workout.class,parentColumns = "workoutId",childColumns = "workoutId"),
+@ForeignKey(entity = Trainer.class,parentColumns = "trainerId",childColumns = "trainerId"),
+@ForeignKey(entity = User.class,parentColumns = "id",childColumns = "userId"),
+@ForeignKey(entity = Records.class,parentColumns = "recordId",childColumns = "recordingId")})
 public class Schedule {
     @PrimaryKey
-//    @ForeignKey()
     public int workoutId;
 
     @PrimaryKey
-//    @ForeignKey()
     public int trainerId;
 
     @PrimaryKey
-//    @ForeignKey()
     public int userId;
 
     @PrimaryKey
-//    @ForeignKey()
     public int recordingId;
 }
