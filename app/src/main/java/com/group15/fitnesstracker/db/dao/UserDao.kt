@@ -22,7 +22,7 @@ interface UserDao {
     fun getByName(firstName: String): Maybe<User>
 
     @Query("select * from User where id = :id")
-    fun getById(id: Long): Maybe<User>
+    fun getById(id: Int): Maybe<User>
 
     @Query("select * from User where username = :username and password = :password")
     fun getByUsername(username: String, password: String): Maybe<User>

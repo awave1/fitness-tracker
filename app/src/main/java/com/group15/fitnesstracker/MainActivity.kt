@@ -20,7 +20,7 @@ class MainActivity: AppCompatActivity() {
 
         val pref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
-        if (pref.getBoolean(Constants.USER_LOGGED_IN, false) && pref.getLong(Constants.CURRENT_USER_ID, -1) != (-1).toLong()) {
+        if (pref.getBoolean(Constants.USER_LOGGED_IN, false) && pref.getInt(Constants.CURRENT_USER_ID, -1) != -1) {
             supportActionBar?.show()
             supportFragmentManager.beginTransaction()
                     .replace(R.id.container, DashboardFragment.instance)

@@ -1,9 +1,7 @@
 package com.group15.fitnesstracker.onboarding.createUser
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.dashboard.DashboardFragment
@@ -41,7 +39,7 @@ class CreateUserPresenter(val view: CreateUserContract.View,
 
                     sharedPref?.edit()
                             ?.putBoolean(Constants.USER_LOGGED_IN, true)
-                            ?.putLong(Constants.CURRENT_USER_ID, it)
+                            ?.putInt(Constants.CURRENT_USER_ID, it.toInt())
                             ?.apply()
 
                     fm?.beginTransaction()

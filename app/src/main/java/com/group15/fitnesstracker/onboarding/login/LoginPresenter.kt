@@ -33,7 +33,7 @@ class LoginPresenter(val view: LoginContract.View,
 
                     sharedPref?.edit()
                             ?.putBoolean(Constants.USER_LOGGED_IN, true)
-                            ?.putLong(Constants.CURRENT_USER_ID, it.id)
+                            ?.putInt(Constants.CURRENT_USER_ID, it.id)
                             ?.apply()
 
 

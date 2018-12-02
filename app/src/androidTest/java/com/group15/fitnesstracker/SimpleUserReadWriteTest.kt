@@ -6,15 +6,11 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.group15.fitnesstracker.db.FitnessTrackerDatabase
-import com.group15.fitnesstracker.db.Schedule
 import com.group15.fitnesstracker.db.User
 import com.group15.fitnesstracker.db.dao.UserDao
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Assert.*
 import org.junit.Before
 import java.io.IOException
 import org.junit.Rule

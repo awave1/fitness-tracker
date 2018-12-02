@@ -27,7 +27,7 @@ class ProfileFragment: Fragment() {
                 Context.MODE_PRIVATE
         )
 
-        val id = sharedPref?.getLong(Constants.CURRENT_USER_ID, -1) as Long
+        val id = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
         Timber.d("user id: $id")
 
         context?.let { c ->
