@@ -9,15 +9,11 @@ import androidx.room.PrimaryKey;
 @ForeignKey(entity = User.class,parentColumns = "id",childColumns = "userId"),
 @ForeignKey(entity = Records.class,parentColumns = "recordId",childColumns = "recordingId")})
 public class Schedule {
-    @PrimaryKey
     public int workoutId;
 
-    @PrimaryKey
     public int trainerId;
 
-    @PrimaryKey
     public int userId;
 
-    @PrimaryKey
     public int recordingId;
 }
