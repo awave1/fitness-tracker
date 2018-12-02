@@ -35,9 +35,11 @@
     <string name="body">Body</string>
     <string name="nutrition">Nutrition</string>
     <string name="bpart">Body Part</string>
-    <string name="create_body_body_fat_hint">Body fat</string>
+    <string name="create_body_button_text">Record Body Measurement</string>
+    <string name="create_body_body_fat_hint">Body Fat</string>
     <string name="create_body_weight_hint">Weight</string>
     <string name="create_body_enter_info_text">Enter body information</string>
+    <string name="create_nutr_button_text">Record Nutrition</string>
     <string name="create_nutr_calories_hint">Calories</string>
     <string name="create_nutr_macronutrient_hint">Macronutrient</string>
     <string name="create_nutr_macro_protein_hint">Protein</string>
@@ -46,11 +48,14 @@
     <string name="create_nutr_micro_name_hint">Name</string>
     <string name="create_nutr_micro_amount_hint">Amount</string>
     <string name="create_nutr_enter_info_text">Enter nutrition information</string>
-    <string name="create_bpart_body_part_hint">Body part</string>
-    <string name="create_bpart_body_part_size_hint">Body part size</string>
+    <string name="create_bpart_button_text">Record Body Part</string>
+    <string name="create_bpart_body_part_hint">Body Part</string>
+    <string name="create_bpart_body_part_size_hint">Body Part Size</string>
     <string name="create_bpart_enter_info_text">Enter body part information</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Dialog-->
+    <string name="create_text">Create</string>
+    <string name="cancel_text">Cancel</string>
+
 
 </resources>

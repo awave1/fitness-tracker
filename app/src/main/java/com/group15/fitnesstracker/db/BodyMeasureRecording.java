@@ -7,6 +7,13 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class BodyMeasureRecording {
+    public BodyMeasureRecording (Date date, double bodyfat, double weight) {
+        recordingId = 1;
+        this.date = date;
+        this.bodyfat = bodyfat;
+        this.weight = weight;
+    }
+
     @PrimaryKey
     public int recordingId;
 

@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.dashboard.tracker.createBody.BodyTrackerFragment
-import com.group15.fitnesstracker.dashboard.tracker.createBpart.BPartTrackerFragment
+import com.group15.fitnesstracker.dashboard.tracker.createBpart.BpartTrackerFragment
 import com.group15.fitnesstracker.dashboard.tracker.createNutr.NutrTrackerFragment
 import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
@@ -26,11 +27,15 @@ class TrackerFragment: Fragment() {
 
         // The pager adapter, which provides the pages to the view pager widget.
         val pagerAdapter = ScreenSlidePagerAdapter(fragmentManager!!)
-        pagerAdapter.addFragment(BodyTrackerFragment(), "@string/body")
-        pagerAdapter.addFragment(NutrTrackerFragment(), "@string/nutrition")
-        pagerAdapter.addFragment(BPartTrackerFragment(), "@string/bpart")
+        pagerAdapter.addFragment(BodyTrackerFragment(), getString(R.string.body))
+        pagerAdapter.addFragment(NutrTrackerFragment(), getString(R.string.nutrition))
+        pagerAdapter.addFragment(BpartTrackerFragment(), getString(R.string.bpart))
 
         tracker_pager.adapter = pagerAdapter
+
+        tracker_tabs.setupWithViewPager(tracker_pager)
+
+        //tracker_pager.addOnPageChangeListener(ViewPager.SimpleOnPageChangeListener ())}
     }
 
     /*@TODO: Add ListView to display items in database (either body records or nutrition records)
@@ -49,8 +54,8 @@ class TrackerFragment: Fragment() {
 */
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-        private val fragmentList : MutableList<Fragment> = ArrayList()
-        private val titleList : MutableList<String> = ArrayList()
+        private val fragmentList: MutableList<Fragment> = ArrayList()
+        private val titleList: MutableList<String> = ArrayList()
 
         override fun getCount(): Int = NUM_PAGES
         override fun getItem(position: Int): Fragment = fragmentList[position]
@@ -61,5 +66,4 @@ class TrackerFragment: Fragment() {
             titleList.add(title)
         }
     }
-
 }

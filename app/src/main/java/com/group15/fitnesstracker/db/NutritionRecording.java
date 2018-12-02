@@ -19,5 +19,6 @@ public class NutritionRecording {
     public double carbohydrate;
 
     public double fat;
+
 }
 
