@@ -20,7 +20,7 @@ fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 @Database(entities = [
     User::class, Workout::class,
     SetExercise::class, TimedExercise::class, WorkoutExercises::class,
-    BodyMeasureRecording::class], version = 1, exportSchema = false)
+    BodyMeasureRecording::class, NutritionRecording::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -28,6 +28,7 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun setExerciseDao(): SetExerciseDao
     abstract fun workoutExercisesDao(): WorkoutExercisesDao
     abstract fun bodyRecordingDao(): BodyRecordingDao
+    abstract fun nutritionRecordingDao(): NutritionRecordingDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null

@@ -97,12 +97,6 @@
                     android:inputType="numberDecimal"
                     android:hint="@string/create_nutr_macro_fat_hint"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-            <ListView
-                android:id="@+id/micronutrientList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ListView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

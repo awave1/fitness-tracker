@@ -3,18 +3,20 @@ package com.group15.fitnesstracker.dashboard.tracker
 import android.content.Context
 import android.widget.Toast
 import com.group15.fitnesstracker.db.BodyMeasureRecording
+import com.group15.fitnesstracker.db.BodyPartMeasureRecording
 import com.group15.fitnesstracker.db.DbInjection
-import com.group15.fitnesstracker.onboarding.createUser.CreateUserContract
+import com.group15.fitnesstracker.db.NutritionRecording
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 
-class CreateRecordingPresenter(val view: CreateRecordingContract.BodyTrackerView, private val context: Context?): CreateRecordingContract.Presenter {
+class CreateRecordingPresenter(val view: CreateRecordingContract.View, private val context: Context?): CreateRecordingContract.Presenter {
     init {
         view.presenter = this
     }
 
-    private var recorings = mutableListOf<BodyMeasureRecording>()
+    private var bodyRecordings = mutableListOf<BodyMeasureRecording>()
+    private var nutritionRecordings = mutableListOf<NutritionRecording>()
+    private var bodyPartRecordings = mutableListOf<BodyPartMeasureRecording>()
 
     override fun start() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -42,11 +44,49 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.BodyTrackerView
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            recorings = it
-                            view.showBodyRecordings(it)
+                            bodyRecordings = it
+                            (view as CreateRecordingContract.BodyTrackerView).showBodyRecordings(it)
                         }
             }
         }
     }
 
+    override fun createNutritionRecording(calories: Double?,
+                                          protein: Double?,
+                                          carbohydrate: Double?,
+                                          fat: Double?,
+                                          userId: Int?, callback: (NutritionRecording) -> Unit) {
+        context?.let { ctx ->
+            userId?.let { it ->
+                val record = NutritionRecording(
+                    userId = userId, calories = calories, protein = protein, carbohydrate = carbohydrate, fat = fat
+                )
+
+                DbInjection.provideNutritionRecordingDao(ctx)
+                        .insertNutritionRecordings(record)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { callback(record) }
+            }
+        }
+    }
+
+    override fun loadNutritionRecordings(userId: Int?) {
+        context?.let { ctx ->
+            userId?.let { id ->
+               DbInjection.provideNutritionRecordingDao(ctx)
+                       .getNutritionRecordingsForUser(userId)
+                       .subscribeOn(Schedulers.io())
+                       .observeOn(AndroidSchedulers.mainThread())
+                       .subscribe {
+                           nutritionRecordings = it
+                           (view as CreateRecordingContract.NutritionTrackerView).showNutritionRecordings(it)
+                       }
+            }
+        }
+    }
+
+    override fun loadBodyPartRecordings(userId: Int?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }
