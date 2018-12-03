@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.dashboard.tracker.createBody.BodyTrackerFragment
 import com.group15.fitnesstracker.dashboard.tracker.createBpart.BpartTrackerFragment
-import com.group15.fitnesstracker.dashboard.tracker.createNutr.NutrTrackerFragment
+import com.group15.fitnesstracker.dashboard.tracker.createNutrition.NutritionTrackerFragment
 import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
 private const val NUM_PAGES = 3
@@ -28,7 +27,7 @@ class TrackerFragment: Fragment() {
         // The pager adapter, which provides the pages to the view pager widget.
         val pagerAdapter = ScreenSlidePagerAdapter(fragmentManager!!)
         pagerAdapter.addFragment(BodyTrackerFragment(), getString(R.string.body))
-        pagerAdapter.addFragment(NutrTrackerFragment(), getString(R.string.nutrition))
+        pagerAdapter.addFragment(NutritionTrackerFragment(), getString(R.string.nutrition))
         pagerAdapter.addFragment(BpartTrackerFragment(), getString(R.string.bpart))
 
         tracker_pager.adapter = pagerAdapter

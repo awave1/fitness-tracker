@@ -1,4 +1,4 @@
-package com.group15.fitnesstracker.dashboard.tracker.createNutr
+package com.group15.fitnesstracker.dashboard.tracker.createNutrition
 
 import android.content.Context
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 import com.group15.fitnesstracker.R
 
-class NutrTrackerFragment : Fragment() {
+class NutritionTrackerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
