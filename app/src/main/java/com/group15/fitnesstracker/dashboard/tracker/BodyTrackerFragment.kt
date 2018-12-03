@@ -6,20 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.dashboard.tracker.CreateRecordingDialogFactory
 import com.group15.fitnesstracker.db.BodyMeasureRecording
 import com.group15.fitnesstracker.util.Constants
-import com.group15.fitnesstracker.util.Utils
 import kotlinx.android.synthetic.main.fragment_body_tracker.*
-import kotlinx.android.synthetic.main.item_recording_body.*
-import java.util.*
 
 class BodyTrackerFragment: Fragment(), CreateRecordingContract.BodyTrackerView {
     override lateinit var presenter: CreateRecordingContract.Presenter
@@ -52,7 +44,7 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.BodyTrackerView {
                         R.layout.fragment_create_body,
                         layoutInflater,
                         it.context,
-                        onSave = { dialog, id, view ->
+                        onSave = { _, _, view ->
                             val bodyFat = view.findViewById<TextInputLayout>(R.id.bodyfatInputContainer).editText
                             val weight = view.findViewById<TextInputLayout>(R.id.weightInputContainer).editText
 
