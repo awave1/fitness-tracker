@@ -29,6 +29,7 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun workoutExercisesDao(): WorkoutExercisesDao
     abstract fun bodyRecordingDao(): BodyRecordingDao
     abstract fun nutritionRecordingDao(): NutritionRecordingDao
+    abstract fun bodyPartRecordingDao(): BodyPartRecordingDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null

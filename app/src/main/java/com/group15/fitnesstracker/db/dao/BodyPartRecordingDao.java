@@ -5,6 +5,7 @@ import com.group15.fitnesstracker.db.BodyPartMeasureRecording;
 
 import java.util.List;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -13,6 +14,7 @@ import androidx.room.Update;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 
+@Dao
 public interface BodyPartRecordingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertBodyPartRecordings(BodyPartMeasureRecording... bodyPartMeasureRecordingsMeasureRecordings);
@@ -25,5 +27,8 @@ public interface BodyPartRecordingDao {
 
     @Query("SELECT * FROM BodyPartMeasureRecording")
     public Maybe<List<BodyPartMeasureRecording>> loadAllBodyPartRecordings();
+
+    @Query("select * from BodyPartMeasureRecording where userId = :userId")
+    public Maybe<List<BodyPartMeasureRecording>> getRecordingsForUser(int userId);
 
 }

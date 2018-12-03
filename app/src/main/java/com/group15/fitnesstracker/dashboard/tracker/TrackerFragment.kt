@@ -22,7 +22,7 @@ class TrackerFragment: Fragment() {
         val pagerAdapter = ScreenSlidePagerAdapter(fragmentManager)
         pagerAdapter.addFragment(BodyTrackerFragment(), getString(R.string.body))
         pagerAdapter.addFragment(NutritionTrackerFragment(), getString(R.string.nutrition))
-        pagerAdapter.addFragment(BodypartTrackerFragment(), getString(R.string.bpart))
+        pagerAdapter.addFragment(BodyPartTrackerFragment(), getString(R.string.bpart))
 
         trackerPager.adapter = pagerAdapter
         trackerTabs.setupWithViewPager(trackerPager)

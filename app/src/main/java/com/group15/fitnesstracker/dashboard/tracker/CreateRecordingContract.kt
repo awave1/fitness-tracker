@@ -3,6 +3,7 @@ package com.group15.fitnesstracker.dashboard.tracker
 import com.group15.fitnesstracker.base.BasePresenter
 import com.group15.fitnesstracker.base.BaseView
 import com.group15.fitnesstracker.db.BodyMeasureRecording
+import com.group15.fitnesstracker.db.BodyPartMeasureRecording
 import com.group15.fitnesstracker.db.NutritionRecording
 
 interface CreateRecordingContract {
@@ -11,12 +12,18 @@ interface CreateRecordingContract {
     interface Presenter: BasePresenter {
         fun createBodyRecording(bodyFat: String?,
                                 bodyWeight: String?,
-                                userId: Int?, callback: (BodyMeasureRecording) -> Unit)
+                                userId: Int?,
+                                callback: (BodyMeasureRecording) -> Unit)
         fun createNutritionRecording(calories: Double?,
-                                              protein: Double?,
-                                              carbohydrate: Double?,
-                                              fat: Double?,
-                                              userId: Int?, callback: (NutritionRecording) -> Unit)
+                                     protein: Double?,
+                                     carbohydrate: Double?,
+                                     fat: Double?,
+                                     userId: Int?,
+                                     callback: (NutritionRecording) -> Unit)
+        fun createBodyPartRecording(bodyPart: String,
+                                    bodyPartSize: Double?,
+                                    userId: Int?,
+                                    callback: (BodyPartMeasureRecording) -> Unit)
 
         fun loadBodyRecordings(userId: Int?)
         fun loadNutritionRecordings(userId: Int?)
@@ -32,6 +39,6 @@ interface CreateRecordingContract {
     }
 
     interface BodyPartTrackerView: View {
-        fun showBodyPartRecordings(recordings: MutableList<BodyMeasureRecording>)
+        fun showBodyPartRecordings(recordings: MutableList<BodyPartMeasureRecording>)
     }
 }

@@ -86,7 +86,33 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.View, private v
         }
     }
 
+    override fun createBodyPartRecording(bodyPart: String, bodyPartSize: Double?, userId: Int?, callback: (BodyPartMeasureRecording) -> Unit) {
+        context?.let { ctx ->
+            userId?.let { id ->
+                val record = BodyPartMeasureRecording(userId = id, bodyPart = bodyPart, bodyPartSize = bodyPartSize)
+
+                DbInjection.provideBodyPartRecordingDao(ctx)
+                        .insertBodyPartRecordings(record)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { callback(record) }
+            }
+        }
+    }
+
+
     override fun loadBodyPartRecordings(userId: Int?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        context?.let { ctx ->
+            userId?.let { id ->
+                DbInjection.provideBodyPartRecordingDao(ctx)
+                        .getRecordingsForUser(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            bodyPartRecordings = it
+                            (view as CreateRecordingContract.BodyPartTrackerView).showBodyPartRecordings(it)
+                        }
+            }
+        }
     }
 }
