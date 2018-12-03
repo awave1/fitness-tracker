@@ -1,4 +1,4 @@
-package com.group15.fitnesstracker.dashboard.tracker.createBpart
+package com.group15.fitnesstracker.dashboard.tracker
 
 import android.content.Context
 import android.os.Bundle
@@ -9,12 +9,12 @@ import android.view.ViewGroup
 
 import com.group15.fitnesstracker.R
 
-class BpartTrackerFragment : Fragment() {
+class NutritionTrackerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bpart_tracker, container, false)
+        return inflater.inflate(R.layout.fragment_nutrition_tracker, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -24,7 +24,6 @@ class BpartTrackerFragment : Fragment() {
                 context?.resources?.getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE
         )
-
 
     }
 }

@@ -1,4 +1,4 @@
-package com.group15.fitnesstracker.dashboard.tracker.createBody
+package com.group15.fitnesstracker.dashboard.tracker
 
 import android.content.Context
 import android.os.Bundle
@@ -7,21 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.fragment.app.DialogFragment
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.textfield.TextInputLayout
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.tracker.CreateRecordingDialogFactory
 import com.group15.fitnesstracker.db.BodyMeasureRecording
 import kotlinx.android.synthetic.main.body_item.*
 import kotlinx.android.synthetic.main.fragment_body_tracker.*
 import java.util.*
 
+class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
+    override lateinit var presenter: CreateRecordingContract.Presenter
 
-
-
-class BodyTrackerFragment : Fragment() /*, CreateBodyDialogFragment.NoticeDialogListener*/ {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        presenter = CreateRecordingPresenter(context)
         return inflater.inflate(R.layout.fragment_body_tracker, container, false)
     }
 
@@ -44,29 +44,22 @@ class BodyTrackerFragment : Fragment() /*, CreateBodyDialogFragment.NoticeDialog
         body_list.adapter = adapter
 
         createBodyBtn.setOnClickListener {
-            /*
-            // Create an instance of the dialog fragment and show it
-            val dialog = CreateBodyDialogFragment()
-            dialog.show(fragmentManager, null)
-            */
-            fragmentManager?.beginTransaction()
-                    ?.replace(R.id.tracker_coordinatorLayout, CreateBodyFragment())
-                    ?.addToBackStack(null)
-                    ?.commit()
+            CreateRecordingDialogFactory
+                    .create(
+                        R.layout.fragment_create_body,
+                        layoutInflater,
+                        it.context,
+                        onSave = { dialog, id, view ->
+                            val bodyFat = view.findViewById<TextInputLayout>(R.id.bodyfatInputContainer).editText
+                            val weight = view.findViewById<TextInputLayout>(R.id.weightInputContainer).editText
+
+                            presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString())
+                        },
+                        onCancel = { dialog, _ ->  dialog.cancel() }
+                    )
+                    .show()
         }
     }
-/*
-    // The dialog fragment receives a reference to this Activity through the
-    // Fragment.onAttach() callback, which it uses to call the following methods
-    // defined by the NoticeDialogFragment.NoticeDialogListener interface
-    override fun onDialogPositiveClick(dialog: DialogFragment) {
-        // User touched the dialog's positive button
-    }
-
-    override fun onDialogNegativeClick(dialog: DialogFragment) {
-        // User touched the dialog's negative button
-    }
-*/
 
     inner class BodyTrackerAdapter(private val mContext: Context, private val resourceLayout: Int, items: ArrayList<BodyMeasureRecording>)
         : ArrayAdapter<BodyMeasureRecording>(mContext, resourceLayout, items) {

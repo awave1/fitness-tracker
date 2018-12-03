@@ -65,4 +65,5 @@
     <string name="workout_progress_warning_title">Workout in progress</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="save_recording_ok">Save</string>
 </resources>

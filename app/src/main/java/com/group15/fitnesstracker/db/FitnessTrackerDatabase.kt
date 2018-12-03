@@ -1,14 +1,9 @@
 package com.group15.fitnesstracker.db
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.group15.fitnesstracker.db.dao.UserDao
-import com.group15.fitnesstracker.db.dao.WorkoutDao
+import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.group15.fitnesstracker.db.dao.SetExerciseDao
-import com.group15.fitnesstracker.db.dao.WorkoutExercisesDao
+import com.group15.fitnesstracker.db.dao.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -22,12 +17,17 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
  */
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
-@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class, WorkoutExercises::class], version = 1, exportSchema = false)
+@Database(entities = [
+    User::class, Workout::class,
+    SetExercise::class, TimedExercise::class, WorkoutExercises::class,
+    BodyMeasureRecording::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun workoutDao(): WorkoutDao
     abstract fun setExerciseDao(): SetExerciseDao
     abstract fun workoutExercisesDao(): WorkoutExercisesDao
+    abstract fun bodyRecordingDao(): BodyRecordingDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null

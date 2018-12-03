@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tracker_coordinatorLayout"
+    android:id="@+id/trackerPageContainer"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tracker_tabs"
+        android:id="@+id/trackerTabs"
         android:layout_height="50dp"
         android:layout_width="match_parent"/>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/tracker_pager"
+        android:id="@+id/trackerPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
