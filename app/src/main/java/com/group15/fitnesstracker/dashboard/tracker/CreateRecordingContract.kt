@@ -8,6 +8,11 @@ interface CreateRecordingContract {
     interface View: BaseView<Presenter>
 
     interface Presenter: BasePresenter {
-        fun createBodyRecording(bodyFat: String?, bodyWeight: String?, callback: (BodyMeasureRecording) -> Unit)
+        fun createBodyRecording(bodyFat: String?, bodyWeight: String?, userId: Int?, callback: (BodyMeasureRecording) -> Unit)
+        fun loadBodyRecordings(userId: Int?)
+    }
+
+    interface BodyTrackerView: View {
+        fun showBodyRecordings(recordings: MutableList<BodyMeasureRecording>)
     }
 }

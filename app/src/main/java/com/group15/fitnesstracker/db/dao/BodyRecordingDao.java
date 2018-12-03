@@ -27,4 +27,7 @@ public interface BodyRecordingDao {
 
     @Query("SELECT * FROM BodyMeasureRecording")
     public Maybe<List<BodyMeasureRecording>> loadAllBodyRecordings();
+
+    @Query("select * from BodyMeasureRecording where userId = :userId")
+    public Maybe<List<BodyMeasureRecording>> loadUserBodyRecordings(int userId);
 }

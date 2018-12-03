@@ -7,21 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.dashboard.tracker.CreateRecordingDialogFactory
 import com.group15.fitnesstracker.db.BodyMeasureRecording
-import kotlinx.android.synthetic.main.body_item.*
+import com.group15.fitnesstracker.util.Constants
+import com.group15.fitnesstracker.util.Utils
 import kotlinx.android.synthetic.main.fragment_body_tracker.*
+import kotlinx.android.synthetic.main.item_recording_body.*
 import java.util.*
 
-class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
+class BodyTrackerFragment: Fragment(), CreateRecordingContract.BodyTrackerView {
     override lateinit var presenter: CreateRecordingContract.Presenter
+    private lateinit var adapter: RecordingAdapter<BodyMeasureRecording>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        presenter = CreateRecordingPresenter(context)
+        presenter = CreateRecordingPresenter(this, context)
         return inflater.inflate(R.layout.fragment_body_tracker, container, false)
     }
 
@@ -33,12 +38,13 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
                 Context.MODE_PRIVATE
         )
 
-        // create test list
-        val bodyRecords = ArrayList<BodyMeasureRecording>()
-        bodyRecords.add(BodyMeasureRecording(bodyFat = 11.21, weight = 12.2))
+        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0)
 
-        val adapter = BodyTrackerAdapter(context!!, R.layout.body_item, bodyRecords)
-        body_list.adapter = adapter
+        presenter.loadBodyRecordings(userId)
+
+        adapter = RecordingAdapter(R.layout.item_recording_body)
+        bodyList.layoutManager = LinearLayoutManager(context)
+        bodyList.adapter = adapter
 
         createBodyBtn.setOnClickListener {
             CreateRecordingDialogFactory
@@ -50,7 +56,7 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
                             val bodyFat = view.findViewById<TextInputLayout>(R.id.bodyfatInputContainer).editText
                             val weight = view.findViewById<TextInputLayout>(R.id.weightInputContainer).editText
 
-                            presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString()) { record ->
+                            presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString(), userId) { record ->
                                 adapter.items.add(record)
                                 adapter.notifyDataSetChanged()
                             }
@@ -61,27 +67,7 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
         }
     }
 
-    inner class BodyTrackerAdapter(private val mContext: Context, private val resourceLayout: Int, val items: ArrayList<BodyMeasureRecording>)
-        : ArrayAdapter<BodyMeasureRecording>(mContext, resourceLayout, items) {
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-            var v = convertView
-
-            if (v == null) {
-                val vi: LayoutInflater = LayoutInflater.from(mContext)
-                v = vi.inflate(resourceLayout, null)
-            }
-
-            val bodyRecord = getItem(position) as BodyMeasureRecording
-
-            body_item_date?.text = bodyRecord.date.toString()
-            body_item_body_fat?.text = bodyRecord.bodyFat?.toString()
-            body_item_weight?.text = bodyRecord.weight?.toString()
-
-            return v!!
-        }
-
+    override fun showBodyRecordings(recordings: MutableList<BodyMeasureRecording>) {
+        adapter.items = recordings
     }
-
 }
