@@ -35,10 +35,7 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
 
         // create test list
         val bodyRecords = ArrayList<BodyMeasureRecording>()
-        bodyRecords.add(BodyMeasureRecording(Date(2000, 12, 1), 11.21, 12.2))
-        bodyRecords.add(BodyMeasureRecording(Date(1999, 12, 16), 4.21, 1.2))
-        bodyRecords.add(BodyMeasureRecording(Date(1998, 12, 5), 1.1, 14.2))
-        bodyRecords.add(BodyMeasureRecording(Date(1996, 2, 3), 222.21, 122.12))
+        bodyRecords.add(BodyMeasureRecording(bodyFat = 11.21, weight = 12.2))
 
         val adapter = BodyTrackerAdapter(context!!, R.layout.body_item, bodyRecords)
         body_list.adapter = adapter
@@ -53,7 +50,10 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
                             val bodyFat = view.findViewById<TextInputLayout>(R.id.bodyfatInputContainer).editText
                             val weight = view.findViewById<TextInputLayout>(R.id.weightInputContainer).editText
 
-                            presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString())
+                            presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString()) { record ->
+                                adapter.items.add(record)
+                                adapter.notifyDataSetChanged()
+                            }
                         },
                         onCancel = { dialog, _ ->  dialog.cancel() }
                     )
@@ -61,7 +61,7 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
         }
     }
 
-    inner class BodyTrackerAdapter(private val mContext: Context, private val resourceLayout: Int, items: ArrayList<BodyMeasureRecording>)
+    inner class BodyTrackerAdapter(private val mContext: Context, private val resourceLayout: Int, val items: ArrayList<BodyMeasureRecording>)
         : ArrayAdapter<BodyMeasureRecording>(mContext, resourceLayout, items) {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -76,8 +76,8 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.View {
             val bodyRecord = getItem(position) as BodyMeasureRecording
 
             body_item_date?.text = bodyRecord.date.toString()
-            body_item_body_fat?.text = bodyRecord.bodyfat.toString()
-            body_item_weight?.text = bodyRecord.weight.toString()
+            body_item_body_fat?.text = bodyRecord.bodyFat?.toString()
+            body_item_weight?.text = bodyRecord.weight?.toString()
 
             return v!!
         }

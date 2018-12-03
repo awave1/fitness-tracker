@@ -13,13 +13,17 @@ class CreateRecordingPresenter(private val context: Context?): CreateRecordingCo
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun createBodyRecording(bodyFat: String?, bodyWeight: String?) {
+    override fun createBodyRecording(bodyFat: String?, bodyWeight: String?, callback: (BodyMeasureRecording) -> Unit) {
         context?.let {
+            val recording = BodyMeasureRecording(bodyFat = bodyFat?.toDouble(), weight = bodyWeight?.toDouble())
             DbInjection.provideBodyRecordingDao(it)
-                    .insertBodyRecordings(BodyMeasureRecording(Date(), bodyFat?.toDouble()!!, bodyWeight?.toDouble()!!))
+                    .insertBodyRecordings(recording)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { Toast.makeText(it, "Saved", Toast.LENGTH_SHORT).show() }
+                    .subscribe {
+                        Toast.makeText(it, "Saved", Toast.LENGTH_SHORT).show()
+                        callback(recording)
+                    }
         }
     }
 
