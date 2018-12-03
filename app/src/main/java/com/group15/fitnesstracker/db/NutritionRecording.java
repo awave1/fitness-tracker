@@ -14,11 +14,11 @@ public class NutritionRecording {
 
     public double calories;
 
-    public Macronutrient macronutrient;
+    public double protein;
+
+    public double carbohydrate;
+
+    public double fat;
+
 }
 
-class Macronutrient {
-    public double protein;
-    public double carbohydrate;
-    public double fat;
-}

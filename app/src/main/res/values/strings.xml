@@ -30,6 +30,33 @@
     <string name="login_password_hint">Password</string>
     <string name="login_text">Login</string>
     <string name="create_user_password_hint">Password</string>
+
+    <!--Tracker Page-->
+    <string name="body">Body</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="bpart">Body Part</string>
+    <string name="create_body_button_text">Record Body Measurement</string>
+    <string name="create_body_body_fat_hint">Body Fat</string>
+    <string name="create_body_weight_hint">Weight</string>
+    <string name="create_body_enter_info_text">Enter body information</string>
+    <string name="create_nutr_button_text">Record Nutrition</string>
+    <string name="create_nutr_calories_hint">Calories</string>
+    <string name="create_nutr_macronutrient_hint">Macronutrient</string>
+    <string name="create_nutr_macro_protein_hint">Protein</string>
+    <string name="create_nutr_macro_carb_hint">Carbohydrate</string>
+    <string name="create_nutr_macro_fat_hint">Fat</string>
+    <string name="create_nutr_micro_name_hint">Name</string>
+    <string name="create_nutr_micro_amount_hint">Amount</string>
+    <string name="create_nutr_enter_info_text">Enter nutrition information</string>
+    <string name="create_bpart_button_text">Record Body Part</string>
+    <string name="create_bpart_body_part_hint">Body Part</string>
+    <string name="create_bpart_body_part_size_hint">Body Part Size</string>
+    <string name="create_bpart_enter_info_text">Enter body part information</string>
+
+    <!--Dialog-->
+    <string name="create_text">Create</string>
+    <string name="cancel_text">Cancel</string>
+
     <string name="add_exercise">Add exercise</string>
     <string name="pick_workout">Pick workout</string>
     <string name="create_workout">Create workout</string>
