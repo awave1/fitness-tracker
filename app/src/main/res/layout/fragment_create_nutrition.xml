@@ -97,21 +97,6 @@
                     android:inputType="numberDecimal"
                     android:hint="@string/create_nutr_macro_fat_hint"/>
             </com.google.android.material.textfield.TextInputLayout>
-
-            <ListView
-                android:id="@+id/micronutrientList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ListView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_nutr_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_black_24dp"
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom|right"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

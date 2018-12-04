@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/bpart_list"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nutritionList"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:paddingTop="50dp" />
 
     <Button
-        android:id="@+id/createBpartBtn"
+        android:id="@+id/createNutrition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_bpart_button_text"
+        android:text="@string/create_nutr_button_text"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:textColor="#000"

@@ -66,6 +66,9 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
+    <string name="save_recording_ok">Save</string>
+    <string name="nutrition_calories">Calories</string>
+
     <!--Goals-->
     <string name="goal_text">Goal:</string>
     <string name="goal_date_text">Complete by:</string>

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.group15.fitnesstracker.db.dao.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,12 +21,19 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
  */
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
-@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class, WorkoutExercises::class, Goal::class], version = 1, exportSchema = false)
+@Database(entities = [
+    User::class, Workout::class,
+    SetExercise::class, TimedExercise::class, WorkoutExercises::class,
+    BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class, Goal::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun workoutDao(): WorkoutDao
     abstract fun setExerciseDao(): SetExerciseDao
     abstract fun workoutExercisesDao(): WorkoutExercisesDao
+    abstract fun bodyRecordingDao(): BodyRecordingDao
+    abstract fun nutritionRecordingDao(): NutritionRecordingDao
+    abstract fun bodyPartRecordingDao(): BodyPartRecordingDao
     abstract fun goalDao(): GoalDao
 
     companion object {
