@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.history.HistoryFragment
 import com.group15.fitnesstracker.dashboard.profile.ProfileFragment
 import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
 import com.group15.fitnesstracker.dashboard.tracker.TrackerFragment
@@ -30,6 +31,12 @@ class DashboardFragment: Fragment() {
                             .replace(R.id.fragment_container, ProfileFragment())
                             .commit()
 
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.navigation_history -> {
+                    childFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, HistoryFragment())
+                            .commit()
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_workout -> {

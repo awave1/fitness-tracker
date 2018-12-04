@@ -7,6 +7,11 @@
         android:title="@string/navigation_profile"/>
 
     <item
+        android:id="@+id/navigation_history"
+        android:icon="@drawable/ic_history_black_24dp"
+        android:title="@string/history" />
+
+    <item
         android:id="@+id/navigation_workout"
         android:icon="@drawable/ic_fitness_24dp"
         android:title="@string/navigation_workout"/>
