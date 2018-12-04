@@ -2,7 +2,6 @@ package com.group15.fitnesstracker.dashboard.tracker
 
 import android.content.Context
 import android.content.DialogInterface
-import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.group15.fitnesstracker.R
@@ -11,7 +10,6 @@ class CreateRecordingDialogFactory {
     companion object {
         fun create(
                 layout: Int,
-                layoutInflater: LayoutInflater,
                 context: Context,
                 onSave: (dialog: DialogInterface, id: Int, view: View) -> Unit,
                 onCancel: (dialog: DialogInterface, id: Int) -> Unit

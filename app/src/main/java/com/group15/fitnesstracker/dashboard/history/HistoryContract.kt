@@ -12,10 +12,12 @@ interface HistoryContract {
     interface HistoryItemView {
         fun showName(name: String)
         fun showDescription(description: String)
+        fun setWorkout(workout: Workout)
+        fun setUserId(userId: Int)
     }
 
     interface Presenter: BasePresenter {
         fun loadHistoryWorkouts(userId: Int)
-        fun onBindViewAtPosition(position: Int, view: HistoryViewHolder)
+        fun onBindViewAtPosition(position: Int, view: HistoryViewHolder, userId: Int)
     }
 }

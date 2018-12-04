@@ -23,7 +23,6 @@ class HistoryFragment: Fragment(), HistoryContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = HistoryAdapter(presenter)
 
         val sharedPref = context?.getSharedPreferences(
                 context?.resources?.getString(R.string.preference_file_key),
@@ -31,6 +30,7 @@ class HistoryFragment: Fragment(), HistoryContract.View {
         )
 
         val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0) as Int
+        adapter = HistoryAdapter(presenter, userId)
 
         presenter.loadHistoryWorkouts(userId)
 

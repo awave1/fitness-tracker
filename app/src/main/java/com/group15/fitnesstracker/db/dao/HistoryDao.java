@@ -28,9 +28,6 @@ public interface HistoryDao {
     @Query("SELECT * FROM History")
     public Maybe<List<History>> loadAllHistories();
 
-//    @Query("select * from History where userId = :userId")
-//    public Maybe<List<History>> getHistoryForUser(int userId);
-
     @Query("select * from Workout as w join History as h on h.workoutId = w.workoutId and h.userId = :userId")
     public Maybe<List<Workout>> getHistoryForUser(int userId);
 }

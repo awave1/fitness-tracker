@@ -41,19 +41,18 @@ class BodyTrackerFragment: Fragment(), CreateRecordingContract.BodyTrackerView {
         createBodyBtn.setOnClickListener {
             CreateRecordingDialogFactory
                     .create(
-                        R.layout.fragment_create_body,
-                        layoutInflater,
-                        it.context,
-                        onSave = { _, _, view ->
-                            val bodyFat = view.findViewById<TextInputLayout>(R.id.bodyfatInputContainer).editText
-                            val weight = view.findViewById<TextInputLayout>(R.id.weightInputContainer).editText
+                            R.layout.fragment_create_body,
+                            it.context,
+                            onSave = { _, _, view ->
+                                val bodyFat = view.findViewById<TextInputLayout>(R.id.bodyfatInputContainer).editText
+                                val weight = view.findViewById<TextInputLayout>(R.id.weightInputContainer).editText
 
-                            presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString(), userId) { record ->
-                                adapter.items.add(record)
-                                adapter.notifyDataSetChanged()
-                            }
-                        },
-                        onCancel = { dialog, _ ->  dialog.cancel() }
+                                presenter.createBodyRecording(bodyFat?.text?.toString(), weight?.text?.toString(), userId) { record ->
+                                    adapter.items.add(record)
+                                    adapter.notifyDataSetChanged()
+                                }
+                            },
+                            onCancel = { dialog, _ ->  dialog.cancel() }
                     )
                     .show()
         }

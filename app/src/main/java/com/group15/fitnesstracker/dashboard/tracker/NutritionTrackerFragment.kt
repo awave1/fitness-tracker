@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
 
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.db.BodyMeasureRecording
 import com.group15.fitnesstracker.db.NutritionRecording
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_nutrition_tracker.*
@@ -44,7 +43,6 @@ class NutritionTrackerFragment : Fragment(), CreateRecordingContract.NutritionTr
         createNutrition.setOnClickListener {
             CreateRecordingDialogFactory.create(
                     R.layout.fragment_create_nutrition,
-                    layoutInflater,
                     it.context,
                     onSave = { dialog, id, view ->
                         val calories = view.findViewById<TextInputLayout>(R.id.caloriesInputContainer).editText

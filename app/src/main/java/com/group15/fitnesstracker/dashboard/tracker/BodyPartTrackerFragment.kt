@@ -43,7 +43,6 @@ class BodyPartTrackerFragment : Fragment(), CreateRecordingContract.BodyPartTrac
         createBodyPart.setOnClickListener {
             CreateRecordingDialogFactory.create(
                     R.layout.fragment_create_body_part,
-                    layoutInflater,
                     it.context,
                     onSave = { _, _, view ->
                         val bodyPart = view.findViewById<TextInputLayout>(R.id.bodypartInputContainer).editText

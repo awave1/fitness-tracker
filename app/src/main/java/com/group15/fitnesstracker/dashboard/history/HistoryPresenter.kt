@@ -26,12 +26,15 @@ class HistoryPresenter(private val view: HistoryContract.View, private val conte
         }
     }
 
-    override fun onBindViewAtPosition(position: Int, view: HistoryViewHolder) {
+    override fun onBindViewAtPosition(position: Int, view: HistoryViewHolder, userId: Int) {
         val workout = workouts[position]
 
+        view.setWorkout(workout)
         view.showName(workout.name)
         view.showDescription(workout.routineDescription)
     }
+
+
 
     override fun start() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

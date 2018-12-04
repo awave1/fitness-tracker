@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.Workout
 
-class HistoryAdapter(private val presenter: HistoryContract.Presenter): RecyclerView.Adapter<HistoryViewHolder>() {
+class HistoryAdapter(private val presenter: HistoryContract.Presenter, private val userId: Int): RecyclerView.Adapter<HistoryViewHolder>() {
     var items: List<Workout> = listOf()
         set(value) {
             field = value
@@ -21,7 +21,7 @@ class HistoryAdapter(private val presenter: HistoryContract.Presenter): Recycler
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        presenter.onBindViewAtPosition(position, holder)
+        presenter.onBindViewAtPosition(position, holder, userId)
     }
 
 }
