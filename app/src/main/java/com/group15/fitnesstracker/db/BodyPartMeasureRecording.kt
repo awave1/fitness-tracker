@@ -6,8 +6,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(foreignKeys = [ForeignKey(entity = BodyMeasureRecording::class, parentColumns = ["recordingId"], childColumns = ["recordingId"]),
-                       ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])])
+@Entity(foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])])
 data class BodyPartMeasureRecording (
         @PrimaryKey(autoGenerate = true) var recordingId: Int = 0,
         val userId: Int?,

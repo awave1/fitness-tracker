@@ -56,7 +56,7 @@ class BodyPartTrackerFragment : Fragment(), CreateRecordingContract.BodyPartTrac
                         }
                     },
                     onCancel = { dialog, _ -> dialog.cancel() }
-            )
+            ).show()
         }
     }
 

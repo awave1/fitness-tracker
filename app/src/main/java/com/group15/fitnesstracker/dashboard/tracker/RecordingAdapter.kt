@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.BodyMeasureRecording
+import com.group15.fitnesstracker.db.BodyPartMeasureRecording
 import com.group15.fitnesstracker.db.NutritionRecording
 import com.group15.fitnesstracker.util.Utils
-import org.w3c.dom.Text
 
 class RecordingAdapter<T>(val view: Int): RecyclerView.Adapter<RecordingAdapter.RecordingViewHolder>() {
     var items = mutableListOf<T>()
@@ -54,6 +54,17 @@ class RecordingAdapter<T>(val view: Int): RecyclerView.Adapter<RecordingAdapter.
                 protein.text = record.protein.toString()
                 carbs.text = record.carbohydrate.toString()
                 fat.text = record.fat.toString()
+            }
+            R.layout.item_recording_body_part -> {
+                val record = items[position] as BodyPartMeasureRecording
+
+                val date = holder.itemView.findViewById<TextView>(R.id.bpart_item_date)
+                val bodyPart = holder.itemView.findViewById<TextView>(R.id.bpart_item_body_part)
+                val bodyPartSize = holder.itemView.findViewById<TextView>(R.id.bpart_item_body_part_size)
+
+                date.text = Utils.formatDate(record.date)
+                bodyPart.text = record.bodyPart
+                bodyPartSize.text = record.bodyPartSize.toString()
             }
         }
     }
