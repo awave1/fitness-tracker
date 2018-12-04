@@ -19,6 +19,9 @@ public interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public Completable insertHistories(History... histories);
 
+    @Insert
+    public Maybe<Long> insertHistory(History history);
+
     @Update
     public Completable updateHistories(History... histories);
 
