@@ -42,6 +42,7 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$rootProject.room"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
     kapt "androidx.room:room-compiler:$rootProject.room"
     implementation "androidx.room:room-rxjava2:$rootProject.room"
 
