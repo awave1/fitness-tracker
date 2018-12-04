@@ -57,5 +57,14 @@
     <string name="create_text">Create</string>
     <string name="cancel_text">Cancel</string>
 
-
+    <string name="add_exercise">Add exercise</string>
+    <string name="pick_workout">Pick workout</string>
+    <string name="create_workout">Create workout</string>
+    <string name="finish_workout">Finish Workout</string>
+    <string name="workout_progress_warning">Workout is unfinished. Do you want to finish?</string>
+    <string name="workout_progress_warning_title">Workout in progress</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_recording_ok">Save</string>
+    <string name="nutrition_calories">Calories</string>
 </resources>
