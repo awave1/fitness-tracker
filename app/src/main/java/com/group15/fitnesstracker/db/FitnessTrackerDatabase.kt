@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.group15.fitnesstracker.db.dao.UserDao
-import com.group15.fitnesstracker.db.dao.WorkoutDao
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.group15.fitnesstracker.db.dao.SetExerciseDao
-import com.group15.fitnesstracker.db.dao.WorkoutExercisesDao
+import com.group15.fitnesstracker.db.dao.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.util.*
 import java.util.concurrent.Executors
 
 const val DB_NAME = "fitness_tracker.db"
@@ -22,12 +20,13 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
  */
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
-@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class, WorkoutExercises::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Workout::class, SetExercise::class, TimedExercise::class, WorkoutExercises::class, Goal::class], version = 1, exportSchema = false)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun workoutDao(): WorkoutDao
     abstract fun setExerciseDao(): SetExerciseDao
     abstract fun workoutExercisesDao(): WorkoutExercisesDao
+    abstract fun goalDao(): GoalDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null
@@ -78,6 +77,15 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                             WorkoutExercises(workoutId = 2, exerciseId = 3, sets = 5),
                                             WorkoutExercises(workoutId = 2, exerciseId = 2, sets = 5),
                                             WorkoutExercises(workoutId = 2, exerciseId = 4, sets = 5)
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
+
+                            dbInstance.goalDao()
+                                    .insertAll(
+                                            Goal(goalId = 1, goalDescription = "Get to 200 lbs", completionDate = Date(), userId = 1),
+                                            Goal(goalId = 1, goalDescription = "Eat chocolate cake cookies", completionDate = Date(), userId = 1)
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())

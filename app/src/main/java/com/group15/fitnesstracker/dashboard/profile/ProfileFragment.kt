@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
+import com.group15.fitnesstracker.db.Goal
 import com.group15.fitnesstracker.util.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_profile_page.*
 import timber.log.Timber
 
-class ProfileFragment: Fragment() {
+class ProfileFragment: Fragment(), CreateGoalContract.GoalView {
+    override lateinit var presenter: CreateGoalContract.Presenter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile_page, container, false)
     }
@@ -38,4 +41,9 @@ class ProfileFragment: Fragment() {
         }
 
     }
+
+    override fun showGoals(goals: List<Goal>) {
+
+    }
+
 }
