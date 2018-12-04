@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.textfield.TextInputLayout
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Goal
 import com.group15.fitnesstracker.util.Constants
+import com.group15.fitnesstracker.util.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_profile_page.*
@@ -17,6 +20,7 @@ import timber.log.Timber
 
 class ProfileFragment: Fragment(), CreateGoalContract.GoalView {
     override lateinit var presenter: CreateGoalContract.Presenter
+    private lateinit var adapter: GoalAdapter<Goal>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile_page, container, false)
@@ -33,11 +37,33 @@ class ProfileFragment: Fragment(), CreateGoalContract.GoalView {
         val id = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
         Timber.d("user id: $id")
 
+        presenter.loadGoals(id)
+
+        adapter = GoalAdapter(R.layout.goal_item)
+        goalList.layoutManager = LinearLayoutManager(context)
+        goalList.adapter = adapter
+
         context?.let { c ->
             DbInjection.provideDb(c).userDao().getById(id)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { profileName.text = getString(R.string.dashboard_user_name, "${it.firstName} ${it.lastName}") }
+        }
+
+        createGoalBtn.setOnClickListener {
+            CreateGoalDialogFactory
+                    .create(
+                            R.layout.fragment_create_goal,
+                            layoutInflater,
+                            it.context,
+                            onSave = { _, _, view ->
+                                val desc = view.findViewById<TextInputLayout>(R.id.goalDescInputContainer).editText
+                                val date = view.findViewById<TextInputLayout>(R.id.goalDateInputContainer)
+
+                                presenter.createGoal(desc?.text?.toString(), date = )
+
+                            }
+                    )
         }
 
     }

@@ -1,0 +1,29 @@
+package com.group15.fitnesstracker.dashboard.profile
+
+import android.content.Context
+import android.content.DialogInterface
+import android.view.LayoutInflater
+import android.view.View
+import androidx.appcompat.app.AlertDialog
+import com.group15.fitnesstracker.R
+
+class CreateGoalDialogFactory {
+    companion object {
+        fun create(
+                layout: Int,
+                layoutInflater: LayoutInflater,
+                context: Context,
+                onSave: (dialog: DialogInterface, id: Int, view: View) -> Unit,
+                onCancel: (dialog: DialogInterface, id: Int) -> Unit
+        ): AlertDialog {
+            val builder = AlertDialog.Builder(context)
+            val view = View.inflate(context, layout, null)
+
+            builder.setView(view)
+                    // Add action buttons
+                    .setPositiveButton(R.string.save_recording_ok) { dialog, id -> onSave(dialog, id, view) }
+                    .setNegativeButton(R.string.cancel) { dialog, id -> onCancel(dialog, id) }
+            return builder.create()
+        }
+    }
+}
