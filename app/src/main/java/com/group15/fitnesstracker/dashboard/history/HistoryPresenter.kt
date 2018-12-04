@@ -5,7 +5,6 @@ import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Workout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 
 class HistoryPresenter(private val view: HistoryContract.View, private val context: Context?): HistoryContract.Presenter {
     init {
@@ -21,8 +20,17 @@ class HistoryPresenter(private val view: HistoryContract.View, private val conte
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
+                        workouts = it
+                        view.showWorkouts(it)
                     }
         }
+    }
+
+    override fun onBindViewAtPosition(position: Int, view: HistoryViewHolder) {
+        val workout = workouts[position]
+
+        view.showName(workout.name)
+        view.showDescription(workout.routineDescription)
     }
 
     override fun start() {
