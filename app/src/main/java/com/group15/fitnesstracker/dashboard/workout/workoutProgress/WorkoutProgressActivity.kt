@@ -1,5 +1,6 @@
 package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,13 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout_progress)
 
+
+        val sharedPref = getSharedPreferences(
+                resources?.getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+        )
+
+        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0) as Int
         val workoutId = intent.getIntExtra(Constants.WORKOUT_ID, 0)
         Timber.d("workout $workoutId")
 
@@ -36,7 +44,8 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
             }.size == adapter.items.size
 
             if (isFinished) {
-                presenter.finishWorkout(workoutId)
+                presenter.finishWorkout(userId, workoutId)
+                finish()
             } else {
                 presenter.showWarning()
             }

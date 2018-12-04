@@ -13,7 +13,7 @@ interface WorkoutProgressContract {
         fun onBindViewAtPosition(position: Int, view: ExerciseView)
         fun loadExercises(workoutId: Int)
         fun showWarning()
-        fun finishWorkout(workoutId: Int)
+        fun finishWorkout(userId: Int, workoutId: Int)
     }
 
     interface ExerciseView {

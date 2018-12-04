@@ -2,8 +2,10 @@ package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
 import android.app.AlertDialog
 import android.content.Context
+import android.widget.Toast
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
+import com.group15.fitnesstracker.db.History
 import com.group15.fitnesstracker.db.SetExercise
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -64,8 +66,14 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                 .show()
     }
 
-    override fun finishWorkout(workoutId: Int) {
-
+    override fun finishWorkout(userId: Int, workoutId: Int) {
+        context?.let { ctx ->
+            DbInjection.provideHistoryDao(context)
+                    .insertHistories(History(userId, workoutId))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { Toast.makeText(ctx, "Finished workout!", Toast.LENGTH_SHORT).show() }
+        }
     }
 
     override fun start() {
