@@ -16,4 +16,6 @@ object DbInjection {
     fun provideNutritionRecordingDao(context: Context) = provideDb(context).nutritionRecordingDao()
 
     fun provideBodyPartRecordingDao(context: Context) = provideDb(context).bodyPartRecordingDao()
+
+    fun provideHistoryDao(context: Context) = provideDb(context).historyDao()
 }
