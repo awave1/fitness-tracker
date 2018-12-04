@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.group15.fitnesstracker.R
-import kotlinx.android.synthetic.main.fragment_schedule_page.*
+import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewDisplayable
-import com.alamkanak.weekview.MonthLoader
-import com.group15.fitnesstracker.R.id.weekView
-import java.util.*
-
+import com.group15.fitnesstracker.R
 
 class ScheduleFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -22,10 +17,16 @@ class ScheduleFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val weekView = view.findViewById<WeekView<ScheduleItem>>(R.id.weekView)
+
         weekView.setOnEventClickListener { any, eventRect ->
             //
         }
 
-        weekView.setMonthChangeListener { startDate, endDate -> emptyList() }
+        val items: MutableList<ScheduleItem> = mutableListOf()
+//        items.add(ScheduleItem())
+
+        weekView.setMonthChangeListener { startDate, endDate -> items as List<WeekViewDisplayable<ScheduleItem>>? }
+
     }
 }
