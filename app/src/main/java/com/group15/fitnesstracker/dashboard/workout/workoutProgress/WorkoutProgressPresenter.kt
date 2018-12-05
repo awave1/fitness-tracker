@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.History
+import com.group15.fitnesstracker.db.Set
 import com.group15.fitnesstracker.db.SetExercise
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,6 +18,7 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
     }
 
     private var exercises = listOf<SetExercise>()
+    private var sets = mutableListOf<Set>()
     private var workoutId: Int = 0
 
     override fun onBindViewAtPosition(position: Int, view: WorkoutProgressContract.ExerciseView) {
@@ -27,9 +29,14 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
-                        val sets = mutableListOf<SetExercise>()
+                        Timber.d("no of sets: $it")
+//                        val sets = mutableListOf<SetExercise>()
 
-                        repeat(it) { sets.add(exercise) }
+                        repeat(it) {
+                            sets.add(Set(workoutId = workoutId, exerciseId = exercise.exerciseId))
+                        }
+
+                        Timber.d("exercise ${exercise.name} with ${sets.size} sets")
 
                         view.showExerciseName(exercise.name)
                         view.showSets(sets)

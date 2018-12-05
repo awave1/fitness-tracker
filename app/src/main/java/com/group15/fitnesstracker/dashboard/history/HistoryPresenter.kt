@@ -34,8 +34,6 @@ class HistoryPresenter(private val view: HistoryContract.View, private val conte
         view.showDescription(workout.routineDescription)
     }
 
-
-
     override fun start() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

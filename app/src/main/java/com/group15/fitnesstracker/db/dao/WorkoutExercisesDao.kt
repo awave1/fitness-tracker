@@ -23,6 +23,6 @@ interface WorkoutExercisesDao {
     @Insert
     fun insertAll_test(vararg workoutExercises: WorkoutExercises)
 
-    @Query("select sets from WorkoutExercises where workoutId = :workoutId and exerciseId = :exerciseId")
+    @Query("select numberOfSets from WorkoutExercises where workoutId = :workoutId and exerciseId = :exerciseId")
     fun getSets(workoutId: Int, exerciseId: Int): Observable<Int>
 }

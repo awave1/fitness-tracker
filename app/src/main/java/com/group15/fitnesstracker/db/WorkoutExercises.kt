@@ -14,5 +14,5 @@ import androidx.room.ForeignKey
 data class WorkoutExercises (
         val workoutId: Int,
         val exerciseId: Int,
-        @NonNull val sets: Int
+        @NonNull val numberOfSets: Int
 )

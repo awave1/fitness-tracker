@@ -1,21 +1,16 @@
 package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
-import android.util.SparseArray
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.dashboard.workout.WorkoutItemViewHolder
+import com.group15.fitnesstracker.db.Set
 import com.group15.fitnesstracker.db.SetExercise
-import kotlinx.android.synthetic.main.card_exercise.view.*
-import timber.log.Timber
 
 class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), WorkoutProgressContract.ExerciseView {
     private val exerciseName: TextView = this.itemView.findViewById(R.id.exerciseName)
@@ -26,7 +21,7 @@ class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), Work
         exerciseName.text = name
     }
 
-    override fun showSets(sets: MutableList<SetExercise>) {
+    override fun showSets(sets: MutableList<Set>) {
         adapter = SetAdapter()
 
         setList.setHasFixedSize(true)
@@ -39,10 +34,10 @@ class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), Work
 }
 
 class SetAdapter: RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
-    var sets = mutableListOf<SetExercise>()
+    var sets = mutableListOf<Set>()
     var isComplete = false
         get() {
-            val selected = sets.filter { it.isSelected }
+            val selected = sets.filter { it.isComplete }
             return selected.size == sets.size
         }
 
@@ -60,7 +55,7 @@ class SetAdapter: RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
         val setReps = holder.itemView.findViewById<EditText>(R.id.setReps)
         val setWeight = holder.itemView.findViewById<EditText>(R.id.setWeight)
 
-        checkBox.setOnCheckedChangeListener { _, isChecked -> sets[position].isSelected = isChecked }
+        checkBox.setOnCheckedChangeListener { _, isChecked -> sets[position].isComplete = isChecked }
     }
 
 }

@@ -2,6 +2,7 @@ package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
 import com.group15.fitnesstracker.base.BasePresenter
 import com.group15.fitnesstracker.base.BaseView
+import com.group15.fitnesstracker.db.Set
 import com.group15.fitnesstracker.db.SetExercise
 
 interface WorkoutProgressContract {
@@ -18,6 +19,6 @@ interface WorkoutProgressContract {
 
     interface ExerciseView {
         fun showExerciseName(name: String)
-        fun showSets(sets: MutableList<SetExercise>)
+        fun showSets(sets: MutableList<Set>)
     }
 }

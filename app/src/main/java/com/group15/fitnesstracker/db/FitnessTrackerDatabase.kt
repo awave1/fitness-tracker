@@ -19,8 +19,9 @@ fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
 @Database(entities = [
     User::class, Workout::class,
-    SetExercise::class, TimedExercise::class, WorkoutExercises::class,
-    BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class, History::class], version = 1, exportSchema = false)
+    SetExercise::class, TimedExercise::class, WorkoutExercises::class, Set::class,
+    BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class,
+    History::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -31,6 +32,7 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun nutritionRecordingDao(): NutritionRecordingDao
     abstract fun bodyPartRecordingDao(): BodyPartRecordingDao
     abstract fun historyDao(): HistoryDao
+    abstract fun setDao(): SetDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null
@@ -73,14 +75,14 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.workoutExercisesDao()
                                     .insertAll(
-                                            WorkoutExercises(workoutId = 1, exerciseId = 1, sets = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 2, sets = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 4, sets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 5),
 
 
-                                            WorkoutExercises(workoutId = 2, exerciseId = 3, sets = 5),
-                                            WorkoutExercises(workoutId = 2, exerciseId = 2, sets = 5),
-                                            WorkoutExercises(workoutId = 2, exerciseId = 4, sets = 5)
+                                            WorkoutExercises(workoutId = 2, exerciseId = 3, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 2, exerciseId = 2, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 2, exerciseId = 4, numberOfSets = 5)
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())

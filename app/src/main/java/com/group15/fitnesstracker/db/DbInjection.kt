@@ -18,4 +18,6 @@ object DbInjection {
     fun provideBodyPartRecordingDao(context: Context) = provideDb(context).bodyPartRecordingDao()
 
     fun provideHistoryDao(context: Context) = provideDb(context).historyDao()
+
+    fun provideSetDao(context: Context) = provideDb(context).setDao()
 }
