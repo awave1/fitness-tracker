@@ -1,10 +1,12 @@
 package com.group15.fitnesstracker.dashboard.profile
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
@@ -57,12 +59,9 @@ class ProfileFragment: Fragment(), ProfileContract.GoalView {
                             R.layout.fragment_create_goal,
                             layoutInflater,
                             it.context,
-                            onSave = { _, _, view ->
-                                val desc = view.findViewById<TextInputLayout>(R.id.goalDescInputContainer).editText
-                                val date = view.findViewById<TextInputLayout>(R.id.goalDateInputContainer)
-
-                                presenter.createGoal(desc?.text?.toString(), date = Date(), userId = id) {
-
+                            onSave = { date, description ->
+                                presenter.createGoal(description, date = date, userId = id) {
+                                    // update adapter
                                 }
                             },
                             onCancel = { dialog, id -> dialog.cancel() }

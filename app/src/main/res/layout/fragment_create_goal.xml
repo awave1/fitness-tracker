@@ -47,29 +47,15 @@
                     android:hint="@string/create_goal_desc_hint"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/goalDateInputContainer"
-                android:layout_marginTop="16dp"
+            <EditText
+                android:id="@+id/goalDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/create_body_weight"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="18sp"
-                    android:background="@android:color/transparent"
-                    android:inputType="date"
-                    android:hint="@string/create_goal_date_hint"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:textSize="18sp"
+                android:focusable="false"
+                android:background="@android:color/transparent"
+                android:hint="@string/create_goal_date_hint"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/create_body_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_black_24dp"
-        android:layout_margin="16dp"
-        android:layout_gravity="bottom|right"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
