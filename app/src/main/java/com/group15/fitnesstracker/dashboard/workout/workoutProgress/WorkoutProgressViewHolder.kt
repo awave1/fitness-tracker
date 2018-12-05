@@ -62,6 +62,8 @@ class SetAdapter: RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
     override fun onBindViewHolder(holder: SetViewHolder, position: Int) {
         val set = sets[position]
 
+        holder.itemView.findViewById<TextView>(R.id.setNumber).text = (position + 1).toString()
+
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.isSetComplete)
         val setReps = holder.itemView.findViewById<EditText>(R.id.setReps)
         val setWeight = holder.itemView.findViewById<EditText>(R.id.setWeight)

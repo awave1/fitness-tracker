@@ -1,15 +1,15 @@
 package com.group15.fitnesstracker.dashboard.history
 
 import android.app.AlertDialog
+import android.content.Context
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.db.DbInjection
-import com.group15.fitnesstracker.db.History
-import com.group15.fitnesstracker.db.Schedule
-import com.group15.fitnesstracker.db.Workout
+import com.group15.fitnesstracker.db.*
+import com.group15.fitnesstracker.db.Set
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,8 +20,17 @@ class HistoryViewHolder(view: View): RecyclerView.ViewHolder(view), HistoryContr
 
     private lateinit var workout: Workout
     private var userId: Int = 0
+    private var recordingId = 0
 
     init {
+        view.setOnClickListener { card ->
+            DbInjection.provideWorkoutExercisesDao(card.context)
+                    .getExercises(workout.workoutId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe { showExercises(card.context, it) }
+        }
+
         view.setOnLongClickListener {
             AlertDialog.Builder(it.context)
                     .setTitle("Delete ${workout.name}?")
@@ -42,6 +51,19 @@ class HistoryViewHolder(view: View): RecyclerView.ViewHolder(view), HistoryContr
         }
     }
 
+    private fun showExercises(context: Context, exercises: List<SetExercise>) {
+        val view = View.inflate(context, R.layout.completed_sets, null)
+        val exerciseList = view.findViewById<RecyclerView>(R.id.exerciseList)
+        val adapter = ExerciseAdapter(userId = userId, workoutId = workout.workoutId, recordingId = recordingId)
+
+        exerciseList.layoutManager = LinearLayoutManager(context)
+        exerciseList.adapter = adapter
+
+        adapter.items = exercises
+
+        AlertDialog.Builder(context).setView(view).create().show()
+    }
+
     override fun showName(name: String) {
         nameTextView.text = name
     }
@@ -56,5 +78,9 @@ class HistoryViewHolder(view: View): RecyclerView.ViewHolder(view), HistoryContr
 
     override fun setUserId(userId: Int) {
         this.userId = userId
+    }
+
+    override fun setRecordingId(recordingId: Int) {
+        this.recordingId = recordingId
     }
 }

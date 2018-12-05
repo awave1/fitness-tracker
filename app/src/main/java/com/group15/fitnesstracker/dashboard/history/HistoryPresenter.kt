@@ -1,5 +1,6 @@
 package com.group15.fitnesstracker.dashboard.history
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Workout
@@ -12,24 +13,35 @@ class HistoryPresenter(private val view: HistoryContract.View, private val conte
     }
 
     private var workouts = listOf<Workout>()
+    private var historyIds = HashMap<Int, Int>()
 
     override fun loadHistoryWorkouts(userId: Int) {
         context?.let { ctx ->
-            DbInjection.provideHistoryDao(ctx)
-                    .getHistoryForUser(userId)
+            val historyDao = DbInjection.provideHistoryDao(ctx)
+            historyDao.getHistoryForUser(userId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         workouts = it
-                        view.showWorkouts(it)
+                        view.showWorkouts(workouts)
+
+                        workouts.forEach { workout ->
+                            historyDao.getRecordingIdForWorkout(workout.workoutId)
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe { historyIds[workout.workoutId] = it }
+                        }
                     }
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun onBindViewAtPosition(position: Int, view: HistoryViewHolder, userId: Int) {
         val workout = workouts[position]
 
         view.setWorkout(workout)
+        view.setRecordingId(historyIds[workout.workoutId]!!)
+        view.setUserId(userId)
+
         view.showName(workout.name)
         view.showDescription(workout.routineDescription)
     }

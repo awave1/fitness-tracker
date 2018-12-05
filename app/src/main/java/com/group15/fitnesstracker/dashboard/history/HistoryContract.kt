@@ -14,6 +14,7 @@ interface HistoryContract {
         fun showDescription(description: String)
         fun setWorkout(workout: Workout)
         fun setUserId(userId: Int)
+        fun setRecordingId(recordingId: Int)
     }
 
     interface Presenter: BasePresenter {
