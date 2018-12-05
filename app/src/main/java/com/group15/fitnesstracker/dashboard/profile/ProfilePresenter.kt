@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 
-class CreateGoalPresenter(val view: CreateGoalContract.View, private val context: Context?): CreateGoalContract.Presenter {
+class ProfilePresenter(val view: ProfileContract.View, private val context: Context?): ProfileContract.Presenter {
     init {
         view.presenter = this
     }
@@ -26,7 +26,7 @@ class CreateGoalPresenter(val view: CreateGoalContract.View, private val context
                     .insertGoal(goal)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe() {
+                    .subscribe {
                         Toast.makeText(it, "Saved", Toast.LENGTH_SHORT).show()
                         callback(goal)
                     }
@@ -42,7 +42,7 @@ class CreateGoalPresenter(val view: CreateGoalContract.View, private val context
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
                             goals = it
-                            (view as CreateGoalContract.GoalView).showGoals(it)
+                            (view as ProfileContract.GoalView).showGoals(it)
                         }
             }
         }

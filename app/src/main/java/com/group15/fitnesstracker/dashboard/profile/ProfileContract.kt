@@ -5,7 +5,7 @@ import com.group15.fitnesstracker.base.BaseView
 import com.group15.fitnesstracker.db.Goal
 import java.util.*
 
-interface CreateGoalContract {
+interface ProfileContract {
     interface View: BaseView<Presenter>
 
     interface Presenter: BasePresenter {

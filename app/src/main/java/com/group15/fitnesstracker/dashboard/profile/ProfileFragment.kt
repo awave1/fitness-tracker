@@ -12,17 +12,18 @@ import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Goal
 import com.group15.fitnesstracker.util.Constants
-import com.group15.fitnesstracker.util.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_profile_page.*
 import timber.log.Timber
+import java.util.*
 
-class ProfileFragment: Fragment(), CreateGoalContract.GoalView {
-    override lateinit var presenter: CreateGoalContract.Presenter
+class ProfileFragment: Fragment(), ProfileContract.GoalView {
+    override lateinit var presenter: ProfileContract.Presenter
     private lateinit var adapter: GoalAdapter<Goal>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        presenter = ProfilePresenter(this, context)
         return inflater.inflate(R.layout.fragment_profile_page, container, false)
     }
 
@@ -60,10 +61,13 @@ class ProfileFragment: Fragment(), CreateGoalContract.GoalView {
                                 val desc = view.findViewById<TextInputLayout>(R.id.goalDescInputContainer).editText
                                 val date = view.findViewById<TextInputLayout>(R.id.goalDateInputContainer)
 
-                                presenter.createGoal(desc?.text?.toString(), date = )
+                                presenter.createGoal(desc?.text?.toString(), date = Date(), userId = id) {
 
-                            }
+                                }
+                            },
+                            onCancel = { dialog, id -> dialog.cancel() }
                     )
+                    .show()
         }
 
     }
