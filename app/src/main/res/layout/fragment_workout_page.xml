@@ -11,7 +11,7 @@
         tools:listitem="@layout/card_workout_routine" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/startWorkout"
+        android:id="@+id/createWorkout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

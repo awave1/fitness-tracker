@@ -1,5 +1,6 @@
 package com.group15.fitnesstracker.dashboard.workout
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.dashboard.workout.createWorkout.CreateWorkoutActivity
 import com.group15.fitnesstracker.dashboard.workout.exerciseList.ExerciseListFragment
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Workout
@@ -31,6 +33,8 @@ class WorkoutFragment: Fragment(), WorkoutContract.View {
 
         workoutList.layoutManager = LinearLayoutManager(context)
         workoutList.adapter = adapter
+
+        createWorkout.setOnClickListener { startActivity(Intent(context, CreateWorkoutActivity::class.java)) }
     }
 
     override fun showWorkouts(workouts: List<Workout>) {

@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".dashboard.workout.workoutProgress.WorkoutProgressActivity" />
+        <activity android:name=".dashboard.workout.createWorkout.CreateWorkoutActivity" />
     </application>
 
 </manifest>

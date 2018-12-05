@@ -20,4 +20,6 @@ object DbInjection {
     fun provideHistoryDao(context: Context) = provideDb(context).historyDao()
 
     fun provideSetDao(context: Context) = provideDb(context).setDao()
+
+    fun provideSetExerciseDao(context: Context) = provideDb(context).setExerciseDao()
 }
