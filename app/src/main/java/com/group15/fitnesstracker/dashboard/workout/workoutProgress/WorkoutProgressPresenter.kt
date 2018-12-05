@@ -9,6 +9,7 @@ import com.group15.fitnesstracker.db.History
 import com.group15.fitnesstracker.db.Set
 import com.group15.fitnesstracker.db.SetExercise
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
@@ -30,7 +31,7 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         Timber.d("no of sets: $it")
-//                        val sets = mutableListOf<SetExercise>()
+                        val sets = mutableListOf<Set>()
 
                         repeat(it) {
                             sets.add(Set(workoutId = workoutId, exerciseId = exercise.exerciseId))
@@ -73,13 +74,30 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
                 .show()
     }
 
-    override fun finishWorkout(userId: Int, workoutId: Int) {
+    override fun finishWorkout(userId: Int, workoutId: Int, completedSets: HashMap<Int, MutableList<Set>>, onComplete: () -> Unit) {
         context?.let { ctx ->
-            DbInjection.provideHistoryDao(context)
-                    .insertHistories(History(userId, workoutId))
+            val historyDao = DbInjection.provideHistoryDao(ctx)
+            val setDao = DbInjection.provideSetDao(ctx)
+
+            Timber.d("userId $userId, workoutId $workoutId")
+
+            completedSets.keys.forEach {
+                setDao.saveSets(completedSets[it]!!)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+            }
+
+            historyDao.insertHistory(History(userId = userId, workoutId = workoutId))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { Toast.makeText(ctx, "Finished workout!", Toast.LENGTH_SHORT).show() }
+                    .subscribe({
+                        Toast.makeText(ctx, "Finished workout!", Toast.LENGTH_SHORT).show()
+                        onComplete()
+                    }, {
+                        Toast.makeText(ctx, "Failed to save!", Toast.LENGTH_SHORT).show()
+                        Timber.e(it, "failed to save history")
+                    })
         }
     }
 

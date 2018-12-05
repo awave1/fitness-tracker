@@ -14,11 +14,12 @@ interface WorkoutProgressContract {
         fun onBindViewAtPosition(position: Int, view: ExerciseView)
         fun loadExercises(workoutId: Int)
         fun showWarning()
-        fun finishWorkout(userId: Int, workoutId: Int)
+        fun finishWorkout(userId: Int, workoutId: Int, completedSets: HashMap<Int, MutableList<Set>>, onComplete: () -> Unit)
     }
 
     interface ExerciseView {
         fun showExerciseName(name: String)
         fun showSets(sets: MutableList<Set>)
+        fun getSets(): MutableList<Set>
     }
 }

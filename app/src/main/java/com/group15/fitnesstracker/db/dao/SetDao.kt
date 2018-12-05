@@ -4,12 +4,23 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.group15.fitnesstracker.db.Set
+import io.reactivex.Completable
+import io.reactivex.Maybe
 
 @Dao
 interface SetDao {
     @Insert
-    fun saveSet(set: Set)
+    fun saveSet(set: Set): Completable
 
-    @Query("select * from `Set` join History as h on h.workoutId = :workoutId and h.recordingId = :recordingId and h.userId = :userId")
-    fun getCompletedSets(recordingId: Int, workoutId: Int, exerciseId: Int, userId: Int)
+    @Insert
+    fun saveSets(sets: MutableList<Set>): Completable
+
+    @Query("""
+        select s.workoutId, s.exerciseId, s.id, s.reps, s.weight
+        from `Set` as s
+        join History as h
+            on h.workoutId = :workoutId and h.recordingId = :recordingId and h.userId = :userId
+        where s.exerciseId = :exerciseId
+    """)
+    fun getCompletedSets(recordingId: Int, workoutId: Int, exerciseId: Int, userId: Int): Maybe<List<Set>>
 }

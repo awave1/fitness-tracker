@@ -75,9 +75,9 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.workoutExercisesDao()
                                     .insertAll(
-                                            WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 1),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 1),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 1),
 
 
                                             WorkoutExercises(workoutId = 2, exerciseId = 3, numberOfSets = 5),

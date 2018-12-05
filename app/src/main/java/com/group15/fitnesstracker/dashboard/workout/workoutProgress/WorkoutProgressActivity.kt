@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.db.Set
 import com.group15.fitnesstracker.db.SetExercise
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.activity_workout_progress.*
@@ -44,8 +45,14 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
             }.size == adapter.items.size
 
             if (isFinished) {
-                presenter.finishWorkout(userId, workoutId)
-                finish()
+                val completedSets = HashMap<Int, MutableList<Set>>()
+
+                adapter.items.forEachIndexed { index, setExercise ->
+                    val vh = exerciseList.findViewHolderForAdapterPosition(index) as WorkoutProgressViewHolder
+                    completedSets[setExercise.exerciseId] = vh.getSets()
+                }
+
+                presenter.finishWorkout(userId, workoutId, completedSets) { finish() }
             } else {
                 presenter.showWarning()
             }

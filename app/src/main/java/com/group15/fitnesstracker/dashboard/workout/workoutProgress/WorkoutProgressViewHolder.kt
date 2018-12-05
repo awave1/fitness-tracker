@@ -1,8 +1,12 @@
 package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
@@ -16,12 +20,15 @@ class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), Work
     private val exerciseName: TextView = this.itemView.findViewById(R.id.exerciseName)
     private val setList: RecyclerView = this.itemView.findViewById(R.id.exerciseSetList)
     private lateinit var adapter: SetAdapter
+    private var sets = mutableListOf<Set>()
 
     override fun showExerciseName(name: String) {
         exerciseName.text = name
     }
 
     override fun showSets(sets: MutableList<Set>) {
+        this.sets = sets
+
         adapter = SetAdapter()
 
         setList.setHasFixedSize(true)
@@ -29,6 +36,8 @@ class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), Work
         setList.adapter = adapter
         adapter.sets = sets
     }
+
+    override fun getSets() = this.sets
 
     fun isComplete() = adapter.isComplete
 }
@@ -51,11 +60,24 @@ class SetAdapter: RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
     override fun getItemCount() = sets.size
 
     override fun onBindViewHolder(holder: SetViewHolder, position: Int) {
+        val set = sets[position]
+
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.isSetComplete)
         val setReps = holder.itemView.findViewById<EditText>(R.id.setReps)
         val setWeight = holder.itemView.findViewById<EditText>(R.id.setWeight)
 
-        checkBox.setOnCheckedChangeListener { _, isChecked -> sets[position].isComplete = isChecked }
-    }
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            set.isComplete = isChecked
+            if (isChecked) {
+                set.reps = setReps.text.toString().toInt()
+                set.weight = setWeight.text.toString().toDouble()
 
+                setReps.inputType = EditorInfo.TYPE_NULL
+                setWeight.inputType = EditorInfo.TYPE_NULL
+            } else {
+                setReps.inputType = EditorInfo.TYPE_NUMBER_FLAG_SIGNED
+                setWeight.inputType = EditorInfo.TYPE_NUMBER_FLAG_DECIMAL
+            }
+        }
+    }
 }
