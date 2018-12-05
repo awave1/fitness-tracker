@@ -1,12 +1,17 @@
 package com.group15.fitnesstracker.dashboard
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.customViews.NoScrollViewPager
 import com.group15.fitnesstracker.dashboard.history.HistoryFragment
 import com.group15.fitnesstracker.dashboard.profile.ProfileFragment
 import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
@@ -21,47 +26,62 @@ class DashboardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupViewPager(dashboardViewPager)
 
         dashboardNav.selectedItemId = R.id.navigation_workout
+        dashboardViewPager.currentItem = 2
 
         dashboardNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_profile -> {
-                    childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, ProfileFragment())
-                            .commit()
-
+                    dashboardViewPager.currentItem = 0
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_history -> {
-                    childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, HistoryFragment())
-                            .commit()
+                    dashboardViewPager.currentItem = 1
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_workout -> {
-                    childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, WorkoutFragment())
-                            .commit()
-
+                    dashboardViewPager.currentItem = 2
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_schedule -> {
-                    childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, ScheduleFragment())
-                            .commit()
-
+                    dashboardViewPager.currentItem = 3
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_tracker -> {
-                    childFragmentManager.beginTransaction()
-                            .replace(R.id.fragment_container, TrackerFragment())
-                            .commit()
-
+                    dashboardViewPager.currentItem = 4
                     return@setOnNavigationItemSelectedListener true
                 }
                 else -> return@setOnNavigationItemSelectedListener true
             }
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupViewPager(viewPager: NoScrollViewPager) {
+        val adapter = BottomBarViewPagerAdapter(childFragmentManager)
+        adapter.addFragments(
+                ProfileFragment(),
+                HistoryFragment(),
+                WorkoutFragment(),
+                ScheduleFragment(),
+                TrackerFragment()
+        )
+
+        viewPager.adapter = adapter
+        viewPager.setPagingEnabled(false)
+    }
+
+    private inner class BottomBarViewPagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
+        private val fragmentList = mutableListOf<Fragment>()
+
+        override fun getCount(): Int = fragmentList.size
+        override fun getItem(position: Int): Fragment = fragmentList[position]
+
+
+        fun addFragments(vararg fragments: Fragment) {
+            fragmentList.addAll(fragments)
         }
     }
 
