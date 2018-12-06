@@ -70,7 +70,7 @@ class CreateUserPresenter(val view: CreateUserContract.View,
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        val sharedPref = context?.getSharedPreferences(
+                        val sharedPref = ctx.getSharedPreferences(
                                 context.resources.getString(R.string.preference_file_key),
                                 Context.MODE_PRIVATE
                         )

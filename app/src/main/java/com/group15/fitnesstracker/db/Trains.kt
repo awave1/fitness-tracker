@@ -3,10 +3,10 @@ package com.group15.fitnesstracker.db
 import androidx.room.Entity
 import androidx.room.ForeignKey
 
-@Entity(primaryKeys = ["trainerid, userid"],
+@Entity(primaryKeys = ["trainerId", "userId"],
         foreignKeys = [
-            ForeignKey(entity = Trainer::class, parentColumns = arrayOf("trainerId"), childColumns = arrayOf("trainerId")),
-            ForeignKey(entity = User::class, parentColumns = arrayOf("id"), childColumns = arrayOf("userId"))
+            ForeignKey(entity = Trainer::class, parentColumns = ["id"], childColumns = ["trainerId"]),
+            ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])
         ])
 data class Trains (
     var trainerId: Int,

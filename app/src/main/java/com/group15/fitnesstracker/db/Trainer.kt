@@ -2,9 +2,10 @@ package com.group15.fitnesstracker.db
 
 import androidx.annotation.NonNull
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(indices = [Index(value = ["email"], unique = true)])
 data class Trainer (
         @PrimaryKey(autoGenerate = true) var id: Int = 0,
         @NonNull var email: String,

@@ -59,7 +59,7 @@
                     android:layout_height="match_parent"
                     android:textSize="18sp"
                     android:background="@android:color/transparent"
-                    android:inputType="textCapWords"
+                    android:inputType="textWebEmailAddress"
                     android:hint="@string/create_user_email"/>
             </com.google.android.material.textfield.TextInputLayout>
 
