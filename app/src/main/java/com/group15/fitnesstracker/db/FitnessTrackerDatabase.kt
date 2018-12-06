@@ -22,7 +22,7 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
 @Database(entities = [
-    User::class, Workout::class, Goal::class,
+    User::class, Workout::class, Goal::class, Trainer::class, Trains::class,
     SetExercise::class, TimedExercise::class, WorkoutExercises::class, Set::class,
     BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class,
     History::class], version = 1, exportSchema = false)
@@ -38,6 +38,8 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun historyDao(): HistoryDao
     abstract fun setDao(): SetDao
     abstract fun goalDao(): GoalDao
+    abstract fun trainerDao(): TrainerDao
+    abstract fun trainsDao(): TrainsDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null

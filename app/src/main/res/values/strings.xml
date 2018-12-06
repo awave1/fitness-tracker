@@ -79,4 +79,6 @@
     <string name="goals_header">Goals:</string>
 
     <string name="history">History</string>
+    <string name="user_is_trainer_text">Are you a trainer?</string>
+    <string name="create_user_email">Email</string>
 </resources>

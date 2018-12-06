@@ -5,6 +5,8 @@ import android.content.Context
 import androidx.fragment.app.FragmentManager
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.dashboard.DashboardFragment
+import com.group15.fitnesstracker.db.DbInjection
+import com.group15.fitnesstracker.db.Trainer
 import com.group15.fitnesstracker.db.User
 import com.group15.fitnesstracker.db.dao.UserDao
 import com.group15.fitnesstracker.util.Constants
@@ -46,6 +48,17 @@ class CreateUserPresenter(val view: CreateUserContract.View,
                             ?.replace(R.id.container, DashboardFragment.instance)
                             ?.commit()
                 }
+    }
+
+    override fun createTrainer(email: String, password: String, firstName: String, lastName: String) {
+        val passHash = CryptoUtils.SHA256Hash(password)
+        val trainer = Trainer(
+                email = email,
+                password = passHash,
+                firstName = firstName,
+                lastName = lastName
+        )
+        
     }
 
     override fun start() {
