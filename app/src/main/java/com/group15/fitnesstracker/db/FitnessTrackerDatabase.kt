@@ -152,6 +152,8 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                             ScheduleItem(workoutId = 2, trainerId = 1, userId = 3,
                                                     from = createDate("06/12/2018 16:00"), to = createDate("06/12/2018 18:00"))
                                     )
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
                         }
                     })
                     .build()

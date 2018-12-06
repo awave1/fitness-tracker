@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import java.util.*
 
-@Entity(primaryKeys = ["workoutId, trainerId, userId, recordingId"],
+@Entity(primaryKeys = ["workoutId", "trainerId", "userId"],
         foreignKeys = [ForeignKey(entity = Workout::class, parentColumns = ["workoutId"], childColumns = ["workoutId"]),
                        ForeignKey(entity = Trainer::class, parentColumns = ["id"], childColumns = ["trainerId"]),
                        ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])])
