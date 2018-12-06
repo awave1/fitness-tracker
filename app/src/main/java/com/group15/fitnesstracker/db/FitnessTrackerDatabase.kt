@@ -11,6 +11,7 @@ import com.group15.fitnesstracker.util.CryptoUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -23,7 +24,8 @@ private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
 fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
 @Database(entities = [
-    User::class, Workout::class, Goal::class, Trainer::class, Trains::class,
+    User::class, Workout::class, Goal::class,
+    Trainer::class, Trains::class, ScheduleItem::class,
     SetExercise::class, TimedExercise::class, WorkoutExercises::class, Set::class,
     BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class,
     History::class], version = 1, exportSchema = false)
@@ -41,6 +43,7 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun goalDao(): GoalDao
     abstract fun trainerDao(): TrainerDao
     abstract fun trainsDao(): TrainsDao
+    abstract fun scheduleItemDao(): ScheduleItemDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null
@@ -96,15 +99,6 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                     .subscribeOn(Schedulers.io())
                                     .subscribe()
 
-                            dbInstance.trainsDao()
-                                    .addUsersToTrain(
-                                            Trains(1, 1),
-                                            Trains(1, 2),
-                                            Trains(1, 3)
-                                    )
-                                    .subscribeOn(Schedulers.io())
-                                    .subscribe()
-
                             dbInstance.workoutDao()
                                     .insertAll(
                                             Workout("Strong 5x5 A", "Very"),
@@ -137,9 +131,32 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
+
+                            dbInstance.trainsDao()
+                                    .addUsersToTrain(
+                                            Trains(1, 1),
+                                            Trains(1, 2),
+                                            Trains(1, 3)
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
+
+                            dbInstance.scheduleItemDao()
+                                    .createItems(
+                                            ScheduleItem(workoutId = 1, trainerId = 1, userId = 1,
+                                                    from = createDate("05/12/2018 08:00"), to = createDate("05/12/2018 10:00")),
+                                            ScheduleItem(workoutId = 2, trainerId = 1, userId = 1,
+                                                    from = createDate("06/12/2018 08:00"), to = createDate("06/12/2018 10:00")),
+                                            ScheduleItem(workoutId = 1, trainerId = 1, userId = 3,
+                                                    from = createDate("05/12/2018 16:00"), to = createDate("05/12/2018 18:00")),
+                                            ScheduleItem(workoutId = 2, trainerId = 1, userId = 3,
+                                                    from = createDate("06/12/2018 16:00"), to = createDate("06/12/2018 18:00"))
+                                    )
                         }
                     })
                     .build()
         }
+
+        private fun createDate(date: String) = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(date)
     }
 }
