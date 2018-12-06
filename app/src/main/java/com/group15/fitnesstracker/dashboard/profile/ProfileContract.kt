@@ -6,7 +6,9 @@ import com.group15.fitnesstracker.db.Goal
 import java.util.*
 
 interface ProfileContract {
-    interface View: BaseView<Presenter>
+    interface View: BaseView<Presenter> {
+        fun showGoals(goals: MutableList<Goal>)
+    }
 
     interface Presenter: BasePresenter {
         fun createGoal(description: String?,
@@ -15,9 +17,5 @@ interface ProfileContract {
                        callback: (Goal) -> Unit)
 
         fun loadGoals(userId: Int?)
-    }
-
-    interface GoalView: View {
-        fun showGoals(goals: List<Goal>)
     }
 }

@@ -13,7 +13,7 @@ class ProfilePresenter(val view: ProfileContract.View, private val context: Cont
         view.presenter = this
     }
 
-    private var goals = listOf<Goal>()
+    private var goals = mutableListOf<Goal>()
 
     override fun start() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -41,8 +41,8 @@ class ProfilePresenter(val view: ProfileContract.View, private val context: Cont
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            goals = it
-                            (view as ProfileContract.GoalView).showGoals(it)
+                            goals.addAll(it)
+                            view.showGoals(goals)
                         }
             }
         }

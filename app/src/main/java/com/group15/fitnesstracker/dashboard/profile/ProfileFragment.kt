@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_profile_page.*
 import timber.log.Timber
 import java.util.*
 
-class ProfileFragment: Fragment(), ProfileContract.GoalView {
+class ProfileFragment: Fragment(), ProfileContract.View {
     override lateinit var presenter: ProfileContract.Presenter
     private lateinit var adapter: GoalAdapter<Goal>
 
@@ -72,8 +72,7 @@ class ProfileFragment: Fragment(), ProfileContract.GoalView {
 
     }
 
-    override fun showGoals(goals: List<Goal>) {
-
+    override fun showGoals(goals: MutableList<Goal>) {
+        adapter.items = goals
     }
-
 }
