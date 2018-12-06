@@ -28,11 +28,6 @@ class TrackerFragment: Fragment() {
         trackerTabs.setupWithViewPager(trackerPager)
     }
 
-    /*@TODO: Add ListView to display items in database (either body records or nutrition records)
-    *       - when clicked -> brought to another fragment view? or alert dialog with update button
-    *       - for nutrition records have a micronutrient button as well which displays them
-    */
-
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
         private val fragmentList = mutableListOf<Fragment>()
         private val titleList = mutableListOf<String>()
