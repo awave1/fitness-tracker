@@ -38,36 +38,44 @@ class ProfileFragment: Fragment(), ProfileContract.View {
         )
 
         val id = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
+        val isTrainer = sharedPref.getBoolean(Constants.IS_TRAINER, false)
+
         Timber.d("user id: $id")
 
-        presenter.loadGoals(id)
+        if (!isTrainer) {
+            presenter.loadGoals(id)
 
-        adapter = GoalAdapter(R.layout.goal_item)
-        goalList.layoutManager = LinearLayoutManager(context)
-        goalList.adapter = adapter
+            adapter = GoalAdapter(R.layout.goal_item)
+            goalList.layoutManager = LinearLayoutManager(context)
+            goalList.adapter = adapter
 
-        context?.let { c ->
-            DbInjection.provideDb(c).userDao().getById(id)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe { profileName.text = getString(R.string.dashboard_user_name, "${it.firstName} ${it.lastName}") }
-        }
+            context?.let { c ->
+                DbInjection.provideDb(c).userDao().getById(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { profileName.text = getString(R.string.dashboard_user_name, "${it.firstName} ${it.lastName}") }
+            }
 
-        createGoalBtn.setOnClickListener {
-            CreateGoalDialogFactory
-                    .create(
-                            R.layout.fragment_create_goal,
-                            layoutInflater,
-                            it.context,
-                            onSave = { date, description ->
-                                presenter.createGoal(description, date = date, userId = id) {goal ->
-                                    adapter.items.add(goal)
-                                    adapter.notifyDataSetChanged()
-                                }
-                            },
-                            onCancel = { dialog, id -> dialog.cancel() }
-                    )
-                    .show()
+            createGoalBtn.setOnClickListener {
+                CreateGoalDialogFactory
+                        .create(
+                                R.layout.fragment_create_goal,
+                                layoutInflater,
+                                it.context,
+                                onSave = { date, description ->
+                                    presenter.createGoal(description, date = date, userId = id) {goal ->
+                                        adapter.items.add(goal)
+                                        adapter.notifyDataSetChanged()
+                                    }
+                                },
+                                onCancel = { dialog, id -> dialog.cancel() }
+                        )
+                        .show()
+            }
+        } else {
+            createGoalBtn.visibility = View.GONE
+            goalList.visibility = View.GONE
+            goals_text_header.visibility = View.GONE
         }
 
     }
