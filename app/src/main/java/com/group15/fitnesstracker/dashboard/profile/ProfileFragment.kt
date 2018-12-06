@@ -1,15 +1,12 @@
 package com.group15.fitnesstracker.dashboard.profile
 
-import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.textfield.TextInputLayout
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Goal
@@ -18,7 +15,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_profile_page.*
 import timber.log.Timber
-import java.util.*
 
 class ProfileFragment: Fragment(), ProfileContract.View {
     override lateinit var presenter: ProfileContract.Presenter
@@ -50,7 +46,7 @@ class ProfileFragment: Fragment(), ProfileContract.View {
             goalList.adapter = adapter
 
             context?.let { c ->
-                DbInjection.provideDb(c).userDao().getById(id)
+                DbInjection.provideUserDao(c).getById(id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { profileName.text = getString(R.string.dashboard_user_name, "${it.firstName} ${it.lastName}") }
@@ -63,7 +59,7 @@ class ProfileFragment: Fragment(), ProfileContract.View {
                                 layoutInflater,
                                 it.context,
                                 onSave = { date, description ->
-                                    presenter.createGoal(description, date = date, userId = id) {goal ->
+                                    presenter.createGoal(description, date = date, userId = id) { goal ->
                                         adapter.items.add(goal)
                                         adapter.notifyDataSetChanged()
                                     }
@@ -76,6 +72,14 @@ class ProfileFragment: Fragment(), ProfileContract.View {
             createGoalBtn.visibility = View.GONE
             goalList.visibility = View.GONE
             goals_text_header.visibility = View.GONE
+
+            context?.let { c ->
+                DbInjection.provideTrainerDao(c)
+                        .getTrainer(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { profileName.text = getString(R.string.dashboard_user_name, "${it.firstName} ${it.lastName}") }
+            }
         }
 
     }

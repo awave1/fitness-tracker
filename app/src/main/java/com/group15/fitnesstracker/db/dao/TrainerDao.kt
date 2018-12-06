@@ -19,4 +19,7 @@ interface TrainerDao {
 
     @Query("SELECT * FROM Trainer")
     fun loadAllTrainers(): Maybe<List<Trainer>>
+
+    @Query("select * from Trainer where id = :id")
+    fun getTrainer(id: Int): Maybe<Trainer>
 }
