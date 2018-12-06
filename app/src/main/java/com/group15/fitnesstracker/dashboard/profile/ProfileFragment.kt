@@ -60,8 +60,9 @@ class ProfileFragment: Fragment(), ProfileContract.GoalView {
                             layoutInflater,
                             it.context,
                             onSave = { date, description ->
-                                presenter.createGoal(description, date = date, userId = id) {
-                                    // update adapter
+                                presenter.createGoal(description, date = date, userId = id) {goal ->
+                                    adapter.items.add(goal)
+                                    adapter.notifyDataSetChanged()
                                 }
                             },
                             onCancel = { dialog, id -> dialog.cancel() }

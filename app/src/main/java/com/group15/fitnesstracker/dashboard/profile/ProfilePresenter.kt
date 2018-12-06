@@ -34,7 +34,7 @@ class ProfilePresenter(val view: ProfileContract.View, private val context: Cont
     }
 
     override fun loadGoals(userId: Int?) {
-        userId?.let { id ->
+        userId?.let { _ ->
             context?.let { ctx ->
                 DbInjection.provideGoalDao(ctx)
                         .getGoalsForUser(userId)
