@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.group15.fitnesstracker.db.dao.*
+import com.group15.fitnesstracker.util.CryptoUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -59,8 +60,51 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             val dbInstance = instance(context)
 
-                            // @TODO implement db population
                             Timber.d("populating db")
+
+                            dbInstance.userDao()
+                                    .insertAll(
+                                            // id: 1
+                                            User(username = "callmebiggy",
+                                                 password = CryptoUtils.SHA256Hash("passwd"),
+                                                 firstName = "Steven", lastName = "Mlilo",
+                                                 age = 22, weight = 240.0),
+
+                                            // id: 2
+                                            User(username = "notkanye",
+                                                    password = CryptoUtils.SHA256Hash("yzyszn"),
+                                                    firstName = "Kanye", lastName = "East",
+                                                    age = 40, weight = 123.0),
+
+                                            // id: 3
+                                            User(username = "putin",
+                                                    password = CryptoUtils.SHA256Hash("lol"),
+                                                    firstName = "Vova", lastName = "Putin",
+                                                    age = 99, weight = 999.9)
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
+
+                            dbInstance.trainerDao()
+                                    .createTrainer(
+                                            // id: 1
+                                            Trainer(email = "email@email.com",
+                                                    password = CryptoUtils.SHA256Hash("pass"),
+                                                    firstName = "Mr",
+                                                    lastName = "Strong"
+                                    ))
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
+
+                            dbInstance.trainsDao()
+                                    .addUsersToTrain(
+                                            Trains(1, 1),
+                                            Trains(1, 2),
+                                            Trains(1, 3)
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
+
                             dbInstance.workoutDao()
                                     .insertAll(
                                             Workout("Strong 5x5 A", "Very"),

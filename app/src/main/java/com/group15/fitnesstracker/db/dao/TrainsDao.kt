@@ -11,6 +11,9 @@ interface TrainsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTrains(vararg trains: Trains): Completable
 
+    @Insert
+    fun addUsersToTrain(vararg train: Trains): Completable
+
     @Update
     fun updateTrains(vararg trains: Trains): Completable
 
