@@ -1,16 +1,14 @@
 package com.group15.fitnesstracker.dashboard
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.customViews.NoScrollViewPager
 import com.group15.fitnesstracker.dashboard.history.HistoryFragment
@@ -18,6 +16,7 @@ import com.group15.fitnesstracker.dashboard.profile.ProfileFragment
 import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
 import com.group15.fitnesstracker.dashboard.tracker.TrackerFragment
 import com.group15.fitnesstracker.dashboard.workout.WorkoutFragment
+import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import timber.log.Timber
 
@@ -28,48 +27,84 @@ class DashboardFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupViewPager(dashboardViewPager)
 
-        dashboardNav.selectedItemId = R.id.navigation_workout
-        dashboardViewPager.currentItem = 2
+        val sharedPref = context?.getSharedPreferences(
+                resources.getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+        )
 
-        dashboardNav.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_profile -> {
-                    dashboardViewPager.currentItem = 0
-                    return@setOnNavigationItemSelectedListener true
+        val isTrainer = sharedPref?.getBoolean(Constants.IS_TRAINER, false) as Boolean
+        setupViewPager(dashboardViewPager, isTrainer)
+
+        if (!isTrainer) {
+            dashboardNav.inflateMenu(R.menu.menu_dashboard)
+            dashboardNav.selectedItemId = R.id.navigation_workout
+            dashboardViewPager.currentItem = 2
+
+            dashboardNav.setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.navigation_profile -> {
+                        dashboardViewPager.currentItem = 0
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_history -> {
+                        dashboardViewPager.currentItem = 1
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_workout -> {
+                        dashboardViewPager.currentItem = 2
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_schedule -> {
+                        dashboardViewPager.currentItem = 3
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_tracker -> {
+                        dashboardViewPager.currentItem = 4
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    else -> return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_history -> {
-                    dashboardViewPager.currentItem = 1
-                    return@setOnNavigationItemSelectedListener true
+            }
+        } else {
+            dashboardNav.inflateMenu(R.menu.menu_dashboard_trainer)
+            dashboardNav.selectedItemId = R.id.navigation_schedule
+            dashboardViewPager.currentItem = 1
+
+            dashboardNav.setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.navigation_profile -> {
+                        dashboardViewPager.currentItem = 0
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_schedule -> {
+                        dashboardViewPager.currentItem = 1
+                        return@setOnNavigationItemSelectedListener true
+                    }
+                    else -> return@setOnNavigationItemSelectedListener true
                 }
-                R.id.navigation_workout -> {
-                    dashboardViewPager.currentItem = 2
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.navigation_schedule -> {
-                    dashboardViewPager.currentItem = 3
-                    return@setOnNavigationItemSelectedListener true
-                }
-                R.id.navigation_tracker -> {
-                    dashboardViewPager.currentItem = 4
-                    return@setOnNavigationItemSelectedListener true
-                }
-                else -> return@setOnNavigationItemSelectedListener true
             }
         }
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setupViewPager(viewPager: NoScrollViewPager) {
+    private fun setupViewPager(viewPager: NoScrollViewPager, trainer: Boolean) {
         val adapter = BottomBarViewPagerAdapter(childFragmentManager)
-        adapter.addFragments(
-                ProfileFragment(),
-                HistoryFragment(),
-                WorkoutFragment(),
-                ScheduleFragment(),
-                TrackerFragment()
-        )
+        if (!trainer) {
+            adapter.addFragments(
+                    ProfileFragment(),
+                    HistoryFragment(),
+                    WorkoutFragment(),
+                    ScheduleFragment(),
+                    TrackerFragment()
+            )
+        } else {
+            adapter.addFragments(
+                    ProfileFragment(),
+                    ScheduleFragment()
+            )
+        }
 
         viewPager.adapter = adapter
         viewPager.setPagingEnabled(false)
