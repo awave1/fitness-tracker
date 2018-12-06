@@ -17,4 +17,5 @@
     <color name="black_semi_transparent">#B2000000</color>
     <color name="white">#ffffff</color>
     <color name="colorAccentDark">#37474F</color>
+    <color name="lightBlue">#5537474f</color>
 </resources>
