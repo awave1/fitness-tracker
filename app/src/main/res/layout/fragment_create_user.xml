@@ -47,6 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputContainer"
                 android:layout_marginTop="16dp"

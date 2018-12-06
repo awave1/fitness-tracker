@@ -130,7 +130,6 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                             WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 1),
                                             WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 1),
 
-
                                             WorkoutExercises(workoutId = 2, exerciseId = 3, numberOfSets = 5),
                                             WorkoutExercises(workoutId = 2, exerciseId = 2, numberOfSets = 5),
                                             WorkoutExercises(workoutId = 2, exerciseId = 4, numberOfSets = 5)

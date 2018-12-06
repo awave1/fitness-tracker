@@ -22,4 +22,7 @@ interface TrainerDao {
 
     @Query("select * from Trainer where id = :id")
     fun getTrainer(id: Int): Maybe<Trainer>
+
+    @Query("select * from Trainer where email = :email and password = :pass")
+    fun getTrainer(email: String, pass: String): Maybe<Trainer>
 }
