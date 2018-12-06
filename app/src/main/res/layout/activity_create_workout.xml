@@ -13,11 +13,18 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/workoutDescription"
+        android:hint="Workout description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/workoutName" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exerciseList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/workoutName"
+        app:layout_constraintTop_toBottomOf="@id/workoutDescription"
         app:layout_constraintBottom_toTopOf="@id/createWorkout"
         tools:listitem="@layout/item_exercise"/>
 

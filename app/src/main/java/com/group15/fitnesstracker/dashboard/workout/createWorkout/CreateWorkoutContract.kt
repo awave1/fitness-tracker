@@ -11,6 +11,7 @@ interface CreateWorkoutContract {
 
     interface Presenter: BasePresenter {
         fun loadAllExercises()
+        fun createWorkout(name: String, description: String, onComplete: () -> Unit)
         fun onBindViewAtPosition(position: Int, holder: CreateWorkoutAdapter.CreateWorkoutViewHolder)
     }
 }

@@ -7,8 +7,8 @@ import io.reactivex.Maybe
 
 @Dao
 interface WorkoutDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(workout: Workout): Completable
+    @Insert
+    fun insert(workout: Workout): Maybe<Long>
 
     @Insert()
     fun insertAll(vararg workouts: Workout): Completable

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.group15.fitnesstracker.R
@@ -18,6 +19,7 @@ import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
 import com.group15.fitnesstracker.dashboard.tracker.TrackerFragment
 import com.group15.fitnesstracker.dashboard.workout.WorkoutFragment
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import timber.log.Timber
 
 class DashboardFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -88,5 +90,10 @@ class DashboardFragment: Fragment() {
     companion object {
         val instance: DashboardFragment
             get() = DashboardFragment()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.d("resumed")
     }
 }

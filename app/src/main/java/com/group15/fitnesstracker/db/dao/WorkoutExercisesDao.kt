@@ -21,6 +21,9 @@ interface WorkoutExercisesDao {
     fun insertAll(vararg workoutExercises: WorkoutExercises): Completable
 
     @Insert
+    fun insertAll(workoutExercises: List<WorkoutExercises>): Completable
+
+    @Insert
     fun insertAll_test(vararg workoutExercises: WorkoutExercises)
 
     @Query("select numberOfSets from WorkoutExercises where workoutId = :workoutId and exerciseId = :exerciseId")

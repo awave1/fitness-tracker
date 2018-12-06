@@ -12,7 +12,7 @@ import androidx.room.ForeignKey
         ]
 )
 data class WorkoutExercises (
-        val workoutId: Int,
-        val exerciseId: Int,
-        @NonNull val numberOfSets: Int
+        var workoutId: Int,
+        var exerciseId: Int,
+        @NonNull var numberOfSets: Int
 )

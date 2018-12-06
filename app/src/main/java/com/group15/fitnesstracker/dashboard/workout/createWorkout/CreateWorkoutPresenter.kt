@@ -3,10 +3,14 @@ package com.group15.fitnesstracker.dashboard.workout.createWorkout
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Workout
+import com.group15.fitnesstracker.db.WorkoutExercises
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -35,6 +39,7 @@ class CreateWorkoutPresenter(val view: CreateWorkoutContract.View, val context: 
 
         val name = holder.itemView.findViewById<TextView>(R.id.exerciseName)
         val description = holder.itemView.findViewById<TextView>(R.id.exerciseDescription)
+        val setNumber = holder.itemView.findViewById<EditText>(R.id.setNumber)
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.isSelected)
 
         name.text = exercise.name
@@ -42,11 +47,32 @@ class CreateWorkoutPresenter(val view: CreateWorkoutContract.View, val context: 
 
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
+                if (setNumber.text.toString().toInt() >= 1) {
+                    exercise.numberOfSets = setNumber.text.toString().toInt()
+                }
                 selectedExercises.add(exercise)
             } else {
                 selectedExercises.remove(exercise)
             }
         }
+    }
+
+    @SuppressLint("CheckResult")
+    override fun createWorkout(name: String, description: String, onComplete: () -> Unit) {
+        DbInjection.provideWorkoutDao(context)
+                .insert(Workout(name, description))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { id ->
+                    val workoutExercises = selectedExercises.map {
+                        WorkoutExercises(id.toInt(), it.exerciseId, it.numberOfSets)
+                    }
+
+                    DbInjection.provideWorkoutExercisesDao(context)
+                            .insertAll(workoutExercises)
+                            .subscribeOn(Schedulers.io())
+                            .subscribe { onComplete() }
+                }
     }
 
     override fun start() {
