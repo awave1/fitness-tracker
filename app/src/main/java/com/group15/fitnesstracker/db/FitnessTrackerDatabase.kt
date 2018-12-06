@@ -95,8 +95,8 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.goalDao()
                                     .insertAll(
-                                            Goal(goalId = 1, goalDescription = "Get to 200 lbs", completionDate = Date(), userId = 1),
-                                            Goal(goalId = 1, goalDescription = "Eat chocolate cake cookies", completionDate = Date(), userId = 1)
+                                            Goal(goalDescription = "Get to 200 lbs", completionDate = Date(), userId = 1),
+                                            Goal(goalDescription = "Eat chocolate cake cookies", completionDate = Date(), userId = 1)
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
