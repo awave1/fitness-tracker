@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/goal_item_desc_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/goal_item_desc_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goal_text"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/goal_item_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder description"
+            android:layout_toEndOf="@id/goal_item_desc_header"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goal_item_desc_parent">
+
+        <TextView
+            android:id="@+id/goal_item_date_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/goal_date_text"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/goal_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder date"
+            android:layout_toEndOf="@id/goal_item_date_header"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

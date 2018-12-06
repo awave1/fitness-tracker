@@ -2,8 +2,6 @@ package com.group15.fitnesstracker.db.dao;
 
 import com.group15.fitnesstracker.db.Goal;
 
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,14 +14,20 @@ import io.reactivex.Maybe;
 @Dao
 public interface GoalDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public Completable insertGoals(Goal... goals);
+    fun insertGoal(goal: Goal): Completable
 
-    @Update
-    public Completable updateGoals(Goal... goals);
+    @Insert()
+    fun insertAll(vararg goals: Goal): Completable
 
-    @Delete
-    public Completable deleteGoals(Goal... goals);
+    @Insert()
+    fun insertAll_test(vararg goals: Goal)
 
-    @Query("SELECT * FROM Goal")
-    public  Maybe<List<Goal>> loadAllGoals();
+    @Query("select * from Goal")
+    fun getAll(): Maybe<List<Goal>>
+
+    @Query("select * from Goal where userId = :userId")
+    fun getGoalsForUser(userId: Int): Maybe<List<Goal>>
+
+    @Delete()
+    fun deleteGoal(goal: Goal): Completable
 }

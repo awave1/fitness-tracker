@@ -65,7 +65,18 @@
     <string name="workout_progress_warning_title">Workout in progress</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+
     <string name="save_recording_ok">Save</string>
     <string name="nutrition_calories">Calories</string>
+
+    <!--Goals-->
+    <string name="goal_text">Goal:</string>
+    <string name="goal_date_text">Complete by:</string>
+    <string name="create_goal_button_text">Create Goal</string>
+    <string name="create_goal_desc_hint">Goal Description</string>
+    <string name="create_goal_date_hint">Completion Date</string>
+    <string name="create_goal_enter_info_text">Enter goal information</string>
+    <string name="goals_header">Goals:</string>
+
     <string name="history">History</string>
 </resources>

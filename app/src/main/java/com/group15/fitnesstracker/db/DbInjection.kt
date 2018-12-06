@@ -11,6 +11,8 @@ object DbInjection {
 
     fun provideWorkoutExercisesDao(context: Context) = provideDb(context).workoutExercisesDao()
 
+    fun provideGoalDao(context: Context) = provideDb(context).goalDao()
+
     fun provideBodyRecordingDao(context: Context) = provideDb(context).bodyRecordingDao()
 
     fun provideNutritionRecordingDao(context: Context) = provideDb(context).nutritionRecordingDao()
