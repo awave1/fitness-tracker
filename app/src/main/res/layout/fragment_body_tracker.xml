@@ -16,13 +16,12 @@
 
     <Button
         android:id="@+id/createBodyBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_body_button_text"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:textColor="#000"
-        android:paddingBottom="20dp"
         style="?android:attr/borderlessButtonStyle" />
 
 

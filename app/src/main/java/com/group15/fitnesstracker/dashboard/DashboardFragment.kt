@@ -55,12 +55,8 @@ class DashboardFragment: Fragment() {
                         dashboardViewPager.currentItem = 2
                         return@setOnNavigationItemSelectedListener true
                     }
-                    R.id.navigation_schedule -> {
-                        dashboardViewPager.currentItem = 3
-                        return@setOnNavigationItemSelectedListener true
-                    }
                     R.id.navigation_tracker -> {
-                        dashboardViewPager.currentItem = 4
+                        dashboardViewPager.currentItem = 3
                         return@setOnNavigationItemSelectedListener true
                     }
                     else -> return@setOnNavigationItemSelectedListener true
@@ -96,7 +92,6 @@ class DashboardFragment: Fragment() {
                     ProfileFragment(),
                     HistoryFragment(),
                     WorkoutFragment(),
-                    ScheduleFragment(),
                     TrackerFragment()
             )
         } else {

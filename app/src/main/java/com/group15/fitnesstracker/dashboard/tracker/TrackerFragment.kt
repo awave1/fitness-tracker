@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.group15.fitnesstracker.R
 import kotlinx.android.synthetic.main.fragment_tracker_page.*
 
@@ -19,7 +20,7 @@ class TrackerFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // The pager adapter, which provides the pages to the view pager widget.
-        val pagerAdapter = ScreenSlidePagerAdapter(fragmentManager)
+        val pagerAdapter = ScreenSlidePagerAdapter(childFragmentManager)
         pagerAdapter.addFragment(BodyTrackerFragment(), getString(R.string.body))
         pagerAdapter.addFragment(NutritionTrackerFragment(), getString(R.string.nutrition))
         pagerAdapter.addFragment(BodyPartTrackerFragment(), getString(R.string.bpart))
@@ -28,7 +29,7 @@ class TrackerFragment: Fragment() {
         trackerTabs.setupWithViewPager(trackerPager)
     }
 
-    private inner class ScreenSlidePagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+    private inner class ScreenSlidePagerAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
         private val fragmentList = mutableListOf<Fragment>()
         private val titleList = mutableListOf<String>()
 
