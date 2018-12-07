@@ -71,8 +71,15 @@ class SetAdapter: RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             set.isComplete = isChecked
             if (isChecked) {
-                set.reps = setReps.text.toString().toInt()
-                set.weight = setWeight.text.toString().toDouble()
+                if (setReps.text.toString().isEmpty()) {
+                    set.reps = 0;
+                }else
+                    set.reps = setReps.text.toString().toInt()
+
+                if (setWeight.text.toString().isEmpty()) {
+                    set.weight = 0.0;
+                }else
+                    set.weight = setWeight.text.toString().toDouble()
 
                 setReps.inputType = EditorInfo.TYPE_NULL
                 setWeight.inputType = EditorInfo.TYPE_NULL
