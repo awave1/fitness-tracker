@@ -42,9 +42,9 @@
     <string name="create_nutr_button_text">Record Nutrition</string>
     <string name="create_nutr_calories_hint">Calories</string>
     <string name="create_nutr_macronutrient_hint">Macronutrient</string>
-    <string name="create_nutr_macro_protein_hint">Protein</string>
-    <string name="create_nutr_macro_carb_hint">Carbohydrate</string>
-    <string name="create_nutr_macro_fat_hint">Fat</string>
+    <string name="create_nutr_macro_protein_hint">Protein (gram)</string>
+    <string name="create_nutr_macro_carb_hint">Carbohydrate (gram)</string>
+    <string name="create_nutr_macro_fat_hint">Fat (gram)</string>
     <string name="create_nutr_micro_name_hint">Name</string>
     <string name="create_nutr_micro_amount_hint">Amount</string>
     <string name="create_nutr_enter_info_text">Enter nutrition information</string>
