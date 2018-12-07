@@ -11,7 +11,7 @@ import java.util.*
 @Dao
 interface ScheduleItemDao {
     @Insert
-    fun createScheduleItem(scheduleItem: ScheduleItem)
+    fun createScheduleItem(scheduleItem: ScheduleItem): Completable
 
     @Insert
     fun createItems(vararg scheduleItem: ScheduleItem): Completable

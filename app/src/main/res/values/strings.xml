@@ -81,4 +81,5 @@
     <string name="history">History</string>
     <string name="user_is_trainer_text">Are you a trainer?</string>
     <string name="create_user_email">Email</string>
+    <string name="add_user_to_schedule">Add user to schedule</string>
 </resources>
