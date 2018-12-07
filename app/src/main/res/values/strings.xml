@@ -79,8 +79,8 @@
     <string name="goals_header">Goals:</string>
 
     <!--Micronutrients-->
-    <string name="micronutrient_name_text">Micronutrient Name:</string>
-    <string name="micronutrient_amt_text">Amount:</string>
+    <string name="micronutrient_name_text">Micronutrient Name</string>
+    <string name="micronutrient_amt_text">Amount</string>
     <string name="micronutrient_text">Micronutrients</string>
     <string name="create_micronutr_text">Add Micronutrient</string>
 
@@ -88,4 +88,5 @@
     <string name="user_is_trainer_text">Are you a trainer?</string>
     <string name="create_user_email">Email</string>
     <string name="add_user_to_schedule">Add user to schedule</string>
+    <string name="add_micronutrient">Add micronutrient</string>
 </resources>

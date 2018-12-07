@@ -71,5 +71,4 @@ class NutritionTrackerFragment : Fragment(), CreateRecordingContract.NutritionTr
     override fun showNutritionRecordings(recordings: MutableList<NutritionRecording>) {
         adapter.items = recordings
     }
-
 }
