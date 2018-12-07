@@ -8,6 +8,7 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:layout_margin="16dp"
         android:id="@+id/workoutName"
         android:hint="Workout name"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:layout_margin="16dp"
         android:id="@+id/workoutDescription"
         android:hint="Workout description"
         android:layout_width="match_parent"

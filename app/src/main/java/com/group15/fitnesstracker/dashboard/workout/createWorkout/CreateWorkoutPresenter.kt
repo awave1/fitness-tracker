@@ -65,7 +65,10 @@ class CreateWorkoutPresenter(val view: CreateWorkoutContract.View, val context: 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { id ->
                     val workoutExercises = selectedExercises.map {
-                        WorkoutExercises(id.toInt(), it.exerciseId, it.numberOfSets)
+                        WorkoutExercises(
+                                workoutId = id.toInt(),
+                                exerciseId = it.exerciseId,
+                                numberOfSets = it.numberOfSets)
                     }
 
                     DbInjection.provideWorkoutExercisesDao(context)

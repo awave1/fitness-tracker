@@ -97,10 +97,10 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.setExerciseDao()
                                     .insertAll(
-                                            SetExercise(name = "Squat", description = "Just squat"),
-                                            SetExercise(name = "Bench press (Barbell", description = "Works out your chest"),
-                                            SetExercise(name = "Deadlift", description = "Just lift"),
-                                            SetExercise(name = "Overhead Press (Standing up)", description = "OH Press")
+                                            SetExercise(name = "Squat", description = "The squat is performed by squatting down with a weight held across the upper back under neck and standing up straight again."),
+                                            SetExercise(name = "Bench press (Barbell)", description = "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position."),
+                                            SetExercise(name = "Deadlift", description = "The deadlift is performed by squatting down and lifting a weight off the floor with the hand until standing up straight again."),
+                                            SetExercise(name = "Overhead Press", description = "The overhead press is a fantastic strength-and-muscle builder for the entire upper body and core")
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .subscribe()
@@ -117,7 +117,9 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                             WorkoutExercises(workoutId = 2, exerciseId = 4, numberOfSets = 5)
                                     )
                                     .subscribeOn(Schedulers.io())
-                                    .subscribe()
+                                    .subscribe({}, {
+                                        Timber.e(it)
+                                    })
                         }
                     })
                     .build()
