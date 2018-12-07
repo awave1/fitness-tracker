@@ -17,36 +17,62 @@
         tools:text="FirstName LastName" />
 
     <!--Daily Nutritional Record-->
-    <!--TODO: contraints-->
     <TextView
         android:id="@+id/dailyNutritionalInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/daily_nut_info" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/daily_nut_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <TextView
         android:id="@+id/dailyCalories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calories" />
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/calories"
+        app:layout_constraintEnd_toStartOf="@+id/dailyProtein"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyNutritionalInfo" />
 
     <TextView
         android:id="@+id/dailyProtein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/protein" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/protein"
+        app:layout_constraintEnd_toStartOf="@+id/dailyCarbs"
+        app:layout_constraintStart_toEndOf="@+id/dailyCalories"
+        app:layout_constraintTop_toBottomOf="@+id/dailyNutritionalInfo" />
 
     <TextView
         android:id="@+id/dailyCarbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/carbs" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/carbs"
+        app:layout_constraintEnd_toStartOf="@+id/dailyFat"
+        app:layout_constraintStart_toEndOf="@+id/dailyProtein"
+        app:layout_constraintTop_toBottomOf="@+id/dailyNutritionalInfo" />
 
     <TextView
         android:id="@+id/dailyFat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fat" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/fat"
+        app:layout_constraintStart_toEndOf="@+id/dailyCarbs"
+        app:layout_constraintTop_toBottomOf="@+id/dailyNutritionalInfo" />
 
     <!--Goals-->
     <TextView
@@ -56,15 +82,21 @@
         android:paddingTop="10dp"
         android:text="@string/goals_header"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/profileName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dailyProtein" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingTop="36dp"
-        app:layout_constraintBottom_toBottomOf="@id/goals_text_header">
+        app:layout_constraintBottom_toBottomOf="@id/goals_text_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/goalList"
@@ -72,6 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="166dp"
             android:paddingTop="50dp" />
 
         <Button
