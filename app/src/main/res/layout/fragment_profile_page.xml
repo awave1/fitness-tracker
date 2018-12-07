@@ -92,11 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="36dp"
-        app:layout_constraintBottom_toBottomOf="@id/goals_text_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        android:paddingTop="36dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/goalList"
@@ -118,6 +114,18 @@
             android:paddingBottom="20dp"
             android:text="@string/create_goal_button_text"
             android:textColor="#000" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dailyInfoRecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/goalList"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginBottom="-91dp"
+            android:scrollbars="none" />
 
 
     </RelativeLayout>
