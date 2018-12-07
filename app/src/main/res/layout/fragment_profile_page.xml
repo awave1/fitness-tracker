@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/profileName"
@@ -13,27 +12,59 @@
         android:layout_height="wrap_content"
         android:paddingBottom="24dp"
         android:textSize="28sp"
-        tools:text="FirstName LastName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="FirstName LastName" />
 
+    <!--Daily Nutritional Record-->
+    <!--TODO: contraints-->
+    <TextView
+        android:id="@+id/dailyNutritionalInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/daily_nut_info" />
+
+    <TextView
+        android:id="@+id/dailyCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calories" />
+
+    <TextView
+        android:id="@+id/dailyProtein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/protein" />
+
+    <TextView
+        android:id="@+id/dailyCarbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carbs" />
+
+    <TextView
+        android:id="@+id/dailyFat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fat" />
+
+    <!--Goals-->
     <TextView
         android:id="@+id/goals_text_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/goals_header"
         android:paddingTop="10dp"
+        android:text="@string/goals_header"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/profileName"/>
+        app:layout_constraintBottom_toBottomOf="@id/profileName" />
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@id/goals_text_header"
-        android:paddingTop="36dp">
+        android:orientation="vertical"
+        android:paddingTop="36dp"
+        app:layout_constraintBottom_toBottomOf="@id/goals_text_header">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/goalList"
@@ -45,14 +76,14 @@
 
         <Button
             android:id="@+id/createGoalBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_goal_button_text"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:textColor="#000"
             android:paddingBottom="20dp"
-            style="?android:attr/borderlessButtonStyle" />
+            android:text="@string/create_goal_button_text"
+            android:textColor="#000" />
 
 
     </RelativeLayout>
