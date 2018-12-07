@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Goal
+import com.group15.fitnesstracker.db.dao.UserStats
 import com.group15.fitnesstracker.util.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,20 +21,6 @@ import timber.log.Timber
 class ProfileFragment: Fragment(), ProfileContract.View {
     override lateinit var presenter: ProfileContract.Presenter
     private lateinit var adapter: GoalAdapter<Goal>
-
-
-    private lateinit var dailyInfoRV: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        dailyInfoRV = dailyInfoRecyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-                adapter = viewAdapter
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         presenter = ProfilePresenter(this, context)
@@ -54,6 +41,7 @@ class ProfileFragment: Fragment(), ProfileContract.View {
         Timber.d("user id: $id")
 
         if (!isTrainer) {
+            presenter.loadPrevDayStats(id)
             presenter.loadGoals(id)
 
             adapter = GoalAdapter(R.layout.goal_item)
@@ -101,5 +89,26 @@ class ProfileFragment: Fragment(), ProfileContract.View {
 
     override fun showGoals(goals: MutableList<Goal>) {
         adapter.items = goals
+    }
+
+    override fun showUserStats(stats: UserStats) {
+        if (stats.sumCalories > 0 && stats.sumProtein > 0 && stats.sumCarbs > 0 && stats.sumFat > 0) {
+            dailyNutritionalInfo.visibility = View.VISIBLE
+            dailyNutritionalInfoHeader.visibility = View.VISIBLE
+            dailyNutritionalInfoValues.visibility = View.VISIBLE
+
+            noStats.visibility = View.GONE
+
+            calories.text = stats.sumCalories.toString()
+            protein.text = stats.sumProtein.toString()
+            carbs.text = stats.sumCarbs.toString()
+            fat.text = stats.sumFat.toString()
+        } else {
+            dailyNutritionalInfo.visibility = View.GONE
+            dailyNutritionalInfoHeader.visibility = View.GONE
+            dailyNutritionalInfoValues.visibility = View.GONE
+
+            noStats.visibility = View.VISIBLE
+        }
     }
 }
