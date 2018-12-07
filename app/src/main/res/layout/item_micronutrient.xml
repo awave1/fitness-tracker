@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/micronutrient_item_name_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/micronutrient_item_name_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/micronutrient_name_text"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/micronutrient_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="placeholder name"
+            android:layout_toEndOf="@id/micronutrient_item_name_header"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/micronutrient_item_name_parent">
+
+        <TextView
+            android:id="@+id/micronutrient_item_amt_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/micronutrient_amt_text"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/micronutrient_item_amt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:layout_toEndOf="@id/micronutrient_item_amt_header"
+            android:textSize="12sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

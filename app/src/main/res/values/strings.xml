@@ -78,5 +78,11 @@
     <string name="create_goal_enter_info_text">Enter goal information</string>
     <string name="goals_header">Goals:</string>
 
+    <!--Micronutrients-->
+    <string name="micronutrient_name_text">Micronutrient Name:</string>
+    <string name="micronutrient_amt_text">Amount:</string>
+    <string name="micronutrient_text">Micronutrients</string>
+    <string name="create_micronutr_text">Add Micronutrient</string>
+
     <string name="history">History</string>
 </resources>
