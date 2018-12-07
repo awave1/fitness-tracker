@@ -10,6 +10,7 @@ import com.group15.fitnesstracker.db.BodyMeasureRecording
 import com.group15.fitnesstracker.db.BodyPartMeasureRecording
 import com.group15.fitnesstracker.db.NutritionRecording
 import com.group15.fitnesstracker.util.Utils
+import timber.log.Timber
 
 class RecordingAdapter<T>(val view: Int): RecyclerView.Adapter<RecordingAdapter.RecordingViewHolder>() {
     var items = mutableListOf<T>()
@@ -48,6 +49,10 @@ class RecordingAdapter<T>(val view: Int): RecyclerView.Adapter<RecordingAdapter.
                 val protein = holder.itemView.findViewById<TextView>(R.id.proteinAmount)
                 val carbs = holder.itemView.findViewById<TextView>(R.id.carbsAmount)
                 val fat = holder.itemView.findViewById<TextView>(R.id.fatAmount)
+
+                if (record.micronutrients.isNotEmpty()) {
+                    Timber.d("nutrition contains micronutrients, showing")
+                }
 
                 date.text = Utils.formatDate(record.date)
                 calories.text = record.calories.toString()

@@ -67,19 +67,21 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.View, private v
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { id ->
-
                             if (micronutrients.isNotEmpty()) {
                                 val m = mutableListOf<MicronutrientRecording>()
 
                                 // uhhhhhh ok for now
                                 micronutrients.forEach {
                                     m.add(it)
-                                    m.last().id = id.toInt()
+                                    m.last().recordingId = id.toInt()
                                 }
+
+                                record.micronutrients = m
 
                                 DbInjection.provideMicronutrientDao(ctx)
                                         .createMicronutrientRecordings(m)
                                         .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe { callback(record) }
                             } else {
                                 callback(record)
@@ -96,8 +98,16 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.View, private v
                        .getNutritionRecordingsForUser(userId)
                        .subscribeOn(Schedulers.io())
                        .observeOn(AndroidSchedulers.mainThread())
-                       .subscribe {
-                           nutritionRecordings = it.toMutableList()
+                       .subscribe { recordings ->
+                           nutritionRecordings = recordings.toMutableList()
+
+                           nutritionRecordings.forEach {  rec ->
+                               DbInjection.provideMicronutrientDao(ctx)
+                                       .getMicronutrientsForRecording(rec.recordingId)
+                                       .subscribeOn(Schedulers.io())
+                                       .subscribe { rec.micronutrients = it }
+                           }
+
                            (view as CreateRecordingContract.NutritionTrackerView).showNutritionRecordings(nutritionRecordings)
                        }
             }

@@ -19,4 +19,7 @@ interface MicronutrientRecordingDao {
 
     @Query("SELECT * FROM MicronutrientRecording")
     fun loadAllMicronutrientRecordings(): Maybe<List<MicronutrientRecording>>
+
+    @Query("select * from MicronutrientRecording where recordingId = :recordingId")
+    fun getMicronutrientsForRecording(recordingId: Int): Maybe<List<MicronutrientRecording>>
 }
