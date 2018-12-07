@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 
 @Entity(foreignKeys = [ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])])
 data class NutritionRecording (
-        @PrimaryKey var recordingId: Int = 0,
+        @PrimaryKey(autoGenerate = true) var recordingId: Int = 0,
         var userId: Int,
         var date: Date = Date(),
         var calories: Double?,

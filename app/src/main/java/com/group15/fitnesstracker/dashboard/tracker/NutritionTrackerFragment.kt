@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputLayout
 
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.NutritionRecording
 import com.group15.fitnesstracker.util.Constants
+import kotlinx.android.synthetic.main.fragment_create_nutrition.*
 import kotlinx.android.synthetic.main.fragment_nutrition_tracker.*
+import timber.log.Timber
 
 class NutritionTrackerFragment : Fragment(), CreateRecordingContract.NutritionTrackerView {
     override lateinit var presenter: CreateRecordingContract.Presenter
@@ -41,31 +44,31 @@ class NutritionTrackerFragment : Fragment(), CreateRecordingContract.NutritionTr
         nutritionList.adapter = adapter
 
         createNutrition.setOnClickListener {
-            CreateRecordingDialogFactory.create(
-                    R.layout.fragment_create_nutrition,
-                    it.context,
-                    onSave = { dialog, id, view ->
+            CreateRecordingDialogFactory.createNutritionDialog(
+                    context = it.context,
+                    onSave = { micronutrientsList, view ->
                         val calories = view.findViewById<TextInputLayout>(R.id.caloriesInputContainer).editText
                         val protein = view.findViewById<TextInputLayout>(R.id.macroProteinInputContainer).editText
                         val carbs = view.findViewById<TextInputLayout>(R.id.macroCarbInputContainer).editText
                         val fat = view.findViewById<TextInputLayout>(R.id.macroFatInputContainer).editText
+
+                        Timber.d("micronutrients added size ${micronutrientsList.size}")
 
                         presenter.createNutritionRecording(
                                 userId = userId,
                                 calories = calories?.text.toString().toDoubleOrNull(),
                                 protein = protein?.text.toString().toDoubleOrNull(),
                                 carbohydrate = carbs?.text.toString().toDoubleOrNull(),
-                                fat = fat?.text.toString().toDoubleOrNull()
+                                fat = fat?.text.toString().toDoubleOrNull(),
+                                micronutrients = micronutrientsList
                         ) { record ->
                             adapter.items.add(record)
                             adapter.notifyDataSetChanged()
                         }
-                    },
-                    onCancel = { dialog, _ -> dialog.cancel() }
+                    }
             )
             .show()
         }
-
     }
 
     override fun showNutritionRecordings(recordings: MutableList<NutritionRecording>) {

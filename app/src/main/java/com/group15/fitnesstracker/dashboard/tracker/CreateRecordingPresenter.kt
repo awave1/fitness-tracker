@@ -2,12 +2,10 @@ package com.group15.fitnesstracker.dashboard.tracker
 
 import android.content.Context
 import android.widget.Toast
-import com.group15.fitnesstracker.db.BodyMeasureRecording
-import com.group15.fitnesstracker.db.BodyPartMeasureRecording
-import com.group15.fitnesstracker.db.DbInjection
-import com.group15.fitnesstracker.db.NutritionRecording
+import com.group15.fitnesstracker.db.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class CreateRecordingPresenter(val view: CreateRecordingContract.View, private val context: Context?): CreateRecordingContract.Presenter {
     init {
@@ -55,7 +53,9 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.View, private v
                                           protein: Double?,
                                           carbohydrate: Double?,
                                           fat: Double?,
-                                          userId: Int?, callback: (NutritionRecording) -> Unit) {
+                                          userId: Int?,
+                                          micronutrients: List<MicronutrientRecording>,
+                                          callback: (NutritionRecording) -> Unit) {
         context?.let { ctx ->
             userId?.let { it ->
                 val record = NutritionRecording(
@@ -63,10 +63,28 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.View, private v
                 )
 
                 DbInjection.provideNutritionRecordingDao(ctx)
-                        .insertNutritionRecordings(record)
+                        .createNutritionRecording(record)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { callback(record) }
+                        .subscribe { id ->
+
+                            if (micronutrients.isNotEmpty()) {
+                                val m = mutableListOf<MicronutrientRecording>()
+
+                                // uhhhhhh ok for now
+                                micronutrients.forEach {
+                                    m.add(it)
+                                    m.last().id = id.toInt()
+                                }
+
+                                DbInjection.provideMicronutrientDao(ctx)
+                                        .createMicronutrientRecordings(m)
+                                        .subscribeOn(Schedulers.io())
+                                        .subscribe { callback(record) }
+                            } else {
+                                callback(record)
+                            }
+                        }
             }
         }
     }
@@ -79,8 +97,8 @@ class CreateRecordingPresenter(val view: CreateRecordingContract.View, private v
                        .subscribeOn(Schedulers.io())
                        .observeOn(AndroidSchedulers.mainThread())
                        .subscribe {
-                           nutritionRecordings = it
-                           (view as CreateRecordingContract.NutritionTrackerView).showNutritionRecordings(it)
+                           nutritionRecordings = it.toMutableList()
+                           (view as CreateRecordingContract.NutritionTrackerView).showNutritionRecordings(nutritionRecordings)
                        }
             }
         }

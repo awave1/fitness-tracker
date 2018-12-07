@@ -1,5 +1,7 @@
 package com.group15.fitnesstracker.dashboard.tracker
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +12,7 @@ import com.group15.fitnesstracker.db.Goal
 import com.group15.fitnesstracker.db.MicronutrientRecording
 import com.group15.fitnesstracker.util.Utils
 
-class MicronutrientAdapter<T>(val view: Int): RecyclerView.Adapter<MicronutrientAdapter.MicronutrientViewHolder>() {
+class MicronutrientAdapter<T> : RecyclerView.Adapter<MicronutrientAdapter.MicronutrientViewHolder>() {
     var items = mutableListOf<T>()
         set(value) {
             field = value
@@ -21,22 +23,40 @@ class MicronutrientAdapter<T>(val view: Int): RecyclerView.Adapter<Micronutrient
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MicronutrientViewHolder {
         return MicronutrientViewHolder(LayoutInflater.from(parent.context)
-                .inflate(view, parent, false))
+                .inflate(R.layout.item_micronutrient, parent, false))
     }
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: MicronutrientViewHolder, position: Int) {
-        when(view) {
-            R.layout.item_micronutrient -> {
-                val micronutrient = items[position] as MicronutrientRecording
+        val micronutrient = items[position] as MicronutrientRecording
 
-                val name = holder.itemView.findViewById<TextView>(R.id.micronutrient_item_name)
-                val amount = holder.itemView.findViewById<TextView>(R.id.micronutrient_item_amt)
+        val name = holder.itemView.findViewById<TextView>(R.id.micronutrientName)
+        val amount = holder.itemView.findViewById<TextView>(R.id.micronutrientAmount)
 
-                name.text = micronutrient.name
-                amount.text = micronutrient.amount.toString()
+        name.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                micronutrient.name = s.toString()
             }
-        }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        amount.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                micronutrient.amount = s.toString().toDouble()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
     }
 }

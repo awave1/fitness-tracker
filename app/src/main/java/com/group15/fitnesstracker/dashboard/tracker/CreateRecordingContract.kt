@@ -4,6 +4,7 @@ import com.group15.fitnesstracker.base.BasePresenter
 import com.group15.fitnesstracker.base.BaseView
 import com.group15.fitnesstracker.db.BodyMeasureRecording
 import com.group15.fitnesstracker.db.BodyPartMeasureRecording
+import com.group15.fitnesstracker.db.MicronutrientRecording
 import com.group15.fitnesstracker.db.NutritionRecording
 
 interface CreateRecordingContract {
@@ -19,6 +20,7 @@ interface CreateRecordingContract {
                                      carbohydrate: Double?,
                                      fat: Double?,
                                      userId: Int?,
+                                     micronutrients: List<MicronutrientRecording>,
                                      callback: (NutritionRecording) -> Unit)
         fun createBodyPartRecording(bodyPart: String,
                                     bodyPartSize: Double?,
