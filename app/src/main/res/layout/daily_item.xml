@@ -8,23 +8,23 @@
         android:id="@+id/calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/default" />
+        android:text="@string/daily_default" />
 
     <TextView
         android:id="@+id/protein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/default" />
+        android:text="@string/daily_default" />
 
     <TextView
         android:id="@+id/carbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/default" />
+        android:text="@string/daily_default" />
 
     <TextView
         android:id="@+id/fat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/default" />
+        android:text="@string/daily_default" />
 </LinearLayout>
