@@ -50,8 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:textSize="30sp"
-                android:text="@string/create_nutr_macronutrient_hint"/>
+                android:text="@string/create_nutr_macronutrient_hint"
+                android:textSize="30sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/macroProteinInputContainer"
