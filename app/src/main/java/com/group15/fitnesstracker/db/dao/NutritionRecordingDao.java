@@ -31,16 +31,16 @@ public interface NutritionRecordingDao {
     @Query("select * from NutritionRecording where userId = :userId")
     public Maybe<List<NutritionRecording>> getNutritionRecordingsForUser(int userId);
 
-    @Query("SELECT SUM(calories) FROM NutritionRecording where date > date-8.64e+7")
+    @Query("SELECT SUM(calories) FROM NutritionRecording where date > (date-8.64e+7)")
     public Double getCalPrevDay();
 
-    @Query("SELECT SUM(protein) FROM NutritionRecording where date > date-8.64e+7")
+    @Query("SELECT SUM(protein) FROM NutritionRecording where date > (date-8.64e+7)")
     public Double getProteinPrevDay();
 
-    @Query("SELECT SUM(carbohydrate) FROM NutritionRecording where date > date-8.64e+7")
+    @Query("SELECT SUM(carbohydrate) FROM NutritionRecording where date > (date-8.64e+7)")
     public Double getCarbsPrevDay();
 
-    @Query("SELECT SUM(fat) FROM NutritionRecording where date > date-8.64e+7")
+    @Query("SELECT SUM(fat) FROM NutritionRecording where date > (date-8.64e+7)")
     public Double getFatPrevDay();
 
 }
