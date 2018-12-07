@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import com.group15.fitnesstracker.R
+import com.group15.fitnesstracker.db.MicronutrientRecording
 
 class CreateRecordingDialogFactory {
     companion object {
