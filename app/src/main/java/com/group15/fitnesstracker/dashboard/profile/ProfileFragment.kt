@@ -31,7 +31,7 @@ class ProfileFragment: Fragment(), ProfileContract.View {
         dailyInfoRV = dailyInfoRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
-            adapter = viewAdapter
+                adapter = viewAdapter
         }
     }
 
