@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.alamkanak.weekview.DateTimeInterpreter
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewDisplayable
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_schedule_page.*
+import java.util.*
+import java.text.SimpleDateFormat
+
 
 class ScheduleFragment: Fragment(), ScheduleContract.View {
 
@@ -36,9 +40,34 @@ class ScheduleFragment: Fragment(), ScheduleContract.View {
 
         presenter.getEvents(id)
 
+        weekView.dateTimeInterpreter = object : DateTimeInterpreter {
+            override fun interpretTime(hour: Int): String {
+                var h = hour
+
+                if (hour == 24)
+                    h = 0
+                else if (hour == 0)
+                    h = 0
+
+                return "$h:00"
+            }
+
+            override fun interpretDate(date: Calendar?): String {
+                val weekdayNameFormat = SimpleDateFormat("EEE", Locale.getDefault())
+                var weekday = weekdayNameFormat.format(date?.time)
+                val format = SimpleDateFormat(" d/M", Locale.getDefault())
+
+                weekday = weekday.get(0).toString()
+
+                return weekday.toUpperCase() + format.format(date?.time)
+            }
+        }
+
         weekView.setOnClickListener { presenter.eventClicked() }
 
-        weekView.setMonthChangeListener { _, _ -> scheduleItems }
+        weekView.setMonthChangeListener { startDate, endDate ->
+            return@setMonthChangeListener scheduleItems
+        }
 
         addToSchedule.setOnClickListener {
 
