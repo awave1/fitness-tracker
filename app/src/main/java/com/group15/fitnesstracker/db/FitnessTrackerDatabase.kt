@@ -101,6 +101,27 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
+
+                            dbInstance.nutritionRecordingDao()
+                                    .insertNutritionRecordings(
+                                            NutritionRecording(recordingId = 1,calories = 200.0,protein = 100.0,carbohydrate = 50.0,fat = 20.0,date = Date(), userId = 1)
+                                    ).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
+
+                            dbInstance.bodyRecordingDao()
+                                    .insertBodyRecordings(
+                                            BodyMeasureRecording(recordingId = 1,date = Date(),userId = 1,bodyFat = 5.0,weight = 150.0)
+                                    ).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
+
+                            dbInstance.bodyPartRecordingDao()
+                                    .insertBodyPartRecordings(
+                                            BodyPartMeasureRecording(recordingId = 1,userId = 2,bodyPart = "Waist",bodyPartSize = 20.0,date = Date())
+                                    ).subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe()
                         }
                     })
                     .build()
