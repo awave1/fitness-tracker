@@ -7,9 +7,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.group15.fitnesstracker.db.dao.*
+import com.group15.fitnesstracker.util.CryptoUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executors
 
@@ -23,6 +25,7 @@ fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
 @Database(entities = [
     User::class, Workout::class, Goal::class,
+    Trainer::class, Trains::class, ScheduleItem::class,
     SetExercise::class, TimedExercise::class, WorkoutExercises::class, Set::class,
     BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class,
     History::class], version = 1, exportSchema = false)
@@ -38,6 +41,9 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun historyDao(): HistoryDao
     abstract fun setDao(): SetDao
     abstract fun goalDao(): GoalDao
+    abstract fun trainerDao(): TrainerDao
+    abstract fun trainsDao(): TrainsDao
+    abstract fun scheduleItemDao(): ScheduleItemDao
 
     companion object {
         @Volatile private var db: FitnessTrackerDatabase? = null
@@ -59,6 +65,41 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             // @TODO implement db population
                             Timber.d("populating db")
+
+                            dbInstance.userDao()
+                                    .insertAll(
+                                            // id: 1
+                                            User(username = "callmebiggy",
+                                                 password = CryptoUtils.SHA256Hash("passwd"),
+                                                 firstName = "Steven", lastName = "Mlilo",
+                                                 age = 22, weight = 240.0),
+
+                                            // id: 2
+                                            User(username = "notkanye",
+                                                    password = CryptoUtils.SHA256Hash("yzyszn"),
+                                                    firstName = "Kanye", lastName = "East",
+                                                    age = 40, weight = 123.0),
+
+                                            // id: 3
+                                            User(username = "putin",
+                                                    password = CryptoUtils.SHA256Hash("lol"),
+                                                    firstName = "Vova", lastName = "Putin",
+                                                    age = 99, weight = 999.9)
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
+
+                            dbInstance.trainerDao()
+                                    .createTrainer(
+                                            // id: 1
+                                            Trainer(email = "email@email.com",
+                                                    password = CryptoUtils.SHA256Hash("pass"),
+                                                    firstName = "Mr",
+                                                    lastName = "Strong"
+                                    ))
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
+
                             dbInstance.workoutDao()
                                     .insertAll(
                                             Workout("Strong 5x5 A", "Very"),
@@ -101,9 +142,25 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
                                     .subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
+
+                            dbInstance.scheduleItemDao()
+                                    .createItems(
+                                            ScheduleItem(workoutId = 1, trainerId = 1, userId = 1,
+                                                    from = createDate("05/12/2018 08:00"), to = createDate("05/12/2018 10:00")),
+                                            ScheduleItem(workoutId = 2, trainerId = 1, userId = 1,
+                                                    from = createDate("06/12/2018 08:00"), to = createDate("06/12/2018 10:00")),
+                                            ScheduleItem(workoutId = 1, trainerId = 1, userId = 3,
+                                                    from = createDate("05/12/2018 16:00"), to = createDate("05/12/2018 18:00")),
+                                            ScheduleItem(workoutId = 2, trainerId = 1, userId = 3,
+                                                    from = createDate("06/12/2018 16:00"), to = createDate("06/12/2018 18:00"))
+                                    )
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe()
                         }
                     })
                     .build()
         }
+
+        private fun createDate(date: String) = SimpleDateFormat("dd/MM/yyyy HH:mm").parse(date)
     }
 }

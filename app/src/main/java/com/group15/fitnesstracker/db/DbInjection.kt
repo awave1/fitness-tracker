@@ -24,4 +24,10 @@ object DbInjection {
     fun provideSetDao(context: Context) = provideDb(context).setDao()
 
     fun provideSetExerciseDao(context: Context) = provideDb(context).setExerciseDao()
+
+    fun provideTrainerDao(context: Context) = provideDb(context).trainerDao()
+
+    fun probideTrainsDao(context: Context) = provideDb(context).trainsDao()
+
+    fun provideScheduleItemDao(context: Context) = provideDb(context).scheduleItemDao()
 }

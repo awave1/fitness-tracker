@@ -6,6 +6,7 @@ class Constants {
         const val USER_LOGGED_IN = "USER_LOGGED_IN"
         const val CURRENT_USER_ID = "CURRENT_USER_ID"
         const val WORKOUT_ID = "WORKOUT_ID"
+        const val IS_TRAINER = "IS_TRAINER"
     }
 }
 

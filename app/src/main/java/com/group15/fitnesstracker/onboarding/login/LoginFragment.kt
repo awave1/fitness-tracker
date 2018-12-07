@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputLayout
 import com.group15.fitnesstracker.MainActivity
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
@@ -23,14 +25,44 @@ class LoginFragment: Fragment(), LoginContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        submit.setOnClickListener {
-            val username = usernameInputContainer.editText?.text?.toString()
-            val password = passwordInputContainer.editText?.text?.toString()
+        var isTrainer = false
 
-            if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                presenter.login(username!!, password!!)
-                (activity as AppCompatActivity).supportActionBar?.show()
+        trainerSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            isTrainer = isChecked
+            if (isChecked) {
+                emailInputContainer.visibility = View.VISIBLE
+                usernameInputContainer.visibility = View.GONE
+            } else {
+                emailInputContainer.visibility = View.GONE
+                usernameInputContainer.visibility = View.VISIBLE
             }
         }
+
+        submit.setOnClickListener {
+            val email = getText(emailInputContainer)
+            val username = getText(usernameInputContainer)
+            val password = getText(passwordInputContainer)
+
+            if (!isTrainer) {
+                if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                    presenter.loginUser(username!!, password!!)
+                    (activity as AppCompatActivity).supportActionBar?.show()
+                }
+            } else {
+                if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
+                    presenter.loginTrainer(email!!, password!!)
+                    (activity as AppCompatActivity).supportActionBar?.show()
+                }
+
+            }
+        }
+    }
+
+    private fun getText(inputContainer: TextInputLayout): String? {
+        if (inputContainer.isVisible) {
+            return inputContainer.editText?.text?.toString()
+        }
+
+        return null
     }
 }

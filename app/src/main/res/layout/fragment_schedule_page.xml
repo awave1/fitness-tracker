@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.alamkanak.weekview.WeekView
+        android:id="@+id/trainerSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:eventTextColor="@color/white"
+        app:timeColumnTextSize="12sp"
+        app:hourHeight="60dp"
+        app:timeColumnPadding="8dp"
+        app:timeColumnTextColor="@color/primaryDarkColor"
+        app:timeColumnBackgroundColor="@color/white"
+        app:headerRowPadding="12dp"
+        app:columnGap="8dp"
+        app:dayBackgroundColor="@color/white"
+        app:todayBackgroundColor="@color/lightBlue"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addToSchedule"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add_black_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

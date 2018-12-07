@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.group15.fitnesstracker.db.User
+import io.reactivex.Completable
 import io.reactivex.Maybe
 
 @Dao
@@ -13,7 +14,7 @@ interface UserDao {
     fun insert(user: User): Maybe<Long>
 
     @Insert
-    fun insertAll(vararg user: User)
+    fun insertAll(vararg user: User): Completable
 
     @Query("select * from User")
     fun getAll(): Maybe<List<User>>
