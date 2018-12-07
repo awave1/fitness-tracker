@@ -10,6 +10,7 @@ import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewDisplayable
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.util.Constants
+import kotlinx.android.synthetic.main.fragment_schedule_page.*
 
 class ScheduleFragment: Fragment(), ScheduleContract.View {
 
@@ -38,6 +39,10 @@ class ScheduleFragment: Fragment(), ScheduleContract.View {
         weekView.setOnClickListener { presenter.eventClicked() }
 
         weekView.setMonthChangeListener { _, _ -> scheduleItems }
+
+        addToSchedule.setOnClickListener {
+
+        }
     }
 
     override fun showScheduleItems(items: MutableList<WeekViewDisplayable<CalendarItem>>) {
