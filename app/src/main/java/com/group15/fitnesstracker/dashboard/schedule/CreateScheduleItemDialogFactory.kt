@@ -7,6 +7,7 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.view.View
 import android.widget.*
+import androidx.core.view.get
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.ScheduleItem
@@ -135,31 +136,13 @@ class CreateScheduleItemDialogFactory {
                 ).show()
             }
 
-            selectUser.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    selectedUser = usersObjList[position]
-                }
-            }
-
-            selectWorkout.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    selectedWorkout = workoutObjList[position]
-                }
-
-            }
-
             builder.setView(view)
                     // Add action buttons
                     .setPositiveButton(R.string.save_recording_ok) { dialog, id ->
                         pickedDateFrom = calendarFrom.time
                         pickedDateTo = calendarTo.time
+                        selectedWorkout = workoutObjList[selectWorkout.selectedItemPosition]
+                        selectedUser = usersObjList[selectUser.selectedItemPosition]
 
                         DbInjection.provideScheduleItemDao(context)
                                 .createScheduleItem(ScheduleItem(
@@ -171,8 +154,7 @@ class CreateScheduleItemDialogFactory {
                                 ))
                                 .subscribeOn(Schedulers.io())
                                 .subscribe {
-                                    Timber.d("Schedule created!")
-                                    dialog.cancel()
+                                    Timber.d("Schedule created! ${selectedUser?.id} ${selectedWorkout?.workoutId}")
                                     onSave()
                                 }
 

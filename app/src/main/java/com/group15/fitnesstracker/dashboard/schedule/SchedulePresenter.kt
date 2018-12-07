@@ -1,6 +1,7 @@
 package com.group15.fitnesstracker.dashboard.schedule
 
 import android.content.Context
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Transformations.map
 import com.alamkanak.weekview.WeekViewDisplayable
@@ -8,6 +9,7 @@ import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.*
 
 class SchedulePresenter(private val view: ScheduleContract.View, private val context: Context?): ScheduleContract.Presenter {
@@ -24,19 +26,12 @@ class SchedulePresenter(private val view: ScheduleContract.View, private val con
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { scheduleItems ->
                         val color = ContextCompat.getColor(ctx, R.color.eventColor)
-                        val items = mutableListOf<WeekViewDisplayable<CalendarItem>>()
-                        scheduleItems.forEach {
-                            DbInjection.provideUserDao(ctx).getById(it.id)
-                                    .subscribeOn(Schedulers.io())
-                                    .subscribe { user ->
 
-                                        DbInjection.provideWorkoutDao(ctx).getWorkout(it.workoutId).subscribeOn(Schedulers.io())
-                                                .subscribe { workout ->
-                                                    val title = "${workout.name}: ${user.firstName} ${user.lastName}"
-                                                    items.add(CalendarItem(it.id, title, it.from, it.to, color))
-                                                }
-                                    }
-                        }
+                        items = scheduleItems.map {
+                            CalendarItem(it.id, "Workout Session", it.from, it.to, color)
+                        }.toMutableList()
+
+                        Timber.d("items ${items.size}")
 
                         view.showScheduleItems(items)
                     }

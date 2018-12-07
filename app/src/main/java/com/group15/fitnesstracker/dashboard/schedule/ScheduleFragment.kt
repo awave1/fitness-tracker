@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import com.alamkanak.weekview.DateTimeInterpreter
 import com.alamkanak.weekview.WeekView
 import com.alamkanak.weekview.WeekViewDisplayable
+import com.alamkanak.weekview.WeekViewEvent
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.ScheduleItem
 import com.group15.fitnesstracker.util.Constants
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_schedule_page.*
+import timber.log.Timber
 import java.util.*
 import java.text.SimpleDateFormat
 
@@ -44,34 +46,9 @@ class ScheduleFragment: Fragment(), ScheduleContract.View {
 
         presenter.getEvents(id)
 
-        weekView.dateTimeInterpreter = object : DateTimeInterpreter {
-            override fun interpretTime(hour: Int): String {
-                var h = hour
-
-                if (hour == 24)
-                    h = 0
-                else if (hour == 0)
-                    h = 0
-
-                return "$h:00"
-            }
-
-            override fun interpretDate(date: Calendar?): String {
-                val weekdayNameFormat = SimpleDateFormat("EEE", Locale.getDefault())
-                var weekday = weekdayNameFormat.format(date?.time)
-                val format = SimpleDateFormat(" d/M", Locale.getDefault())
-
-                weekday = weekday.get(0).toString()
-
-                return weekday.toUpperCase() + format.format(date?.time)
-            }
-        }
-
         weekView.setOnClickListener { presenter.eventClicked() }
 
-        weekView.setMonthChangeListener { startDate, endDate ->
-            return@setMonthChangeListener scheduleItems
-        }
+        weekView.setMonthChangeListener { startDate, endDate -> scheduleItems }
 
         addToSchedule.setOnClickListener {
             CreateScheduleItemDialogFactory.create(id, it.context) {
@@ -82,7 +59,11 @@ class ScheduleFragment: Fragment(), ScheduleContract.View {
 
     override fun showScheduleItems(items: MutableList<WeekViewDisplayable<CalendarItem>>) {
         this.scheduleItems = items
-
         weekView.notifyDataSetChanged()
     }
+}
+
+fun WeekViewEvent<CalendarItem>.eventMatches(year: Int, month: Int): Boolean {
+    return startTime.get(Calendar.YEAR) == year && startTime.get(Calendar.MONTH) == month - 1 || endTime.get(Calendar.YEAR) == year && endTime.get(
+            Calendar.MONTH) == month - 1
 }

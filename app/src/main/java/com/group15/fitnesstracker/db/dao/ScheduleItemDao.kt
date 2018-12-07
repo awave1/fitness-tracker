@@ -1,9 +1,12 @@
 package com.group15.fitnesstracker.db.dao
 
 import androidx.room.Dao
+import androidx.room.Embedded
 import androidx.room.Insert
 import androidx.room.Query
 import com.group15.fitnesstracker.db.ScheduleItem
+import com.group15.fitnesstracker.db.User
+import com.group15.fitnesstracker.db.Workout
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import java.util.*
