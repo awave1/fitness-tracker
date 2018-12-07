@@ -42,9 +42,9 @@
     <string name="create_nutr_button_text">Record Nutrition</string>
     <string name="create_nutr_calories_hint">Calories</string>
     <string name="create_nutr_macronutrient_hint">Macronutrient</string>
-    <string name="create_nutr_macro_protein_hint">Protein (gram)</string>
-    <string name="create_nutr_macro_carb_hint">Carbohydrate (gram)</string>
-    <string name="create_nutr_macro_fat_hint">Fat (gram)</string>
+    <string name="create_nutr_macro_protein_hint">Protein(g)</string>
+    <string name="create_nutr_macro_carb_hint">Carbohydrate(g)</string>
+    <string name="create_nutr_macro_fat_hint">Fat(g)</string>
     <string name="create_nutr_micro_name_hint">Name</string>
     <string name="create_nutr_micro_amount_hint">Amount</string>
     <string name="create_nutr_enter_info_text">Enter nutrition information</string>
@@ -68,6 +68,14 @@
 
     <string name="save_recording_ok">Save</string>
     <string name="nutrition_calories">Calories</string>
+
+    <!--Daily Value-->
+    <string name="daily_nut_info">Daily Nutritional Info</string>
+    <string name="calories">Calories</string>
+    <string name="protein">Protein</string>
+    <string name="carbs">Carbs</string>
+    <string name="fat">Fat</string>
+
 
     <!--Goals-->
     <string name="goal_text">Goal:</string>
