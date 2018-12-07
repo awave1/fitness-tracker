@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Goal
+import com.group15.fitnesstracker.db.dao.UserStats
 import com.group15.fitnesstracker.util.Constants
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -39,6 +41,7 @@ class ProfileFragment: Fragment(), ProfileContract.View {
         Timber.d("user id: $id")
 
         if (!isTrainer) {
+            presenter.loadPrevDayStats(id)
             presenter.loadGoals(id)
 
             adapter = GoalAdapter(R.layout.goal_item)
@@ -86,5 +89,26 @@ class ProfileFragment: Fragment(), ProfileContract.View {
 
     override fun showGoals(goals: MutableList<Goal>) {
         adapter.items = goals
+    }
+
+    override fun showUserStats(stats: UserStats) {
+        if (stats.sumCalories > 0 && stats.sumProtein > 0 && stats.sumCarbs > 0 && stats.sumFat > 0) {
+            dailyNutritionalInfo.visibility = View.VISIBLE
+            dailyNutritionalInfoHeader.visibility = View.VISIBLE
+            dailyNutritionalInfoValues.visibility = View.VISIBLE
+
+            noStats.visibility = View.GONE
+
+            calories.text = stats.sumCalories.toString()
+            protein.text = stats.sumProtein.toString()
+            carbs.text = stats.sumCarbs.toString()
+            fat.text = stats.sumFat.toString()
+        } else {
+            dailyNutritionalInfo.visibility = View.GONE
+            dailyNutritionalInfoHeader.visibility = View.GONE
+            dailyNutritionalInfoValues.visibility = View.GONE
+
+            noStats.visibility = View.VISIBLE
+        }
     }
 }

@@ -2,10 +2,13 @@ package com.group15.fitnesstracker.dashboard.profile
 
 import android.content.Context
 import android.widget.Toast
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Goal
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import java.util.*
 
 class ProfilePresenter(val view: ProfileContract.View, private val context: Context?): ProfileContract.Presenter {
@@ -14,6 +17,10 @@ class ProfilePresenter(val view: ProfileContract.View, private val context: Cont
     }
 
     private var goals = mutableListOf<Goal>()
+    var prevDayCals = 0.0
+    var prevDayProtein = 0.0
+    var prevDayCarbs = 0.0
+    var prevDayFat = 0.0
 
     override fun start() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -34,10 +41,10 @@ class ProfilePresenter(val view: ProfileContract.View, private val context: Cont
     }
 
     override fun loadGoals(userId: Int?) {
-        userId?.let { _ ->
+        userId?.let { id ->
             context?.let { ctx ->
                 DbInjection.provideGoalDao(ctx)
-                        .getGoalsForUser(userId)
+                        .getGoalsForUser(id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
@@ -48,4 +55,14 @@ class ProfilePresenter(val view: ProfileContract.View, private val context: Cont
         }
     }
 
+    override fun loadPrevDayStats(userId: Int?) {
+        userId?.let { id ->
+            context?.let { ctx ->
+                DbInjection.provideNutritionRecordingDao(ctx).getDailyStats(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { view.showUserStats(it) }
+            }
+        }
+    }
 }
