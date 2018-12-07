@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.alamkanak.weekview.WeekView
-        android:id="@+id/weekView"
+        android:id="@+id/trainerSchedule"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:eventTextColor="@color/white"
