@@ -45,12 +45,12 @@ class LoginFragment: Fragment(), LoginContract.View {
 
             if (!isTrainer) {
                 if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                    presenter.loginUser(username!!, password!!)
+                    presenter.loginUser(username, password)
                     (activity as AppCompatActivity).supportActionBar?.show()
                 }
             } else {
                 if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-                    presenter.loginTrainer(email!!, password!!)
+                    presenter.loginTrainer(email, password)
                     (activity as AppCompatActivity).supportActionBar?.show()
                 }
 

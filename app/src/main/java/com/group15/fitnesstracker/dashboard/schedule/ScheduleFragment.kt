@@ -42,7 +42,7 @@ class ScheduleFragment: Fragment(), ScheduleContract.View {
                 Context.MODE_PRIVATE
         )
 
-        val id = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0) as Int
+        val id = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
 
         presenter.getEvents(id)
 

@@ -29,7 +29,7 @@ class HistoryFragment: Fragment(), HistoryContract.View {
                 Context.MODE_PRIVATE
         )
 
-        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0) as Int
+        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
         adapter = HistoryAdapter(presenter, userId)
 
         presenter.loadHistoryWorkouts(userId)

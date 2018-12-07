@@ -25,7 +25,7 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
                 Context.MODE_PRIVATE
         )
 
-        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0) as Int
+        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
         val workoutId = intent.getIntExtra(Constants.WORKOUT_ID, 0)
         Timber.d("workout $workoutId")
 

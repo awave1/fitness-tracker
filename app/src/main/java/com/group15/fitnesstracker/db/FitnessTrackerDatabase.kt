@@ -64,28 +64,15 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             val dbInstance = instance(context)
 
-                            // @TODO implement db population
                             Timber.d("populating db")
 
                             dbInstance.userDao()
                                     .insertAll(
                                             // id: 1
-                                            User(username = "callmebiggy",
-                                                 password = CryptoUtils.SHA256Hash("passwd"),
-                                                 firstName = "Steven", lastName = "Mlilo",
-                                                 age = 22, weight = 240.0),
-
-                                            // id: 2
-                                            User(username = "notkanye",
-                                                    password = CryptoUtils.SHA256Hash("yzyszn"),
-                                                    firstName = "Kanye", lastName = "East",
-                                                    age = 40, weight = 123.0),
-
-                                            // id: 3
-                                            User(username = "putin",
-                                                    password = CryptoUtils.SHA256Hash("lol"),
-                                                    firstName = "Vova", lastName = "Putin",
-                                                    age = 99, weight = 999.9)
+                                            User(username = "user1",
+                                                 password = CryptoUtils.SHA256Hash("pass"),
+                                                 firstName = "John", lastName = "Smith",
+                                                 age = 22, weight = 240.0)
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .subscribe()
@@ -103,57 +90,31 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.workoutDao()
                                     .insertAll(
-                                            Workout("Strong 5x5 A", "Very"),
-                                            Workout("Strong 5x5 B", "Strong"))
+                                            Workout("Strong 5x5 A", "Basic 5x5 workout that includes Bench, Squat, and Overhead press"),
+                                            Workout("Strong 5x5 B", "Basic 5x5 workout that includes Bench, Deadlift, and Overhead press"))
                                     .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
 
                             dbInstance.setExerciseDao()
                                     .insertAll(
-                                            SetExercise(name = "Squats", description = "Just squat"),
-                                            SetExercise(name = "Bench", description = "Just bench"),
+                                            SetExercise(name = "Squat", description = "Just squat"),
+                                            SetExercise(name = "Bench press (Barbell", description = "Works out your chest"),
                                             SetExercise(name = "Deadlift", description = "Just lift"),
-                                            SetExercise(name = "OH Press", description = "Just press")
+                                            SetExercise(name = "Overhead Press (Standing up)", description = "OH Press")
                                     )
                                     .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
 
                             dbInstance.workoutExercisesDao()
                                     .insertAll(
-                                            WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 1),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 1),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 1),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 5),
+                                            WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 5),
 
 
                                             WorkoutExercises(workoutId = 2, exerciseId = 3, numberOfSets = 5),
                                             WorkoutExercises(workoutId = 2, exerciseId = 2, numberOfSets = 5),
                                             WorkoutExercises(workoutId = 2, exerciseId = 4, numberOfSets = 5)
-                                    )
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe()
-
-                            dbInstance.goalDao()
-                                    .insertAll(
-                                            Goal(goalId = 1, goalDescription = "Get to 200 lbs", completionDate = Date(), userId = 1),
-                                            Goal(goalId = 2, goalDescription = "Eat chocolate chip cookies", completionDate = Date(), userId = 1)
-                                    )
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe()
-
-                            dbInstance.scheduleItemDao()
-                                    .createItems(
-                                            ScheduleItem(workoutId = 1, trainerId = 1, userId = 1,
-                                                    from = createDate("05/12/2018 08:00"), to = createDate("05/12/2018 10:00")),
-                                            ScheduleItem(workoutId = 2, trainerId = 1, userId = 1,
-                                                    from = createDate("06/12/2018 08:00"), to = createDate("06/12/2018 10:00")),
-                                            ScheduleItem(workoutId = 1, trainerId = 1, userId = 3,
-                                                    from = createDate("05/12/2018 16:00"), to = createDate("05/12/2018 18:00")),
-                                            ScheduleItem(workoutId = 2, trainerId = 1, userId = 3,
-                                                    from = createDate("06/12/2018 16:00"), to = createDate("06/12/2018 18:00"))
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .subscribe()

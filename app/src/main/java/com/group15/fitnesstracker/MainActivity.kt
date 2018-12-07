@@ -44,7 +44,12 @@ class MainActivity: AppCompatActivity() {
                 Toast.makeText(this, getString(R.string.logout_message), Toast.LENGTH_LONG).show()
 
                 val sharedPref = this.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-                sharedPref.edit().putBoolean(Constants.USER_LOGGED_IN, false).apply()
+                sharedPref.edit()
+                        .putInt(Constants.CURRENT_USER_ID, -1)
+                        .putBoolean(Constants.USER_LOGGED_IN, false)
+                        .putBoolean(Constants.IS_TRAINER, false)
+                        .apply()
+
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.container, OnboardingFragment.instance)
                         .commit()

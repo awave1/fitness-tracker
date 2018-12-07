@@ -32,7 +32,7 @@ class BodyPartTrackerFragment : Fragment(), CreateRecordingContract.BodyPartTrac
                 Context.MODE_PRIVATE
         )
 
-        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, 0)
+        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1)
 
         presenter.loadBodyPartRecordings(userId)
 
