@@ -104,21 +104,26 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.nutritionRecordingDao()
                                     .insertNutritionRecordings(
-                                            NutritionRecording(recordingId = 1,calories = 200.0,protein = 100.0,carbohydrate = 50.0,fat = 20.0,date = Date(), userId = 1)
-                                    ).subscribeOn(Schedulers.io())
+                                            NutritionRecording(recordingId = 1,calories = 200.0,protein = 100.0,carbohydrate = 50.0,fat = 20.0,date = Date(), userId = 1) ,
+                                            NutritionRecording(recordingId = 2,calories = 2000.0,protein = 1000.0,carbohydrate = 500.0,fat = 200.0,date = Date(), userId = 1)
+
+                            ).subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
 
                             dbInstance.bodyRecordingDao()
                                     .insertBodyRecordings(
-                                            BodyMeasureRecording(recordingId = 1,date = Date(),userId = 1,bodyFat = 5.0,weight = 150.0)
+                                            BodyMeasureRecording(recordingId = 1,date = Date(),userId = 1,bodyFat = 5.0,weight = 150.0),
+                                            BodyMeasureRecording(recordingId = 2,date = Date(),userId = 1,bodyFat = 0.0,weight = 0.0)
                                     ).subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
 
                             dbInstance.bodyPartRecordingDao()
                                     .insertBodyPartRecordings(
-                                            BodyPartMeasureRecording(recordingId = 1,userId = 2,bodyPart = "Waist",bodyPartSize = 20.0,date = Date())
+                                            BodyPartMeasureRecording(recordingId = 1,userId = 1,bodyPart = "Waist",bodyPartSize = 20.0,date = Date()),
+                                            BodyPartMeasureRecording(recordingId = 2,userId = 1,bodyPart = "Spirit",bodyPartSize = 0.0,date = Date())
+
                                     ).subscribeOn(Schedulers.io())
                                     .observeOn(AndroidSchedulers.mainThread())
                                     .subscribe()
