@@ -3,11 +3,13 @@ package com.group15.fitnesstracker.dashboard.tracker
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.BodyMeasureRecording
 import com.group15.fitnesstracker.db.BodyPartMeasureRecording
+import com.group15.fitnesstracker.db.MicronutrientRecording
 import com.group15.fitnesstracker.db.NutritionRecording
 import com.group15.fitnesstracker.util.Utils
 import timber.log.Timber
@@ -52,6 +54,16 @@ class RecordingAdapter<T>(val view: Int): RecyclerView.Adapter<RecordingAdapter.
 
                 if (record.micronutrients.isNotEmpty()) {
                     Timber.d("nutrition contains micronutrients, showing")
+                    val micronutrientContainer = holder.itemView.findViewById<LinearLayout>(R.id.microContainer)
+                    val micronutrients = holder.itemView.findViewById<RecyclerView>(R.id.micronutrients)
+
+                    val adapter = MicronutrientRecordingAdapter()
+                    adapter.items = record.micronutrients
+
+                    micronutrients.layoutManager = LinearLayoutManager(holder.itemView.context)
+                    micronutrients.adapter = adapter
+
+                    micronutrientContainer.visibility = View.VISIBLE
                 }
 
                 date.text = Utils.formatDate(record.date)

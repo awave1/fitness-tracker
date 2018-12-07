@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -7,13 +8,26 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="10dp"
+        tools:text="January"/>
+
     <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/date"
         android:id="@+id/caloriesContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginStart="10dp">
         <TextView
             android:id="@+id/caloriesLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -21,6 +35,7 @@
             app:layout_constraintRight_toLeftOf="@id/caloriesAmount"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginEnd="10dp"
+            android:layout_weight="0.5"
             android:text="@string/nutrition_calories" />
 
         <TextView
@@ -28,6 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toRightOf="@id/caloriesLabel"
+            android:layout_weight="0.5"
+            android:gravity="end"
+            android:layout_marginEnd="10dp"
             tools:text="1110"/>
     </LinearLayout>
 
@@ -35,8 +53,9 @@
         android:id="@+id/macroContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/caloriesContainer">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/caloriesContainer"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/macronutrientsLabel"
@@ -44,30 +63,38 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginEnd="10dp"
+            android:layout_weight="0.25"
             android:text="Macronutrients"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="0.75">
 
             <LinearLayout
                 android:id="@+id/proteinContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/proteinLabel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="0.5"
                     android:text="Protein" />
 
                 <TextView
                     android:id="@+id/proteinAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:layout_marginEnd="10dp"
                     tools:text="11"/>
 
             </LinearLayout>
@@ -76,42 +103,52 @@
                 android:id="@+id/carbsContainer"
                 app:layout_constraintTop_toBottomOf="@id/proteinContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/carbsLabel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="0.5"
                     android:text="Carbohydrate" />
 
                 <TextView
                     android:id="@+id/carbsAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:layout_marginEnd="10dp"
                     tools:text="11"/>
             </LinearLayout>
 
             <LinearLayout
                 app:layout_constraintTop_toBottomOf="@id/carbsContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
                 <TextView
                     android:id="@+id/fatLabel"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="0.5"
                     android:text="Fat" />
 
                 <TextView
                     android:id="@+id/fatAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:gravity="end"
+                    android:layout_marginEnd="10dp"
                     tools:text="11"/>
 
             </LinearLayout>
@@ -119,13 +156,31 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/date"
+    <LinearLayout
+        android:id="@+id/microContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@id/macroContainer"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="January"/>
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/micronutrientLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:text="Micronutrients"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/micronutrients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_nutrition_micronutrient" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
