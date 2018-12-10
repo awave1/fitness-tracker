@@ -41,6 +41,9 @@ class ProfileFragment: Fragment(), ProfileContract.View {
         Timber.d("user id: $id")
 
         if (!isTrainer) {
+            goalsContainer.visibility = View.VISIBLE
+            dailyContainer.visibility = View.VISIBLE
+
             presenter.loadPrevDayStats(id)
             presenter.loadGoals(id)
 
@@ -73,8 +76,9 @@ class ProfileFragment: Fragment(), ProfileContract.View {
             }
         } else {
             createGoalBtn.visibility = View.GONE
-            goalList.visibility = View.GONE
-            goals_text_header.visibility = View.GONE
+            goalsContainer.visibility = View.GONE
+            dailyContainer.visibility = View.GONE
+
 
             context?.let { c ->
                 DbInjection.provideTrainerDao(c)

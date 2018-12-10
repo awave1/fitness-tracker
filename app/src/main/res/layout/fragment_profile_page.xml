@@ -166,7 +166,7 @@
 
 
             <LinearLayout
-                android:id="@+id/relativeLayout"
+                android:id="@+id/goalsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
