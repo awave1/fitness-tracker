@@ -66,16 +66,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/createMicroNutrBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_micronutr_text"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:textColor="#000"
-        android:paddingBottom="20dp"
-        style="?android:attr/borderlessButtonStyle" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
