@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.group15.fitnesstracker.db.FitnessTrackerDatabase
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import com.group15.fitnesstracker.db.Workout
 import com.group15.fitnesstracker.db.WorkoutExercises
 import com.group15.fitnesstracker.db.dao.WorkoutExercisesDao
@@ -35,10 +35,10 @@ class WorkoutExercisesTest {
 
         db.setExerciseDao()
                 .insertAll_test(
-                        SetExercise(name = "Squats", description = "Just squat"),
-                        SetExercise(name = "Bench", description = "Just bench"),
-                        SetExercise(name = "Deadlift", description = "Just lift"),
-                        SetExercise(name = "OH Press", description = "Just press")
+                        Exercise(name = "Squats", description = "Just squat"),
+                        Exercise(name = "Bench", description = "Just bench"),
+                        Exercise(name = "Deadlift", description = "Just lift"),
+                        Exercise(name = "OH Press", description = "Just press")
                 )
 
         db.workoutExercisesDao()

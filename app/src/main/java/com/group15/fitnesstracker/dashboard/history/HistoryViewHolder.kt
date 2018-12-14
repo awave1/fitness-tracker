@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.*
-import com.group15.fitnesstracker.db.Set
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -51,7 +49,7 @@ class HistoryViewHolder(view: View): RecyclerView.ViewHolder(view), HistoryContr
         }
     }
 
-    private fun showExercises(context: Context, exercises: List<SetExercise>) {
+    private fun showExercises(context: Context, exercises: List<Exercise>) {
         val view = View.inflate(context, R.layout.completed_sets, null)
         val exerciseList = view.findViewById<RecyclerView>(R.id.exerciseList)
         val adapter = ExerciseAdapter(userId = userId, workoutId = workout.workoutId, recordingId = recordingId)

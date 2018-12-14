@@ -1,12 +1,10 @@
 package com.group15.fitnesstracker.dashboard.workout.createWorkout
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.dashboard.workout.WorkoutFragment
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import kotlinx.android.synthetic.main.activity_create_workout.*
 
 class CreateWorkoutActivity: AppCompatActivity(), CreateWorkoutContract.View {
@@ -32,7 +30,7 @@ class CreateWorkoutActivity: AppCompatActivity(), CreateWorkoutContract.View {
         }
     }
 
-    override fun showExercises(items: List<SetExercise>) {
+    override fun showExercises(items: List<Exercise>) {
         adapter.items = items
     }
 }

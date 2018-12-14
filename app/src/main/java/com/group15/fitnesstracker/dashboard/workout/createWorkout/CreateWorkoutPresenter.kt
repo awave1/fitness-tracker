@@ -5,10 +5,9 @@ import android.content.Context
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import com.group15.fitnesstracker.db.Workout
 import com.group15.fitnesstracker.db.WorkoutExercises
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,8 +18,8 @@ class CreateWorkoutPresenter(val view: CreateWorkoutContract.View, val context: 
         view.presenter = this
     }
 
-    private var exercises = listOf<SetExercise>()
-    private val selectedExercises = mutableListOf<SetExercise>()
+    private var exercises = listOf<Exercise>()
+    private val selectedExercises = mutableListOf<Exercise>()
 
     @SuppressLint("CheckResult")
     override fun loadAllExercises() {

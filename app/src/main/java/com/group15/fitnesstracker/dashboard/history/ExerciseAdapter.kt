@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.base.BaseAdapter
 import com.group15.fitnesstracker.db.DbInjection
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ExerciseAdapter(val userId: Int, val workoutId: Int, val recordingId: Int)
-    : BaseAdapter<SetExercise, ExerciseAdapter.ExerciseViewHolder>() {
+    : BaseAdapter<Exercise, ExerciseAdapter.ExerciseViewHolder>() {
     class ExerciseViewHolder(view: View): RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseViewHolder {

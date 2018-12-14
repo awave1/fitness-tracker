@@ -7,9 +7,8 @@ import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.History
 import com.group15.fitnesstracker.db.Set
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
@@ -18,7 +17,7 @@ class WorkoutProgressPresenter(private val view: WorkoutProgressContract.View, p
         view.presenter = this
     }
 
-    private var exercises = listOf<SetExercise>()
+    private var exercises = listOf<Exercise>()
     private var sets = mutableListOf<Set>()
     private var workoutId: Int = 0
 

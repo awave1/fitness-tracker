@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.base.BaseAdapter
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 
-class CreateWorkoutAdapter(private val presenter: CreateWorkoutContract.Presenter): BaseAdapter<SetExercise, CreateWorkoutAdapter.CreateWorkoutViewHolder>() {
+class CreateWorkoutAdapter(private val presenter: CreateWorkoutContract.Presenter): BaseAdapter<Exercise, CreateWorkoutAdapter.CreateWorkoutViewHolder>() {
 
     class CreateWorkoutViewHolder(view: View): RecyclerView.ViewHolder(view)
 

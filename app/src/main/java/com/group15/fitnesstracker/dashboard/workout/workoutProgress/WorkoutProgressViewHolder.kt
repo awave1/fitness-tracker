@@ -1,8 +1,5 @@
 package com.group15.fitnesstracker.dashboard.workout.workoutProgress
 
-import android.text.Editable
-import android.text.InputType
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.Set
-import com.group15.fitnesstracker.db.SetExercise
 
 class WorkoutProgressViewHolder(view: View): RecyclerView.ViewHolder(view), WorkoutProgressContract.ExerciseView {
     private val exerciseName: TextView = this.itemView.findViewById(R.id.exerciseName)

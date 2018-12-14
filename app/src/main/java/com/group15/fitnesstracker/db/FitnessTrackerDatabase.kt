@@ -8,11 +8,9 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.group15.fitnesstracker.db.dao.*
 import com.group15.fitnesstracker.util.CryptoUtils
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.util.*
 import java.util.concurrent.Executors
 
 const val DB_NAME = "fitness_tracker.db"
@@ -26,7 +24,7 @@ fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 @Database(entities = [
     User::class, Workout::class, Goal::class,
     Trainer::class, Trains::class, ScheduleItem::class,
-    SetExercise::class, TimedExercise::class, WorkoutExercises::class, Set::class,
+    Exercise::class, WorkoutExercises::class, Set::class,
     BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class, MicronutrientRecording::class,
     History::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -97,10 +95,10 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.setExerciseDao()
                                     .insertAll(
-                                            SetExercise(name = "Squat", description = "The squat is performed by squatting down with a weight held across the upper back under neck and standing up straight again."),
-                                            SetExercise(name = "Bench press (Barbell)", description = "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position."),
-                                            SetExercise(name = "Deadlift", description = "The deadlift is performed by squatting down and lifting a weight off the floor with the hand until standing up straight again."),
-                                            SetExercise(name = "Overhead Press", description = "The overhead press is a fantastic strength-and-muscle builder for the entire upper body and core")
+                                            Exercise(name = "Squat", description = "The squat is performed by squatting down with a weight held across the upper back under neck and standing up straight again."),
+                                            Exercise(name = "Bench press (Barbell)", description = "The bench press is an upper body strength training exercise that consists of pressing a weight upwards from a supine position."),
+                                            Exercise(name = "Deadlift", description = "The deadlift is performed by squatting down and lifting a weight off the floor with the hand until standing up straight again."),
+                                            Exercise(name = "Overhead Press", description = "The overhead press is a fantastic strength-and-muscle builder for the entire upper body and core")
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .subscribe()

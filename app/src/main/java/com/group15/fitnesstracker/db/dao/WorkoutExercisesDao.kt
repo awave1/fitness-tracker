@@ -3,7 +3,7 @@ package com.group15.fitnesstracker.db.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import com.group15.fitnesstracker.db.WorkoutExercises
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -11,8 +11,8 @@ import io.reactivex.Observable
 
 @Dao
 interface WorkoutExercisesDao {
-    @Query("select * from SetExercise as e join WorkoutExercises as w on e.exerciseId = w.exerciseId where w.workoutId = :workoutId")
-    fun getExercises(workoutId: Int): Maybe<List<SetExercise>>
+    @Query("select * from Exercise as e join WorkoutExercises as w on e.exerciseId = w.exerciseId where w.workoutId = :workoutId")
+    fun getExercises(workoutId: Int): Maybe<List<Exercise>>
 
     @Insert
     fun insert(workoutExercises: WorkoutExercises): Completable

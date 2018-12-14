@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.Set
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.activity_workout_progress.*
 import timber.log.Timber
@@ -59,7 +59,7 @@ class WorkoutProgressActivity: AppCompatActivity(), WorkoutProgressContract.View
         }
     }
 
-    override fun showExercises(exercises: List<SetExercise>) {
+    override fun showExercises(exercises: List<Exercise>) {
         adapter.items = exercises
     }
 

@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.group15.fitnesstracker.R
-import com.group15.fitnesstracker.db.SetExercise
+import com.group15.fitnesstracker.db.Exercise
 
 class WorkoutProgressAdapter(private val presenter: WorkoutProgressPresenter): RecyclerView.Adapter<WorkoutProgressViewHolder>() {
-    var items: List<SetExercise> = listOf()
+    var items: List<Exercise> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
