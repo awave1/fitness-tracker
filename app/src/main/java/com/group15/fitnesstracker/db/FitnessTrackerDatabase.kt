@@ -49,7 +49,7 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
         private fun buildDb(context: Context): FitnessTrackerDatabase {
 
             return Room.databaseBuilder(context, FitnessTrackerDatabase::class.java, DB_NAME)
-                    .fallbackToDestructiveMigration()
+                    .setJournalMode(JournalMode.TRUNCATE)
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

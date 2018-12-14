@@ -16,6 +16,7 @@ import com.group15.fitnesstracker.dashboard.profile.ProfileFragment
 import com.group15.fitnesstracker.dashboard.schedule.ScheduleFragment
 import com.group15.fitnesstracker.dashboard.tracker.TrackerFragment
 import com.group15.fitnesstracker.dashboard.workout.WorkoutFragment
+import com.group15.fitnesstracker.db.FitnessTrackerDatabase
 import com.group15.fitnesstracker.util.Constants
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import timber.log.Timber
@@ -32,6 +33,8 @@ class DashboardFragment: Fragment() {
                 resources.getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE
         )
+
+        Timber.d("db path: ${context?.getDatabasePath("fitness_tracker.db")?.absolutePath}")
 
         val isTrainer = sharedPref?.getBoolean(Constants.IS_TRAINER, false) as Boolean
         setupViewPager(dashboardViewPager, isTrainer)
