@@ -36,7 +36,7 @@ interface NutritionRecordingDao {
     @Query("""
         select SUM(calories) as sumCalories, SUM(protein) as sumProtein,
                SUM(carbohydrate) as sumCarbs, SUM(fat) as sumFat
-        from NutritionRecording where date == DATE('now', '-1 day') and userId = :userId
+        from NutritionRecording where DATE(DATETIME(date / 1000, 'unixepoch')) == DATE('now') and userId = :userId
     """)
     fun getDailyStats(userId: Int): Maybe<UserStats>
 }
