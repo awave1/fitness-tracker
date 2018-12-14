@@ -14,16 +14,10 @@ import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 
 const val DB_NAME = "fitness_tracker.db"
-private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
-
-/**
- * Utility method to run blocks on a dedicated background thread, used for io/database work.
- */
-fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 
 @Database(entities = [
     User::class, Workout::class, Goal::class,
-    Trainer::class, Trains::class, ScheduleItem::class,
+    Trainer::class, Trains::class, Schedule::class,
     Exercise::class, WorkoutExercise::class, Set::class,
     BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class, MicronutrientRecording::class,
     History::class], version = 1, exportSchema = false)
@@ -41,7 +35,7 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun goalDao(): GoalDao
     abstract fun trainerDao(): TrainerDao
     abstract fun trainsDao(): TrainsDao
-    abstract fun scheduleItemDao(): ScheduleItemDao
+    abstract fun scheduleDao(): ScheduleDao
     abstract fun micronutrientDao(): MicronutrientRecordingDao
 
     companion object {

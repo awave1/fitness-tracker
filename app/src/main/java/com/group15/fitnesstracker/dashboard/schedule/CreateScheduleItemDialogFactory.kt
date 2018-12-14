@@ -7,10 +7,9 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.view.View
 import android.widget.*
-import androidx.core.view.get
 import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
-import com.group15.fitnesstracker.db.ScheduleItem
+import com.group15.fitnesstracker.db.Schedule
 import com.group15.fitnesstracker.db.User
 import com.group15.fitnesstracker.db.Workout
 import com.group15.fitnesstracker.util.Utils
@@ -145,7 +144,7 @@ class CreateScheduleItemDialogFactory {
                         selectedUser = usersObjList[selectUser.selectedItemPosition]
 
                         DbInjection.provideScheduleItemDao(context)
-                                .createScheduleItem(ScheduleItem(
+                                .createScheduleItem(Schedule(
                                         workoutId = selectedWorkout?.workoutId!!,
                                         userId = selectedUser?.id!!,
                                         from = pickedDateFrom,

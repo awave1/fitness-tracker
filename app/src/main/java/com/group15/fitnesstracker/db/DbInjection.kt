@@ -29,7 +29,7 @@ object DbInjection {
 
     fun probideTrainsDao(context: Context) = provideDb(context).trainsDao()
 
-    fun provideScheduleItemDao(context: Context) = provideDb(context).scheduleItemDao()
+    fun provideScheduleItemDao(context: Context) = provideDb(context).scheduleDao()
 
     fun provideMicronutrientDao(context: Context) = provideDb(context).micronutrientDao()
 }

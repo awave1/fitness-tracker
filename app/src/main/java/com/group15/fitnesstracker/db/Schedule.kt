@@ -9,7 +9,7 @@ import java.util.*
 @Entity(foreignKeys = [ForeignKey(entity = Workout::class, parentColumns = ["workoutId"], childColumns = ["workoutId"]),
                        ForeignKey(entity = Trainer::class, parentColumns = ["id"], childColumns = ["trainerId"]),
                        ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["userId"])])
-data class ScheduleItem (
+data class Schedule (
         @PrimaryKey(autoGenerate = true) var id: Int = 0,
         @NonNull var workoutId: Int = 0,
         @NonNull var trainerId: Int = 0,
