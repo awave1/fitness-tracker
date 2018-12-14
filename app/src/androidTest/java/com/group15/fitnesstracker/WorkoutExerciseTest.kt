@@ -8,7 +8,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.group15.fitnesstracker.db.FitnessTrackerDatabase
 import com.group15.fitnesstracker.db.Exercise
 import com.group15.fitnesstracker.db.Workout
-import com.group15.fitnesstracker.db.WorkoutExercises
+import com.group15.fitnesstracker.db.WorkoutExercise
 import com.group15.fitnesstracker.db.dao.WorkoutExercisesDao
 import org.junit.After
 import org.junit.Before
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class WorkoutExercisesTest {
+class WorkoutExerciseTest {
     private lateinit var workoutExercisesDao: WorkoutExercisesDao
     private lateinit var db: FitnessTrackerDatabase
 
@@ -43,14 +43,14 @@ class WorkoutExercisesTest {
 
         db.workoutExercisesDao()
                 .insertAll_test(
-                        WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 5),
-                        WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 5),
-                        WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 5),
+                        WorkoutExercise(workoutId = 1, exerciseId = 1, numberOfSets = 5),
+                        WorkoutExercise(workoutId = 1, exerciseId = 2, numberOfSets = 5),
+                        WorkoutExercise(workoutId = 1, exerciseId = 4, numberOfSets = 5),
 
 
-                        WorkoutExercises(workoutId = 2, exerciseId = 3, numberOfSets = 5),
-                        WorkoutExercises(workoutId = 2, exerciseId = 2, numberOfSets = 5),
-                        WorkoutExercises(workoutId = 2, exerciseId = 4, numberOfSets = 5)
+                        WorkoutExercise(workoutId = 2, exerciseId = 3, numberOfSets = 5),
+                        WorkoutExercise(workoutId = 2, exerciseId = 2, numberOfSets = 5),
+                        WorkoutExercise(workoutId = 2, exerciseId = 4, numberOfSets = 5)
                 )
     }
 

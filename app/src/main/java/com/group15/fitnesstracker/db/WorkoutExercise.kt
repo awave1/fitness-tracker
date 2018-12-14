@@ -11,7 +11,7 @@ import androidx.room.ForeignKey
             ForeignKey(entity = Exercise::class, parentColumns = ["exerciseId"], childColumns = ["exerciseId"])
         ]
 )
-data class WorkoutExercises (
+data class WorkoutExercise (
         var workoutId: Int,
         var exerciseId: Int,
         @NonNull var numberOfSets: Int

@@ -24,7 +24,7 @@ fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 @Database(entities = [
     User::class, Workout::class, Goal::class,
     Trainer::class, Trains::class, ScheduleItem::class,
-    Exercise::class, WorkoutExercises::class, Set::class,
+    Exercise::class, WorkoutExercise::class, Set::class,
     BodyMeasureRecording::class, NutritionRecording::class, BodyPartMeasureRecording::class, MicronutrientRecording::class,
     History::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -105,14 +105,14 @@ abstract class FitnessTrackerDatabase: RoomDatabase() {
 
                             dbInstance.workoutExercisesDao()
                                     .insertAll(
-                                            WorkoutExercises(workoutId = 1, exerciseId = 1, numberOfSets = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 2, numberOfSets = 5),
-                                            WorkoutExercises(workoutId = 1, exerciseId = 4, numberOfSets = 5),
+                                            WorkoutExercise(workoutId = 1, exerciseId = 1, numberOfSets = 5),
+                                            WorkoutExercise(workoutId = 1, exerciseId = 2, numberOfSets = 5),
+                                            WorkoutExercise(workoutId = 1, exerciseId = 4, numberOfSets = 5),
 
 
-                                            WorkoutExercises(workoutId = 2, exerciseId = 3, numberOfSets = 5),
-                                            WorkoutExercises(workoutId = 2, exerciseId = 2, numberOfSets = 5),
-                                            WorkoutExercises(workoutId = 2, exerciseId = 4, numberOfSets = 5)
+                                            WorkoutExercise(workoutId = 2, exerciseId = 3, numberOfSets = 5),
+                                            WorkoutExercise(workoutId = 2, exerciseId = 2, numberOfSets = 5),
+                                            WorkoutExercise(workoutId = 2, exerciseId = 4, numberOfSets = 5)
                                     )
                                     .subscribeOn(Schedulers.io())
                                     .subscribe({}, {

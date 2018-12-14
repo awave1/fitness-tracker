@@ -9,7 +9,7 @@ import com.group15.fitnesstracker.R
 import com.group15.fitnesstracker.db.DbInjection
 import com.group15.fitnesstracker.db.Exercise
 import com.group15.fitnesstracker.db.Workout
-import com.group15.fitnesstracker.db.WorkoutExercises
+import com.group15.fitnesstracker.db.WorkoutExercise
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -64,7 +64,7 @@ class CreateWorkoutPresenter(val view: CreateWorkoutContract.View, val context: 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { id ->
                     val workoutExercises = selectedExercises.map {
-                        WorkoutExercises(
+                        WorkoutExercise(
                                 workoutId = id.toInt(),
                                 exerciseId = it.exerciseId,
                                 numberOfSets = it.numberOfSets)
