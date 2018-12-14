@@ -31,7 +31,7 @@ fun ioThread(f : () -> Unit) = IO_EXECUTOR.execute(f)
 abstract class FitnessTrackerDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun workoutDao(): WorkoutDao
-    abstract fun setExerciseDao(): SetExerciseDao
+    abstract fun setExerciseDao(): ExerciseDao
     abstract fun workoutExercisesDao(): WorkoutExercisesDao
     abstract fun bodyRecordingDao(): BodyRecordingDao
     abstract fun nutritionRecordingDao(): NutritionRecordingDao

@@ -8,7 +8,7 @@ import io.reactivex.Completable
 import io.reactivex.Maybe
 
 @Dao
-interface SetExerciseDao {
+interface ExerciseDao {
     @Insert
     fun insertAll(vararg exercise: Exercise): Completable
 
