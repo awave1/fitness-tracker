@@ -41,4 +41,14 @@ class HistoryFragment: Fragment(), HistoryContract.View {
     override fun showWorkouts(workouts: List<Workout>) {
         adapter.items = workouts
     }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPref = context?.getSharedPreferences(
+                context?.resources?.getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+        )
+        val userId = sharedPref?.getInt(Constants.CURRENT_USER_ID, -1) as Int
+        presenter.loadHistoryWorkouts(userId)
+    }
 }
