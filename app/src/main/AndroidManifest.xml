@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.group15.fitnesstracker">
+          package="com.awave.wrkout">
 
     <application
         android:allowBackup="false"
-        android:name=".FitnessTrackerApplication"
+        android:name="com.awave.wrkout.FitnessTrackerApplication"
         android:icon="@mipmap/apptitudexxxhdpi"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name="com.awave.wrkout.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait">
@@ -21,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".dashboard.workout.workoutProgress.WorkoutProgressActivity" />
-        <activity android:name=".dashboard.workout.createWorkout.CreateWorkoutActivity" />
+        <activity android:name="com.awave.wrkout.dashboard.workout.workoutProgress.WorkoutProgressActivity" />
+        <activity android:name="com.awave.wrkout.dashboard.workout.createWorkout.CreateWorkoutActivity" />
     </application>
 
 </manifest>

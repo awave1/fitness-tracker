@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     xmlns:tool="http://schemas.android.com/tools">
 
-    <com.group15.fitnesstracker.customViews.NoScrollViewPager
+    <com.awave.wrkout.customViews.NoScrollViewPager
         android:id="@+id/dashboardViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
